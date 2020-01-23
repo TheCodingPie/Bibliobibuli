@@ -2,6 +2,7 @@ let mongoose = require('mongoose')
 
 
 let userSchema = new mongoose.Schema({
+  username: String,
   name: String,
   lastname:String,
   address:String,
