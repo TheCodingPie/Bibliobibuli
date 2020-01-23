@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+let mongoose = require('mongoose');
+
 app.use((req, res, next) => {
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -14,13 +16,11 @@ app.use(express.json({ limit: '1mb' }));
 app.listen(1234, () => console.log("Server is listening on port: 1234") );
 
 
-//---povezivanje na mongo---------------------------------------------------------------------
-let mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/imeBaze', { useNewUrlParser: true,  useUnifiedTopology: true  })//ako je nema baza sam ce da je kreira
-//--------------------------------------------------------------------------------------------
+
+mongoose.connect('mongodb://127.0.0.1:27017/Bibliobibuli', { useNewUrlParser: true,  useUnifiedTopology: true  })//ako je nema baza sam ce da je kreira
 
 
-let userModel = require('./models/user')
+let userModel = require('./src/server/models/user')
 
 app.post('/createUser', async (req, res)=> {
 	
