@@ -1,15 +1,7 @@
 import axios from 'axios';
 import Fetchurl from './FetchUrl';
+let url =Fetchurl.url+'Auction/';
 
 
-class BookService {
-  constructor() {
-    this.url =Fetchurl.url+'Auction/';
-
-  }
-  
-
-}
-
-export default (new BookService());
+export {}
 

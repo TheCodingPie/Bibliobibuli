@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/login.css";
 import {Modal,Button} from 'react-bootstrap'
-import UserService from '../services/UserService'
+import * as userService from '../services/UserService'
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
 //NAPINJE I DA SE IMA KONSTRUKTOR UVEK, MAKAR I PRAZAN
 export default class CreateProfileUser extends Component {
@@ -74,7 +74,7 @@ export default class CreateProfileUser extends Component {
 
 
     };
-var res= await UserService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,[],[],[],[]);
+var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,[],[],[],[]);
 console.log(res)    ;
 /*
     const options = {
