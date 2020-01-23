@@ -20,22 +20,20 @@ app.listen(1234, () => console.log("Server is listening on port: 1234") );
 mongoose.connect('mongodb://127.0.0.1:27017/Bibliobibuli', { useNewUrlParser: true,  useUnifiedTopology: true  })//ako je nema baza sam ce da je kreira
 
 
-let userModel = require('./src/server/models/user')
-
-app.post('/createUser', async (req, res)=> {
-	
-	console.log(req.body);
-	let paki=new userModel(req.body);
-	let savedDocument= await paki.save()//UPIS U BAZU NA KOJU SMO SE NAKACILI PREKO MONGOSE.CONNECT
-	 console.log(savedDocument)
-	res.json("Uspesno");
-});
 
 
+var userController = require("./src/server/controllers/UserController.js");
+/*var bookController = require("./src/server/controllers/BookController.js");
+var auctionController = require("./src/server/controllers/AuctionController.js");
+var requestController = require("./src/server/controllers/RequestController");
+var publisherController = require("./src/server/controllers/PublisherController");
+*/
+app.use("/User", userController);
 /*
-let paki = new userModel({
-  name: 'Paki',
-  lastname:'Stojanovic'
-})*/
+app.use("/Book", bookController);
+app.use("/Auction", auctionController);
+app.use("/Request", requestController);
+app.use("/Publisher", publisherController);
+*/
 
 

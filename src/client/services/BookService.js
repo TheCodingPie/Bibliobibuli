@@ -3,13 +3,13 @@ import Fetchurl from './FetchUrl';
 
 
 class BookService {
-  constructor(url) {
-    this.url =url+'Book';
+  constructor() {
+    this.url =Fetchurl.url+'Book/';
 
   }
   
 
 }
 
-export default (new BookService(Fetchurl.url));
+export default (new BookService());
 

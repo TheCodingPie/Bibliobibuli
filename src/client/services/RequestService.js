@@ -3,12 +3,12 @@ import Fetchurl from './FetchUrl';
 
 
 class RequestService {
-  constructor(url) {
-    this.url =url+'Request';
+  constructor() {
+    this.url =Fetchurl.url+'Request/';
 
   }
   
 }
 
-export default (new RequestService(Fetchurl.url));
+export default (new RequestService());
 

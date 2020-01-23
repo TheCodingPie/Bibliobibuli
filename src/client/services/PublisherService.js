@@ -3,13 +3,13 @@ import Fetchurl from './FetchUrl';
 
 
 class PublisherService {
-  constructor(url) {
-    this.url =url+'Publisher';
+  constructor() {
+    this.url =Fetchurl.url+'Publisher/';
 
   }
   
 
 }
 
-export default (new PublisherService(Fetchurl.url));
+export default (new PublisherService());
 
