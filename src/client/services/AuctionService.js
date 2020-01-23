@@ -4,7 +4,7 @@ import Fetchurl from './FetchUrl';
 
 class BookService {
   constructor(url) {
-    this.url =url;
+    this.url =url+'Auction';
 
   }
   

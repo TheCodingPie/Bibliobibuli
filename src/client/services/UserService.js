@@ -5,7 +5,7 @@ import Fetchurl from './FetchUrl';
 
 class UserService {
   constructor(url) {
-    this.baseUrl =url;
+    this.baseUrl =url+'User';
 
   }
   
