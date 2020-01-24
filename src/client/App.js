@@ -1,12 +1,17 @@
 import React from 'react';
-
 import './App.css';
-import CreateProfileUser from './components/createProfileUser';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as Components from './components'; // ovako su importovane sve komponente iz foldera, dole poziv
 
 function App() {
   return (
     <div className="App">
-     <CreateProfileUser />
+      <Router>
+        <Switch>
+           <Route path="/" exact component={Components.CreateProfileUser} />
+    
+        </Switch>
+     </Router>
     </div>
   );
 }
