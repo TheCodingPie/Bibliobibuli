@@ -58,52 +58,12 @@ export default class CreateProfileUser extends Component {
      this.setState({modalShow:true});
       return;
     }
-    const data = {
-      username: this.state.username,
-      name: this.state.name,
-      lastname: this.state.lastname,
-      address: this.state.address,
-      email: this.state.email,
-      password: this.state.password,
-      grade: 0,
-      numOfBorrowedBooks: 0,
-      incomingRequests:[],
-       madeRequests:[],
-      booksForSale:[],
-      booksToRent:[],
-
-
-    };
-var res= await UserService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,[],[],[],[]);
-console.log(res)    ;
-/*
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    };
-    const response = await fetch(
-      "http://localhost:1234/User/createUser",
-      options
-    );
-    const res = await response.json();
    
-    console.log(res);
-        /*
-            if (res == "false")
-
-            this.setState({
-              successful: "username nije slobodan",
-              borderColor: "red"
-            });
-            else {
-
-              this.props.history.push({
-                pathname: `/`,
-               
-              });
-            }*/
-
+var res= await UserService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,[],[],[],[]);
+if(res=="false")
+this.setState({successful:"Vec postoji taj username"});
+else
+this.setState({successful:""});
   };
 
   render() {

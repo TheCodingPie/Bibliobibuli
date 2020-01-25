@@ -4,12 +4,16 @@ var router = express.Router();
 var  userModel = require("../models/user");
 
 router.post('/createUser', async(req, res) => {
-        console.log(req.body);
-        let paki=new userModel(req.body);
-        let savedDocument= await paki.save()
-         console.log(savedDocument)
-        res.json("Uspesno");
+       
+        let user=new userModel(req.body);
+        let savedDocument= await user.save((err, result)=>{
+    if(err && err.code==11000)
+       res.json("false");
+    else
+     res.json("Uspesno");
+    
     
 });
+    });
 
 module.exports = router;
