@@ -19,21 +19,18 @@ app.listen(1234, () => console.log("Server is listening on port: 1234") );
 
 mongoose.connect('mongodb://127.0.0.1:27017/Bibliobibuli', { useNewUrlParser: true,  useUnifiedTopology: true  })//ako je nema baza sam ce da je kreira
 
+let userController = require("./src/server/controllers/UserController.js");
+let bookController = require("./src/server/controllers/BookController.js");
+let auctionController = require("./src/server/controllers/AuctionController.js");
+let requestController = require("./src/server/controllers/RequestController");
+let publisherController = require("./src/server/controllers/PublisherController");
 
-
-
-var userController = require("./src/server/controllers/UserController.js");
-/*var bookController = require("./src/server/controllers/BookController.js");
-var auctionController = require("./src/server/controllers/AuctionController.js");
-var requestController = require("./src/server/controllers/RequestController");
-var publisherController = require("./src/server/controllers/PublisherController");
-*/
 app.use("/User", userController);
 /*
 app.use("/Book", bookController);
 app.use("/Auction", auctionController);
-app.use("/Request", requestController);
+app.use("/Request", requestController);*/
 app.use("/Publisher", publisherController);
-*/
+
 
 

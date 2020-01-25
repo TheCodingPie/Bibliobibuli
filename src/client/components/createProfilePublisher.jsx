@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "../styles/login.css";
 import {Modal,Button} from 'react-bootstrap'
-import * as userService from '../services/UserService'
+import * as publisherService from '../services/PublisherService'
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
 //NAPINJE I DA SE IMA KONSTRUKTOR UVEK, MAKAR I PRAZAN
-export default class CreateProfileUser extends Component {
+export default class CreateProfilePublisher extends Component {
   constructor(props) {
     super(props);
 
@@ -12,13 +12,11 @@ export default class CreateProfileUser extends Component {
       username: "",
       password: "",
       login: "nije",
-      name: "",
-      lastname: "",
       email: "",
       successful: "",
       borderColor: "lightgray",
       modalShow:false,
-      address:"",
+     
     };
   }
   handleChangeusername(event) {
@@ -33,35 +31,22 @@ export default class CreateProfileUser extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleChangeName(event) {
-    this.setState({ name: event.target.value });
-  }
-  handleChangeLastname(event) {
-    this.setState({ lastname: event.target.value });
-  }
-  handleChangeEmail(event) {
+    handleChangeEmail(event) {
     this.setState({ email: event.target.value });
   }
-  handleChangeAddress(event) {
-    this.setState({address: event.target.value });
-  }
-
-  createUser = async () => {
+createPublisher = async () => {
     if (
       this.state.username == "" ||
       this.state.password == "" ||
-      this.state.name == "" ||
-      this.state.lastname == "" ||
-      this.state.address == "" ||
       this.state.email == ""
     ) {
      this.setState({modalShow:true});
       return;
     }
   
-var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,[],[],[],[]);
-console.log(res)  
-this.setState({successful:res});  
+var res= await publisherService.createPublisher(this.state.username,this.state.email,this.state.password,[]);
+console.log(res)    
+this.setState({successful:res});
 
 
   };
@@ -104,25 +89,7 @@ this.setState({successful:res});
               />
             </div>
 
-            <div className="form-group">
-              <label>Ime</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Unesite vase ime"
-                onChange={this.handleChangeName.bind(this)}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Prezime</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Unesite vase prezime"
-                onChange={this.handleChangeLastname.bind(this)}
-              />
-            </div>
+           
             <div className="form-group">
               <label>E mail</label>
               <input
@@ -132,20 +99,11 @@ this.setState({successful:res});
                 onChange={this.handleChangeEmail.bind(this)}
               />
             </div>
-            <div className="form-group">
-              <label>Adresa</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Unesite vasu adresu"
-                onChange={this.handleChangeAddress.bind(this)}
-              />
-              </div>
-
+            
             <button
               type="submit"
               className="btn btn-primary btn-block"
-              onClick={this.createUser}
+              onClick={this.createPublisher}
             >
               Kreiraj profil
             </button>
