@@ -44,8 +44,10 @@ export default class LoginUser extends Component {
   if(response=="false")
   this.setState({response:"Proverite svoje podatke"})   
   else
-  console.log(response)//Za JOKS->>>>.ovde je ceo objekat koji ti treba 
-   
+  this.props.history.push({
+    pathname: `/FirstPageUser`,
+    state: { user: response }
+  });//Za JOKS->>>>.ovde je ceo objekat koji ti treba 
   };
 
   render() {

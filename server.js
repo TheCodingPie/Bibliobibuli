@@ -26,9 +26,9 @@ let requestController = require("./src/server/controllers/RequestController");
 let publisherController = require("./src/server/controllers/PublisherController");
 
 app.use("/User", userController);
-/*
+
 app.use("/Book", bookController);
-app.use("/Auction", auctionController);
+/*app.use("/Auction", auctionController);
 app.use("/Request", requestController);*/
 app.use("/Publisher", publisherController);
 

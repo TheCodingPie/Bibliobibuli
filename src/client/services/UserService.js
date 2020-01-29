@@ -5,10 +5,10 @@ import Fetchurl from './FetchUrl';
 let url=Fetchurl.url + 'User/'
 
 
-  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, incomingRequests, madeRequests,booksForSale, booksToRent) => 
+  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent) => 
   {
  let dataToSend = {
-      username, name, lastname, address, email , password, grade, numOfBorrowedBooks, incomingRequests, madeRequests,booksForSale, booksToRent
+      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,numOfImages, incomingRequests, madeRequests,booksForSale, booksToRent
     };
 
     let res = await axios.post(url+'createUser/', dataToSend);
@@ -29,11 +29,19 @@ let url=Fetchurl.url + 'User/'
     return data;
 
   }
- 
+ const returnImageNumber =async(username)=>{
+   let dataToSend={
+     username
+   }
+   let res = await axios.post(url+'returnImageNumber/', dataToSend);
+   let data = await res.data;
+   return data.numOfImages;
+ }
 
 export{
   createUser,
-  loginUser
+  loginUser,
+  returnImageNumber
 }
 
 
