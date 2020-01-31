@@ -24,7 +24,10 @@ class AddBook extends React.Component {
       nameAuthor:"",
       lastnameAuthor:"",
       name:"",
-      bookType:""
+      bookType:"",
+      aboutBook:"",
+      publishing:"",
+      yearPublishing:2020
       
     };
     console.log(this.state.user)//TREBA IZBRISATI
@@ -42,6 +45,12 @@ handleChangeName=(e)=>{
 }
 handleChangeBookType=(e)=>{
     this.setState({bookType:e.target.value})
+}
+handleChangePublishing=(e)=>{
+  this.setState({publishing:e.target.value})
+}
+handleChangeYearPublishing=(e)=>{
+  this.setState({yearPublishing:e.target.value})
 }
 
   componentDidMount = async () => {
@@ -70,11 +79,11 @@ handleChangeBookType=(e)=>{
 
 
   addToFirebase = async () => {
-   // await storageRef.child(this.state.username.toString() + '/' + this.state.idPhoto.toString()).put(this.state.file);
-   // await storageRef.child(this.state.username.toString() + '/' + this.state.idPhoto.toString()).getDownloadURL().then((url) => this.setState({ urlImage: url }));
+   // await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).put(this.state.file);
+    //await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).getDownloadURL().then((url) => this.setState({ urlImage: url }));
     //this.saveImageToDataBase();
-    console.log(this.state.name)
-    await bookService.addBook(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,[],0,0,this.state.user.username,this.state.bookType,this.state.idPhoto)
+    console.log(this.state.name);
+    await bookService.addBookExchange(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,[],0,0,this.state.user.username,this.state.bookType,this.state.idPhoto,[],this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing)
   }
 
 
@@ -108,7 +117,7 @@ handleChangeBookType=(e)=>{
   }
 
   onChangeAbout = (e) => {
-    this.setState({ aboutImage: e.target.value });
+    this.setState({ aboutBook: e.target.value });
   }
 
 
@@ -195,6 +204,26 @@ handleChangeBookType=(e)=>{
                         placeholder="Unesite korisnicko ime"
                         value={this.state.bookType}
                         onChange={this.handleChangeBookType.bind(this)}
+                        ></input>
+                </div>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                    <label>Godina Izdavanja</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Godina izdavanja"
+                        value={this.state.yearPublishing}
+                        onChange={this.handleChangeYearPublishing.bind(this)}
+                        ></input>
+                </div>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                    <label>Izdavanje</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Unesite korisnicko ime"
+                        value={this.state.publishing}
+                        onChange={this.handleChangePublishing.bind(this)}
                         ></input>
                 </div>
 

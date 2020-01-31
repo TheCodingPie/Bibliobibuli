@@ -22,7 +22,7 @@ export default class LoginUser extends Component {
   }
 
   handleChangePassword(event) {
-    this.setState({ password: event.target.value, color: "lightgrey" });
+    this.setState({ password: event.target.value, color: "lightgrey",response:""  });
   }
 /*  createProfileArtist = () => {
     this.props.history.push({
@@ -42,7 +42,7 @@ export default class LoginUser extends Component {
     
   var response= await userService.loginUser(this.state.username,this.state.password);
   if(response=="false")
-  this.setState({response:"Proverite svoje podatke"})   
+  this.setState({response:"Proverite svoje podatke",color:'red'})   
   else
   this.props.history.push({
     pathname: `/FirstPageUser`,

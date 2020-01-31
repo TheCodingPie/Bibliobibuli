@@ -7,16 +7,15 @@ let url =Fetchurl.url+'Book/';
 
 
 
-const addBook = async (name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber) => 
+const addBookExchange = async (name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description,yearPublishing,publishing) => 
 {
 let dataToSend = {
-    name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber
+    name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description, yearPublishing,publishing
   };
 
   let res = await axios.post(url+'addBook/', dataToSend);
   console.log(res)
-  //let data = await res.data;
   return res;
 
 }
-export  {addBook}
+export  {addBookExchange}

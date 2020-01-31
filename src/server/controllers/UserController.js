@@ -34,7 +34,7 @@ router.post('/createUser', async(req, res) => {
         
         )
     });
-    router.post('/addBook', async(req, res) => {
+   /* router.post('/addBook', async(req, res) => {
       
           let book=new bookModel(req.body);
         await user.findOneAndUpdate(
@@ -43,6 +43,19 @@ router.post('/createUser', async(req, res) => {
                       booksForSale:book 
                     } 
             })
-        });
+        });*/
+        router.post('/changeAdress', async(req, res) => {
+      
+            
+         let rez= await userModel.findOneAndUpdate(
+              { username:req.body.username }, 
+              {
+                        address:req.body.address
+              });
+             if(rez==null)
+             res.json('false');
+             else
+             res.json('true');
+          });
 
 module.exports = router;

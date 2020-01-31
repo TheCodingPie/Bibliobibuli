@@ -10,10 +10,14 @@ let bookSchema = new mongoose.Schema({
   averageReview:Number,
   usernameOwner:String,
   bookType:String,
-  imageNumber:Number
+  imageNumber:Number,
+  borrowedTo:[{username:String}],
+  description:String,
+  yearPublishing:Number,
+  publishing:String
   
 
   
 })
 
-module.exports = mongoose.model('Books', bookSchema)/*User je ime kolekcije ali to mongo prebaci u mnozinu pa ga pamti u bazi kao Users, kolekcija=tabela */
+module.exports = mongoose.model('BookExchange', bookSchema)/*User je ime kolekcije ali to mongo prebaci u mnozinu pa ga pamti u bazi kao Users, kolekcija=tabela */

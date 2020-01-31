@@ -26,7 +26,12 @@ class FirstPageUser extends React.Component {
     state: { user: this.state.user }
       });
  }
-
+changeAdress=()=>{
+  this.props.history.push({
+    pathname: `/ChangeAdressUser`,
+state: { user: this.state.user }
+  });
+}
 
  
 
@@ -48,7 +53,9 @@ class FirstPageUser extends React.Component {
                 
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
                 </NavDropdown>
+                
               </Nav>
             </Navbar.Collapse>
           </Navbar>

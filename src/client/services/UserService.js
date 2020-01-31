@@ -16,6 +16,13 @@ let url=Fetchurl.url + 'User/'
     return data;
 
   }
+  const changeAdress =async(username,address)=>
+  {
+    let dataToSend={username,address}
+    let res=await axios.post(url+'changeAdress/', dataToSend);
+    let data = await res.data;
+    return data;
+  }
 
   const loginUser = async (username,  password) => 
   {
@@ -41,7 +48,8 @@ let url=Fetchurl.url + 'User/'
 export{
   createUser,
   loginUser,
-  returnImageNumber
+  returnImageNumber,
+  changeAdress
 }
 
 

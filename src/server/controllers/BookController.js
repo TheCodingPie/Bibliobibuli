@@ -5,18 +5,17 @@ var  bookModel = require("../models/books");
 var  userModel = require("../models/user");
 
     router.post('/addBook', async(req, res) => {
-      
+      console.log("lalala")
        let book=new bookModel(req.body);
-     // let book=req.body;
-     console.log(book);
-      await userModel.findOneAndUpdate(
-          { _id:"5e2e150b23029ec344ab310e"}, 
-          { $push: { 
-                    booksForSale:book
-                  } 
-          },(err, docs)=> 
-          (err || docs.length==0 )? res.json("false") : res.send(docs[0]))
-      });
+     await book.save();
+     let rez=await userModel.updateOne(
+      { username:book.usernameOwner}, 
+      { $push: {
+        booksToRent:{name:book.name,lastnameAuthor:book.lastnameAuthor,imageNumber:book.imageNumber,id:book._id}
+      }
+      })
+       
+    });
 
  
 

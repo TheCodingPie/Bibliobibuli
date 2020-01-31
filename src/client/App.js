@@ -6,7 +6,8 @@ import CreateProfilePublisher from './components/createProfilePublisher';
 import LoginUser from './components/loginUser';
 import LoginPublisher from './components/loginPublisher';
 import FirstPageUser from './components/user/firstPageUser';
-import AddBook from './components/user/addBook';
+import AddBook from './components/user/addBookExchange';
+import ChangeAdressUser from './components/user/changeAdress';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
            <Route path="/LoginPublisher" exact component={LoginPublisher} />
            <Route path="/FirstPageUser" exact component={FirstPageUser} />
            <Route path="/AddBook" exact component={AddBook} />
+           <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
     
         </Switch>
      </Router>
