@@ -17,16 +17,6 @@ router.post('/createPublisher', async(req, res) => {
      
     });
 
-    router.post('/loginPublisher', async(req, res) => {
-       
-        console.log(req.body);
-
-        publisherModel.find(req.body, (err, docs)=> 
-           
-                (err || docs.length==0 )? res.json("false") : res.send(docs[0])
-        
-        )
-    });
 
 
 module.exports = router;

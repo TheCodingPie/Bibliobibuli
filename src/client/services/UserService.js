@@ -24,14 +24,14 @@ let url=Fetchurl.url + 'User/'
     return data;
   }
 
-  const loginUser = async (username,  password) => 
+  const login = async (username,  password) => 
   {
  let dataToSend = {
       username,  
       password
     };
 
-    let res = await axios.post(url+'loginUser/', dataToSend);
+    let res = await axios.post(url+'login/', dataToSend);
     let data = await res.data;
     return data;
 
@@ -47,7 +47,7 @@ let url=Fetchurl.url + 'User/'
 
 export{
   createUser,
-  loginUser,
+  login,
   returnImageNumber,
   changeAdress
 }

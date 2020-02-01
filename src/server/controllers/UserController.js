@@ -3,7 +3,7 @@ var router = express.Router();
 
 var  userModel = require("../models/user");
 var  bookModel = require("../models/books");
-
+var publisherModel = require("../models/publisher");
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
@@ -16,14 +16,31 @@ router.post('/createUser', async(req, res) => {
         });
     });
 
-    router.post('/loginUser', async(req, res) => {
-       
-        console.log(req.body);
-
-        userModel.find(req.body, (err, docs)=> 
+    router.post('/login', async(req, res) => {
+         userModel.find(req.body, (err, docs)=> {
            
-                (err || docs.length==0 )? res.json("false") : res.send(docs[0])
-        
+            if(err || docs.length==0 ) 
+            {
+                publisherModel.find(req.body, (err, docs)=> 
+                 {
+                   if (err || docs.length==0 )
+                         res.json("false") 
+                   else 
+                   {
+                        let toSend=docs[0].toObject();
+                         toSend.type='publisher';
+                         res.send(toSend);
+                   }
+                })
+               }
+            else
+                {  
+                    let toSend=docs[0].toObject();
+                    toSend.type='user'
+                    res.send(toSend)
+                }
+            
+            }
         )
     });
     router.post('/returnImageNumber', async(req, res) => {

@@ -14,23 +14,11 @@ let dataToSend = {
 
 }
 
-const loginPublisher = async (username,  password) => 
-{
-let dataToSend = {
-    username,  
-    password
-  };
-
-  let res = await axios.post(url+'loginPublisher/', dataToSend);
-  let data = await res.data;
-  return data;
-
-}
 
 
 
 export{
     createPublisher,
-    loginPublisher
+   
 }
 
