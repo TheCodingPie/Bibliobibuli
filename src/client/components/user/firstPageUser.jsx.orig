@@ -24,9 +24,7 @@ class FirstPageUser extends React.Component {
   }
   componentDidMount=async()=>{
     let user=await userService.returnUser(this.state.user.username);
-    let images=user.booksForSale.concat(user.booksToRent);
-    console.log(images);
-    console.log(user);
+    let images=this.state.user.booksForSale.concat(this.state.user.booksToRent);
     this.setState({user:user,images:images})
   }
 componentWillMount=async ()=>{
@@ -52,6 +50,7 @@ changeAdress=()=>{
 state: { user: this.state.user }
   });
 }
+<<<<<<< HEAD
 bookDetailed=async(item)=>{
 console.log(item);
 console.log(this.state.user.booksForSale)
@@ -76,7 +75,6 @@ console.log(this.state.user.booksForSale)
   
 }
 printImages = () => {
-  
   let findImages = this.state.images.map((item, index) => {
     return (
       <div
@@ -99,12 +97,14 @@ printImages = () => {
   });
   return findImages;
 };
+=======
 searchNewBooks=()=>{
   this.props.history.push({
     pathname: `/SearchNewBooks`,
 state: { user: this.state.user }
   });
 }
+>>>>>>> origin/master
 
 addTopic=()=>{
   this.props.history.push({
@@ -139,24 +139,30 @@ seeTopics=(trending)=>{
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
+<<<<<<< HEAD
                   <NavDropdown.Item ><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
+=======
                   <NavDropdown.Item ><Button onClick={this.searchNewBooks}>Pretrazi nove knjige</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
+>>>>>>> origin/master
                 </NavDropdown>
                 <SearchBar></SearchBar>
                 <SearchBarAuction></SearchBarAuction>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
+<<<<<<< HEAD
         </div>
         <h3>{this.state.user.name}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label>
         <h6>Nis</h6>
+=======
        
+>>>>>>> origin/master
 
         <Container style={{display:'flex',flexDirection:'row'}}>
           <div className="justify-content-center row">{this.printImages()}</div>
@@ -166,7 +172,7 @@ seeTopics=(trending)=>{
     
 </div>
      
-     
+      </div>
     );
   }
 }

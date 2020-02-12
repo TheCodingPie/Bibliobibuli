@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import * as publisherService from '../services/PublisherService'
+import * as userService from '../services/UserService'
 
 import im from "../../images/j.jpg";
 
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
 //NAPINJE I DA SE IMA KONSTRUKTOR UVEK, MAKAR I PRAZAN
-export default class LoginPublisher extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -22,31 +22,39 @@ export default class LoginPublisher extends Component {
   }
 
   handleChangePassword(event) {
-    this.setState({ password: event.target.value, color: "lightgrey" });
+    this.setState({ password: event.target.value, color: "lightgrey",response:""  });
   }
-/*  createProfileArtist = () => {
+  createProfileUser = () => {
     this.props.history.push({
-      pathname: `/createArtist`
+      pathname: `/CreateProfileUser`
     });
   };
-  createProfileClient = () => {
+  createProfilePublisher = () => {
     this.props.history.push({
-      pathname: `/createClient`
+      pathname: `/CreateProfilePublisher`
     });
   };
-  */
-  LoginPublisher =async () => {
+  
+  login =async () => {
     if ( this.state.username == "" || this.state.password == ""  ) 
             return;
       
     
-  var response= await publisherService.loginPublisher(this.state.username,this.state.password);
+  var response= await userService.login(this.state.username,this.state.password);
+ 
+  
   if(response=="false")
-  this.setState({response:"Proverite svoje podatke"})   
+             this.setState({response:"Proverite svoje podatke",color:'red'})   
   else
-  console.log(response)//Za JOKS->>>>.ovde je ceo objekat koji ti treba 
-   
-  };
+     if(response.type=="user")
+        this.props.history.push({
+          pathname: `/FirstPageUser`,
+            state: { user: response }  });//Za JOKS->>>>.ovde je ceo objekat koji ti treba 
+    else
+        this.props.history.push({
+          pathname: `/PublisherFirstPage`,
+            state: { publisher: response }});
+};
 
   render() {
    
@@ -105,7 +113,7 @@ export default class LoginPublisher extends Component {
                     display: "flex",
                     flex: 2
                   }}
-                  onClick={() => this.LoginPublisher()}
+                  onClick={() => this.login()}
                 >
                   <h5>Prijavite se</h5>
                
@@ -113,6 +121,37 @@ export default class LoginPublisher extends Component {
                 <label>{this.state.response}</label>
 
                 <div className="left"></div>
+              </div>
+              <div className="zaDugmice">
+                <button
+                  className="btn"   
+                  onClick={this.createProfileUser}
+                  style={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    flex: 2
+                  }}
+                >
+                  Registracija korisnika
+                </button>
+
+                <button
+                  className="btn"
+                  style={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    flex: 2
+                  }}
+                  onClick={this.createProfilePublisher}
+                >
+                  Registracija izdavaca
+                </button>
               </div>
               <div className="iznadIIspod"></div>
              

@@ -8,6 +8,11 @@ var ObjectID = require('mongodb').ObjectID;
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
+<<<<<<< HEAD
+        console.log(user)
+     let rez=await user.save();
+     console.log(rez);
+=======
         console.log(user);
      await user.save((err, result)=>{
          console.log(err);
@@ -17,6 +22,7 @@ router.post('/createUser', async(req, res) => {
     
     
         });
+>>>>>>> origin/master
     });
 
     router.post('/login', async(req, res) => {

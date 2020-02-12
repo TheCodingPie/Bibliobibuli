@@ -4,10 +4,14 @@ let url =Fetchurl.url+'Book/';
 
 
 
+<<<<<<< HEAD
 
 
 
 const addBookExchange = async (name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description,yearPublishing,publishing,urlImage) => 
+=======
+const addBookExchange = async (name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description,yearPublishing,publishing) => 
+>>>>>>> origin/master
 {
 let dataToSend = {
     name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description, yearPublishing,publishing,urlImage
@@ -17,6 +21,7 @@ let dataToSend = {
   return res;
 
 }
+<<<<<<< HEAD
 const addBookSale=async(  name,
   nameAuthor,
   lastnameAuthor,
@@ -70,7 +75,8 @@ const addBookSale=async(  name,
     let res=await axios.post(url+'returnBookTrade/', dataToSend)
     return res;
   }
-
+export  {addBookExchange,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
+=======
 
 const addNewBook = async(usernamePublisher,name,nameAuthor, lastnameAuthor,bookType,description,price,countOfBooks,yearPublishing)=>{
   let dataToSend={
@@ -116,5 +122,5 @@ const searchNewBooks=async (part)=>{
 }
 
 
-export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
-//export  {addBookExchange,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
+export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks}
+>>>>>>> origin/master

@@ -3,10 +3,13 @@ var router = express.Router();
 
 var  bookModel = require("../models/books");
 var  userModel = require("../models/user");
+<<<<<<< HEAD
 var  bookforAuction = require("../models/booksForAuction");
+=======
 var newBookModel= require('../models/newBook');
 var publisherModel=require('../models/publisher');
 var ObjectID = require('mongodb').ObjectID;
+>>>>>>> origin/master
 
 
     router.post('/addBook', async(req, res) => {
@@ -62,7 +65,9 @@ var ObjectID = require('mongodb').ObjectID;
      bookModel.find(req.body, (err, docs)=> {
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])}
 
+<<<<<<< HEAD
 )
+=======
 
     router.post('/AddNewBook',async(req,res)=>{
       let newBook= new newBookModel(req.body);
@@ -148,6 +153,7 @@ router.post('/SeeBook',async(req,res)=>{
 
 
 
+>>>>>>> origin/master
  
     });
 

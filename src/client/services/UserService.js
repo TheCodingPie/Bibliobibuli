@@ -25,14 +25,14 @@ let url=Fetchurl.url + 'User/'
     return data;
   }
 
-  const loginUser = async (username,  password) => 
+  const login = async (username,  password) => 
   {
  let dataToSend = {
       username,  
       password
     };
 
-    let res = await axios.post(url+'loginUser/', dataToSend);
+    let res = await axios.post(url+'login/', dataToSend);
     let data = await res.data;
     return data;
 
@@ -52,9 +52,26 @@ let url=Fetchurl.url + 'User/'
    return data;
  }
 
+ const ratePublisher=async(userId,publisherId, rating)=>{
+
+  let dataToSend={
+    userId,publisherId, rating
+  }
+  let res = await axios.post(url+'RatePublisher/', dataToSend);
+  let data = await res.data;
+  return data;
+
+ }
+
+ const canRatePublisher=async (publisherId,userId)=>{
+  let dataToSend={publisherId,userId};
+  let res = await axios.post(url+'CanRatePublisher/', dataToSend);
+  return res.data;
+}
+
 export{
   createUser,
-  loginUser,
+  login,
   returnImageNumber,
   changeAdress,
   returnUser
