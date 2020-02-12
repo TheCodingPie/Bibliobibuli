@@ -60,7 +60,7 @@ export default class CreateProfileUser extends Component {
       return;
     }
   
-var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,0,[],[],[],[]);
+var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,0,[],[],[],[],[],[]);
 console.log(res)  
 this.setState({successful:res});  
 

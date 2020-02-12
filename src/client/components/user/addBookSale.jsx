@@ -1,12 +1,17 @@
 import React from 'react';
+import DatePicker from "react-datepicker";
+import TimePicker from "rc-time-picker";
 import firebase from '../../config/firebaseConfig'
-import { FormControl, Button, Col, Image, Container, Row, Media, Modal } from 'react-bootstrap';
+import { FormControl, Button, Col, Image, Container, Row, Media, Modal} from 'react-bootstrap';
 import * as bookService from '../../services/BookService'
 import * as userService from '../../services/UserService'
+import moment from "moment";
 import * as boo from '../../services/UserService'
+import "react-datepicker/dist/react-datepicker.css";
+import 'rc-time-picker/assets/index.css';
 var storageRef = firebase.storage().ref();
 
-class AddBook extends React.Component {
+class AddBookSale extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +32,10 @@ class AddBook extends React.Component {
       bookType:"",
       aboutBook:"",
       publishing:"",
-      yearPublishing:2020
+      yearPublishing:2020,
+      startPrice:0,
+      dateEnd:new Date(),
+      time:moment().format("HH:mm"),
       
     };
     console.log(this.state.user)//TREBA IZBRISATI
@@ -51,6 +59,16 @@ handleChangePublishing=(e)=>{
 }
 handleChangeYearPublishing=(e)=>{
   this.setState({yearPublishing:e.target.value})
+}
+handleChangeStartPrice=(e)=>{
+  this.setState({startPrice:e.target.value})
+}
+handleChangeDate=async date=>{
+  this.setState({dateEnd:date})
+}
+handleChangeTime=async time=>{
+  if(time==null) return
+ this.setState({timeEnd:time.format("HH:mm")})
 }
 
   componentDidMount = async () => {
@@ -81,7 +99,7 @@ handleChangeYearPublishing=(e)=>{
   addToFirebase = async () => {
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).put(this.state.file);
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).getDownloadURL().then((url) => this.setState({ urlImage: url }));
-    await bookService.addBookExchange(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,[],0,0,this.state.user.username,this.state.bookType,this.state.idPhoto,[],this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage)
+    await bookService.addBookSale(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,this.state.user.username,this.state.bookType,this.state.idPhoto,this.state.startPrice,[],this.state.dateEnd,this.state.time,0,null,this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage)
   this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:""})
   }
 
@@ -92,28 +110,7 @@ handleChangeYearPublishing=(e)=>{
   }
 
 
-  addTagToArray = () => {
-    if (this.state.tagInputValue !== "") {
-      this.state.arrayTags.push(this.state.tagInputValue);
-    }
-    this.setState({ tagInputValue: '' });
-  }
-
-
-
-  printTags = () => {
-    let elements = this.state.arrayTags.map((item, index) => {
-      return (<div className="ml-2 mb-2"><Button variant="outline-primary" key={index} onClick={(but) => this.deleteTag(but)} value={item}>{item}</Button> </div>);
-    });
-
-    return elements;
-  }
-
-  deleteTag = (e) => {
-    var index = this.state.arrayTags.indexOf(e.target.value);
-    this.state.arrayTags.splice(index, 1);
-    this.setState({ arrayTags: this.state.arrayTags });
-  }
+ 
 
   onChangeAbout = (e) => {
     this.setState({ aboutBook: e.target.value });
@@ -218,6 +215,33 @@ handleChangeYearPublishing=(e)=>{
                         onChange={this.handleChangePublishing.bind(this)}
                         ></input>
                 </div>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                    <label>Pocetna cena</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Unesite pocetnu cenu"
+                        value={this.state.startPrice}
+                        onChange={this.handleChangeStartPrice.bind(this)}
+                        ></input>
+                </div>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                    <label>Datum</label>
+                    <DatePicker
+                        selected={this.state.dateEnd}
+                        onChange={this.handleChangeDate}
+                        />
+                </div>
+                <div style={{display:'flex',flexDirection:'row'}}>
+                    <label>vreme kraja ponude</label>
+                    <TimePicker
+                         style={{ width: 100 }}
+                         showSecond={false}
+                         defaultValue={moment()}
+                         className="xxx"
+                        onChange={this.handleChangeTime}
+                        />
+                </div>
 
               </div>
               <br />
@@ -241,7 +265,7 @@ handleChangeYearPublishing=(e)=>{
   }
 }
 
-export default AddBook
+export default AddBookSale
 
 function MyVerticallyCenteredModal(props) {
   return (

@@ -14,7 +14,8 @@ let bookSchema = new mongoose.Schema({
   borrowedTo:[{username:String}],
   description:String,
   yearPublishing:Number,
-  publishing:String
+  publishing:String,
+  urlImage:String
   
 
   

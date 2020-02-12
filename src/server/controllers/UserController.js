@@ -7,16 +7,22 @@ var  bookModel = require("../models/books");
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
-     await user.save((err, result)=>{
-        (err)? 
-            (err.code==11000) ?  res.json("Korisnicko ime je zauzeto") :  res.json("greska na serveru") 
-        : res.json("Uspesno ste kreirali profil");
-    
-    
-        });
+        console.log(user)
+     let rez=await user.save();
+     console.log(rez);
     });
 
     router.post('/loginUser', async(req, res) => {
+       
+        console.log(req.body);
+
+        userModel.find(req.body, (err, docs)=> 
+           
+                (err || docs.length==0 )? res.json("false") : res.send(docs[0])
+        
+        )
+    });
+    router.post('/returnUser', async(req, res) => {
        
         console.log(req.body);
 

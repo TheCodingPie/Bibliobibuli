@@ -8,6 +8,8 @@ import LoginPublisher from './components/loginPublisher';
 import FirstPageUser from './components/user/firstPageUser';
 import AddBook from './components/user/addBookExchange';
 import ChangeAdressUser from './components/user/changeAdress';
+import AddBookSale from './components/user/addBookSale';
+import BookDetailTrade from './components/user/bookDetailesTrade';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
            <Route path="/FirstPageUser" exact component={FirstPageUser} />
            <Route path="/AddBook" exact component={AddBook} />
            <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
+           <Route path="/AddBookSale" exact component={AddBookSale} />
+           <Route path="/bookDetailTrade" exact component={BookDetailTrade} />
     
         </Switch>
      </Router>

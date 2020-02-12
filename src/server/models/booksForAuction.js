@@ -10,10 +10,14 @@ let bookAuctionSchema = new mongoose.Schema({
   imageNumber:Number,
   startPrice:Number,
   bids:[{price:Number,usernameBidder:String}],
-  auctionEndDate:Date,
-  auctionEndTime:Date,
+  auctionEndDate:String,
+  auctionEndTime:String,
   highestPrice:Number,
-  winner:String
+  winner:String,
+  aboutBook:String,
+  yearPublishing:Number,
+  publishing:String,
+  urlImage:String
 
 
   
