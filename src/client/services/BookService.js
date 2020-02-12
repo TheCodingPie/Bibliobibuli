@@ -70,6 +70,11 @@ const addBookSale=async(  name,
     let res=await axios.post(url+'returnBookTrade/', dataToSend)
     return res;
   }
+  const returnBookAuction=async(_id)=>{
+    let dataToSend={_id}
+    let res=await axios.post(url+'returnBookAuction/', dataToSend)
+    return res;
+  }
 
 
 const addNewBook = async(usernamePublisher,name,nameAuthor, lastnameAuthor,bookType,description,price,countOfBooks,yearPublishing)=>{
@@ -116,5 +121,5 @@ const searchNewBooks=async (part)=>{
 }
 
 
-export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
+export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade,returnBookAuction}
 //export  {addBookExchange,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}

@@ -50,7 +50,6 @@ var ObjectID = require('mongodb').ObjectID;
  
     });
     router.post('/returnBookAuction', async(req, res) => {
-      console.log(b)
      bookforAuction.find(req.body, (err, docs)=> 
            
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])
@@ -63,6 +62,7 @@ var ObjectID = require('mongodb').ObjectID;
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])}
 
 )
+});
 
     router.post('/AddNewBook',async(req,res)=>{
       let newBook= new newBookModel(req.body);
@@ -149,7 +149,7 @@ router.post('/SeeBook',async(req,res)=>{
 
 
  
-    });
+    
 
 
     

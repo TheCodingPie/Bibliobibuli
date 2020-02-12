@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from '../../config/firebaseConfig'
-import { FormControl, Button, Col, Image, Container, Row, Media, Modal } from 'react-bootstrap';
+import { FormControl, Button, Col, Image, Container, Row, Media, Modal,ListGroup,ListGroupItem } from 'react-bootstrap';
 import * as bookService from '../../services/BookService'
 import * as userService from '../../services/UserService'
 import * as boo from '../../services/UserService'
@@ -42,7 +42,16 @@ class BookDetailTrade extends React.Component {
     await this.setState({image:image.data,imgUrl:image.data.urlImage});
     
   }
-
+  printComments=()=>{
+    let comments= this.state.image.comments.map((comment, index)=>{
+        console.log(comment)
+     return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" > <div className="col"> 
+      <div><text>Autor komentara: {comment.usernameCommentAuthor}</text> </div> 
+       <div>Komentar:<br/> {comment.comment}</div>
+      </div>  </ListGroup.Item>);  
+     });
+     return comments;
+ }
 
 
 
@@ -50,21 +59,52 @@ class BookDetailTrade extends React.Component {
 
  render() {
     return (
-        <div>
+        <div style={{alignItems:'center',display:'flex',flexDirection:'column'}}>
         <div
-        className="d-flex  align-self-start flex-column mr-2 ml-2 mb-2 "
+        className=" mr-2 ml-2 mb-2 " 
+        style={{display:'flex',alignItems:'center',flex:5}}
       >
         <Image
           width={300}
           height={300}
-          className="align-self-start ml-2 "
+          className="ml-2 "
           src={this.state.image.urlImage}
           alt="radi"
           class="img-thumbnail"
         />
+        <span></span>
+        <span></span>
+        <div style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+    <div style={{flex:2}}></div>
+    <div style={{flex:2,display:'flex',flexDirection:'column',width:'100%'}}>
+    <label style={{alignSelf:'center',color:'blue'}}>Broj ocena: {this.state.image.numOfReviews}</label>
+    <label style={{alignSelf:'center',color:'blue'}}>Prosecna ocena: {this.state.image.averageReview}</label>
+    </div>
+    <div style={{flex:2}}></div>
+        </div>
        
       </div>
+      <div style={{flex:5,display:'flex',flexDirection:'column'}}>
     <label>{this.state.image.name}</label>
+    <label>Autor : {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</label>
+    <label>Tip knjige : {this.state.image.bookType}</label>
+    <label>Godina izdavanja : {this.state.image.yearPublishing}</label>
+    <label>Izdavacka kuca : {this.state.image.publishing}</label>
+    <label>Opis knjige : {this.state.image.description}</label>
+    </div>
+    <div style={{flex:2}}>
+   
+   
+
+
+    </div>
+    <div style={{flex:5}}>
+      <h3>Komentari</h3>
+      <ListGroup>
+                    {this.printComments()}
+                </ListGroup>
+</div>
+
       </div>
     )
   }
