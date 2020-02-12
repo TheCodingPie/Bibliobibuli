@@ -50,7 +50,6 @@ var ObjectID = require('mongodb').ObjectID;
  
     });
     router.post('/returnBookAuction', async(req, res) => {
-      console.log(b)
      bookforAuction.find(req.body, (err, docs)=> 
            
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])

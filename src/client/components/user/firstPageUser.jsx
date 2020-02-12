@@ -68,7 +68,7 @@ console.log(this.state.user.booksForSale)
  })
  if(p){
  this.props.history.push({
-  pathname: `/bookDetailSale`,
+  pathname: `/bookDetailAuction`,
  state: { user: this.state.user,book_id:item.id,item:item }
 });return}
 
@@ -133,7 +133,7 @@ this.props.history.push({
 }
  
 obradiIzborAuction=(selected)=>{
-  console.log(selected[0])
+  console.log('uso')
   this.props.history.push({
     pathname: `/bookDetailAuction`,
    state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }

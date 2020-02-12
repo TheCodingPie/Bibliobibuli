@@ -20,8 +20,11 @@ import PublisherFirstPage from './components/publisher/PublisherFirstPage';
 import SearchNewBooks from './components/user/SearchNewBooks';
 import SeeNewBookUser from './components/user/SeeNewBookUser';
 import BuyNewBook from './components/user/BuyNewBook';
+<<<<<<< HEAD
 import UserProfile from './components/user/userProfile';
+=======
 import BookDetailAuction from './components/user/bookDetailesAuction';
+>>>>>>> dd4d41440ab4c038a3d2452925aa3fbda5330123
 
 
 function App() {
@@ -41,7 +44,7 @@ function App() {
            <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
            <Route path="/AddBookSale" exact component={AddBookSale} />
            <Route path="/bookDetailTrade" exact component={BookDetailTrade} />
-           <Route path="/bookDetailAuction" exact component={BookDetailAuction} />
+           <Route path="/bookDetailSale" exact component={BookDetailAuction} />
            <Route path="/AddNewBook" exact component={AddNewBook} />
            <Route path="/SeeMyBooks" exact component={SeeMyBooks} />
            <Route path="/SeeBook" exact component={SeeBook} />
