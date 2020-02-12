@@ -16,13 +16,18 @@ import SearchBarAuction from "../searchBarAuction";
 class FirstPageUser extends React.Component {
   constructor(props) {
     super(props);
-
+    (this.props.location.state==undefined)?
+    this.state = {
+        goBack:true
+      }:
     this.state = {
       user: this.props.location.state.user,
-      images:[]
+      images:[],
+      goBack:false
     };
   }
   componentDidMount=async()=>{
+    if(this.props.location.state==undefined)return;
     let user=await userService.returnUser(this.state.user.username);
     let images=user.booksForSale.concat(user.booksToRent);
     console.log(images);
@@ -59,8 +64,6 @@ console.log(this.state.user.booksForSale)
  this.state.user.booksForSale.forEach((x)=>{
    if(x.name==item.name)
    p=true;
-   
-    
    
  })
  if(p){
@@ -119,10 +122,29 @@ seeTopics=(trending)=>{
     state: { user: this.state.user,trending }
   });
 }
+
+obradiIzborTrade=(selected)=>{
+console.log(selected[0])
+this.props.history.push({
+  pathname: `/bookDetailTrade`,
+ state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
+});
+
+}
  
+obradiIzborAuction=(selected)=>{
+  console.log(selected[0])
+  this.props.history.push({
+    pathname: `/bookDetailAuction`,
+   state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
+  });
+  
+  }
 
   render() {
     return (
+      (this.state.goBack)?(<label>Vratite se nazad</label>):
+      (
       <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
       <div className="w-100" style={{
 
@@ -135,7 +157,8 @@ seeTopics=(trending)=>{
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                
+              <SearchBar obradiIzbor={this.obradiIzborTrade}></SearchBar>
+                <SearchBarAuction obradiIzbor={this.obradiIzborAuction}></SearchBarAuction>
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
@@ -145,17 +168,16 @@ seeTopics=(trending)=>{
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
                 </NavDropdown>
-                <SearchBar></SearchBar>
-                <SearchBarAuction></SearchBarAuction>
+                
               </Nav>
             </Navbar.Collapse>
           </Navbar>
         </div>
-        <h3>{this.state.user.name}</h3>
+        <h3>{this.state.user.username}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label>
-        <h6>Nis</h6>
+       
        
 
         <Container style={{display:'flex',flexDirection:'row'}}>
@@ -164,7 +186,7 @@ seeTopics=(trending)=>{
        
 
     
-</div>
+</div>)
      
      
     );

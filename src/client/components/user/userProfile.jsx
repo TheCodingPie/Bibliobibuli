@@ -1,30 +1,36 @@
 import React, { Component } from "react";
 
 
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalHeader from "react-bootstrap/ModalHeader";
-
 import { Navbar, Nav, NavDropdown,Image ,Container } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
+
 import * as userService from '../../services/UserService'
 import * as bookService from '../../services/BookService'
 import { Button, Modal } from "react-bootstrap";
-import SearchBar from "../searchBar";
-import SearchBarAuction from "../searchBarAuction";
 
 
-class FirstPageUser extends React.Component {
+
+export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
-
+    (this.props.location.state==undefined)?
+    this.state = {
+        goBack:true
+      }:
     this.state = {
       user: this.props.location.state.user,
-      images:[]
+      userViewing:this.props.location.state.userViewing,
+      images:[],
+      goBack:false
     };
+    console.log(this.state.userViewing)
+    
   }
   componentDidMount=async()=>{
+      if(this.state.goBack)return
     let user=await userService.returnUser(this.state.user.username);
-    let images=this.state.user.booksForSale.concat(this.state.user.booksToRent);
+    let images=user.booksForSale.concat(user.booksToRent);
+    console.log(images);
+    console.log(user);
     this.setState({user:user,images:images})
   }
 componentWillMount=async ()=>{
@@ -50,7 +56,6 @@ changeAdress=()=>{
 state: { user: this.state.user }
   });
 }
-<<<<<<< HEAD
 bookDetailed=async(item)=>{
 console.log(item);
 console.log(this.state.user.booksForSale)
@@ -75,6 +80,7 @@ console.log(this.state.user.booksForSale)
   
 }
 printImages = () => {
+  
   let findImages = this.state.images.map((item, index) => {
     return (
       <div
@@ -97,14 +103,12 @@ printImages = () => {
   });
   return findImages;
 };
-=======
 searchNewBooks=()=>{
   this.props.history.push({
     pathname: `/SearchNewBooks`,
 state: { user: this.state.user }
   });
 }
->>>>>>> origin/master
 
 addTopic=()=>{
   this.props.history.push({
@@ -122,47 +126,18 @@ seeTopics=(trending)=>{
  
 
   render() {
+      
     return (
+        (this.state.goBack)?(<label>Vratite se nazad</label>):
+    (
       <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
-      <div className="w-100" style={{
-
-       
-
-      }} >
-       
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand>Bibliobibuli</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                
-                <NavDropdown title="Opcije" id="basic-nav-dropdown">
-                  <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
-<<<<<<< HEAD
-                  <NavDropdown.Item ><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
-=======
-                  <NavDropdown.Item ><Button onClick={this.searchNewBooks}>Pretrazi nove knjige</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
->>>>>>> origin/master
-                </NavDropdown>
-                <SearchBar></SearchBar>
-                <SearchBarAuction></SearchBarAuction>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-<<<<<<< HEAD
-        </div>
+      
         <h3>{this.state.user.name}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label>
-        <h6>Nis</h6>
-=======
+        <h6>{this.state.user.email}</h6>
        
->>>>>>> origin/master
 
         <Container style={{display:'flex',flexDirection:'row'}}>
           <div className="justify-content-center row">{this.printImages()}</div>
@@ -170,14 +145,13 @@ seeTopics=(trending)=>{
        
 
     
-</div>
+</div>)
      
-      </div>
+     
     );
   }
 }
 
-export default FirstPageUser;
 
 function MyVerticallyCenteredModal(props) {
   return (

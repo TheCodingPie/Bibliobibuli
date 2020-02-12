@@ -62,7 +62,7 @@ var ObjectID = require('mongodb').ObjectID;
      bookModel.find(req.body, (err, docs)=> {
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])}
 
-)
+) });
 
     router.post('/AddNewBook',async(req,res)=>{
       let newBook= new newBookModel(req.body);
@@ -149,7 +149,7 @@ router.post('/SeeBook',async(req,res)=>{
 
 
  
-    });
+   
 
 
     

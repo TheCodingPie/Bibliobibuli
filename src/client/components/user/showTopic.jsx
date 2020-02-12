@@ -64,7 +64,10 @@ addComment=async()=>{
     
 }
 handleChangeComment=(event)=> this.setState({ commentToAdd:event.target.value});
-
+goToUserProfile=()=>this.props.history.push({
+  pathname: `/UserProfile`,
+state: { user: this.state.topic.userWhoStarted,userViewing:this.state.user}
+});
   render() {
     if(this.state.goBack)
         return(<label>Vratite se nazad</label>)
@@ -82,13 +85,13 @@ handleChangeComment=(event)=> this.setState({ commentToAdd:event.target.value});
          {this.state.topic.description}
         </h2>
         <p>Pokrenuo temu - - >  
-        <Button> {this.state.topic.userWhoStarted.username}</Button>
+        <Button onClick={this.goToUserProfile}> {this.state.topic.userWhoStarted.username}</Button>
         </p>
         <p>Broj pregleda--> 
         {this.state.topic.seenBy}
         </p>
         <p>
-         {date.toDateString()}
+         {date.toLocaleDateString("de")}
         </p>
         <h2>Komentari </h2>
         <ListGroup style={{display:'flex',flexDirection:'column'}}>

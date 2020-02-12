@@ -23,11 +23,6 @@ export default class SearchBarAuction extends Component {
   };
 
 
-  
-
-  
-
-
   obradiInput = async(input) => {
     if(input=="") return
     let booksToAuction=await bookService.searchBarAuction(input);
@@ -37,16 +32,9 @@ export default class SearchBarAuction extends Component {
 
   render() {
     
-    //this.followArtist('Mina','Stef');
-    //this.getComments('joksi').catch(err=> console.log('Fetch Error :-S', err));
-    //this.addComment('Pi','4-12-2019 Pavle = Top je sminka').catch((error) =>  console.error('Error:', error));;
-
+    
     return (
-      /* <div  style={{
-         
-         display:'flex',
-         flexDirection:'row'
-       }}>*/
+     
       <Typeahead
         id="basic-example"
         labelKey="name"
@@ -54,18 +42,7 @@ export default class SearchBarAuction extends Component {
         options={this.state.podaci}
         placeholder="Pretrazi aukcije"
         onInputChange={input => this.obradiInput(input)}
-      />/*
-          <button
-              className="btn "
-              style={{ backgroundColor: "pink", color: "White" }}
-              type="submit"
-              data-toggle="popover"
-              data-content="Pretrazi"
-              onClick={this.props.obradiIzbor}
-            >
-              Pretrazi
-            </button>
-      </div>*/
+      />
     );
   }
 }

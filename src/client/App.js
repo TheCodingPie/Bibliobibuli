@@ -20,6 +20,7 @@ import PublisherFirstPage from './components/publisher/PublisherFirstPage';
 import SearchNewBooks from './components/user/SearchNewBooks';
 import SeeNewBookUser from './components/user/SeeNewBookUser';
 import BuyNewBook from './components/user/BuyNewBook';
+import UserProfile from './components/user/userProfile';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
            <Route path="/SearchNewBooks" exact component={SearchNewBooks} />
            <Route path="/SeeNewBookUser" exact component={SeeNewBookUser} />
            <Route path="/BuyNewBook" exact component={BuyNewBook} />
+           <Route path="/UserProfile" exact component={UserProfile} />
     
         </Switch>
      </Router>
