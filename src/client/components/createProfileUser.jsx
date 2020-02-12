@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styles/login.css";
 import {Modal,Button} from 'react-bootstrap'
 import * as userService from '../services/UserService'
+let timer;
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
 //NAPINJE I DA SE IMA KONSTRUKTOR UVEK, MAKAR I PRAZAN
 export default class CreateProfileUser extends Component {
@@ -47,6 +48,13 @@ export default class CreateProfileUser extends Component {
     this.setState({address: event.target.value });
   }
 
+  goToLogin=()=>{
+    clearInterval(timer);
+    this.props.history.push({
+    pathname: `/`,
+    
+  });}
+
   createUser = async () => {
     if (
       this.state.username == "" ||
@@ -61,7 +69,7 @@ export default class CreateProfileUser extends Component {
     }
   
 var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,0,[],[],[],[]);
-console.log(res)  
+
 this.setState({successful:res});  
 
 
@@ -85,6 +93,7 @@ this.setState({successful:res});
             <div className="form-group">
               <label>Korisnicko ime</label>
               <input
+              
                 type="text"
                 className="form-control"
                 placeholder="Unesite korisnicko ime"
@@ -150,12 +159,13 @@ this.setState({successful:res});
             >
               Kreiraj profil
             </button>
+            {(this.state.successful=="Uspesno ste kreirali profil") ? timer=setInterval(this.goToLogin, 2000):""}
             <label
               style={{
                 alignSelf: "center",
                 color: "red"
               }}
-            >
+            > 
               {this.state.successful}
             </label>
           </div>
