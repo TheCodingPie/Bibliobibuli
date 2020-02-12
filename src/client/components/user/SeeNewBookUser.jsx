@@ -66,7 +66,12 @@ export default class SeeNewBookUser extends React.Component {
               state: { book: this.state.book, user:this.state.user }});
      }
 
+     goToPublisher=()=>{
+        this.props.history.push({
+            pathname: `/PublisherProfile`,
+              state: { username: this.state.book.usernamePublisher, user:this.state.user }});
 
+     }
     render()
     {
        
@@ -81,7 +86,7 @@ export default class SeeNewBookUser extends React.Component {
                <br/>
                Autor :{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}
                <br/>
-               Izdavac:{this.state.book.usernamePublisher}
+               Izdavac:<Button onClick={()=>this.goToPublisher()}>{this.state.book.usernamePublisher}</Button>
                <br/>
                Zanr:{this.state.book.bookType}
                <br/>

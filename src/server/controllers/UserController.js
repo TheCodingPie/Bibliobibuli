@@ -118,6 +118,13 @@ router.post('/createUser', async(req, res) => {
             });
           });
         
+          router.post('/GetPublisher', async(req,res)=>{
+            publisherModel.findOne({username:req.body.username},{password:0,ratings:0}, function(err, user) {
+                (err)? res.json(false): (!user)? res.json(false) : res.json(user) ;
+            });
+    
+        });
+          
 
         
           

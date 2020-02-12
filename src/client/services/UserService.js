@@ -69,12 +69,23 @@ let url=Fetchurl.url + 'User/'
   return res.data;
 }
 
+const getPublisher=async(username)=>{
+  let dataToSend={username};
+  let res = await axios.post(url+'GetPublisher/', dataToSend);
+  return res.data;
+}
+
+
 export{
   createUser,
   login,
   returnImageNumber,
   changeAdress,
-  returnUser
+  returnUser,
+  ratePublisher,
+  canRatePublisher,
+  getPublisher
+
 }
 
 
