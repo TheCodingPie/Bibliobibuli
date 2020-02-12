@@ -1,0 +1,35 @@
+.addNewBook{
+ 
+    display: flex;
+  height: 100% ;
+}
+.content{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    flex-shrink: 1;
+    flex-basis: 1;
+
+}
+.leftRight{
+    display: flex;
+    flex-grow: 0.6;
+    
+    flex-shrink: 0.6;
+    flex-basis: 0.6;
+
+}
+.content2{
+    display: flex;
+    flex-grow: 0.6;
+    flex-direction: column;
+    flex-shrink: 0.6;
+    flex-basis: 0.6;
+
+}
+.contentHeader{
+    display: flex;
+    flex-grow: 0.2;
+    flex-shrink: 0.2;
+    flex-basis: 0.2;
+}

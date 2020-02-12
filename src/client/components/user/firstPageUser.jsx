@@ -32,6 +32,12 @@ changeAdress=()=>{
 state: { user: this.state.user }
   });
 }
+searchNewBooks=()=>{
+  this.props.history.push({
+    pathname: `/SearchNewBooks`,
+state: { user: this.state.user }
+  });
+}
 
  
 
@@ -54,6 +60,7 @@ state: { user: this.state.user }
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={this.searchNewBooks}>Pretrazi nove knjige</Button></NavDropdown.Item>
                 </NavDropdown>
                 
               </Nav>

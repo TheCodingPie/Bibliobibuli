@@ -18,6 +18,6 @@ let userSchema = new mongoose.Schema({
    booksToRent:[{name:String,lastnameAuthor:String,imageNumber:Number,id:mongoose.Schema.Types.ObjectId}],
 
   
-}, { _id: false })
+})
 
 module.exports = mongoose.model('User', userSchema)/*User je ime kolekcije ali to mongo prebaci u mnozinu pa ga pamti u bazi kao Users, kolekcija=tabela */

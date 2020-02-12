@@ -52,7 +52,7 @@ export default class Login extends Component {
             state: { user: response }  });//Za JOKS->>>>.ovde je ceo objekat koji ti treba 
     else
         this.props.history.push({
-          pathname: ``,//<---STRANICA ZA PUBLISHERA
+          pathname: `/PublisherFirstPage`,
             state: { publisher: response }});
 };
 

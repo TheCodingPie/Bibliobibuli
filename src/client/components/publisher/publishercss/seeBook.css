@@ -1,0 +1,81 @@
+
+.seeBook{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+.aboutBook{
+    display: flex;
+    flex-grow:1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+.comments{
+    display: flex;
+    flex-grow: 1.5;
+    margin-top: 5%;
+   
+   
+}
+.bookAddCom{
+    display: flex;
+    flex-grow: 0.5;
+    flex-direction: row;
+}
+.addCommentAndRate{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+.addComment{
+    display: flex;
+    flex-grow:1;
+    flex-direction: column;
+}
+.rate{
+    display: flex;
+    flex-grow:1;
+    flex-direction: column;
+}
+.rateBook{
+    display: flex;
+    flex-grow:1;
+    flex-direction: row;
+    
+}
+.roller{
+    display: flex;
+    flex-grow:0.8; 
+}
+.leftRight{
+    display: flex;
+    flex-grow: 0.2;
+}
+.rateDown{
+    display:flex;
+    flex-direction: column;
+}
+
+.publisherFirstPage{
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+.contentCom{
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+.leftRight1{
+    display: flex;
+    flex-grow: 0.8;
+    
+    flex-shrink: 0.8;
+    flex-basis: 0.8;
+
+}

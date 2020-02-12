@@ -45,6 +45,23 @@ let url=Fetchurl.url + 'User/'
    return data.numOfImages;
  }
 
+ const ratePublisher=async(userId,publisherId, rating)=>{
+
+  let dataToSend={
+    userId,publisherId, rating
+  }
+  let res = await axios.post(url+'RatePublisher/', dataToSend);
+  let data = await res.data;
+  return data;
+
+ }
+
+ const canRatePublisher=async (publisherId,userId)=>{
+  let dataToSend={publisherId,userId};
+  let res = await axios.post(url+'CanRatePublisher/', dataToSend);
+  return res.data;
+}
+
 export{
   createUser,
   login,

@@ -8,6 +8,14 @@ import Login from './components/login';
 import FirstPageUser from './components/user/firstPageUser';
 import AddBook from './components/user/addBookExchange';
 import ChangeAdressUser from './components/user/changeAdress';
+import AddNewBook from './components/publisher/AddNewBook';
+import SeeMyBooks from './components/publisher/SeeMyBooks';
+import SeeBook from './components/publisher/SeeBook';
+import PublisherFirstPage from './components/publisher/PublisherFirstPage';
+import SearchNewBooks from './components/user/SearchNewBooks';
+import SeeNewBookUser from './components/user/SeeNewBookUser';
+import BuyNewBook from './components/user/BuyNewBook';
+
 
 function App() {
   return (
@@ -21,6 +29,13 @@ function App() {
            <Route path="/FirstPageUser" exact component={FirstPageUser} />
            <Route path="/AddBook" exact component={AddBook} />
            <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
+           <Route path="/AddNewBook" exact component={AddNewBook} />
+           <Route path="/SeeMyBooks" exact component={SeeMyBooks} />
+           <Route path="/SeeBook" exact component={SeeBook} />
+           <Route path="/PublisherFirstPage" exact component={PublisherFirstPage} />
+           <Route path="/SearchNewBooks" exact component={SearchNewBooks} />
+           <Route path="/SeeNewBookUser" exact component={SeeNewBookUser} />
+           <Route path="/BuyNewBook" exact component={BuyNewBook} />
     
         </Switch>
      </Router>
