@@ -24,17 +24,17 @@ export default class Login extends Component {
   handleChangePassword(event) {
     this.setState({ password: event.target.value, color: "lightgrey",response:""  });
   }
-/*  createProfileArtist = () => {
+  createProfileUser = () => {
     this.props.history.push({
-      pathname: `/createArtist`
+      pathname: `/CreateProfileUser`
     });
   };
-  createProfileClient = () => {
+  createProfilePublisher = () => {
     this.props.history.push({
-      pathname: `/createClient`
+      pathname: `/CreateProfilePublisher`
     });
   };
-  */
+  
   login =async () => {
     if ( this.state.username == "" || this.state.password == ""  ) 
             return;
@@ -121,6 +121,37 @@ export default class Login extends Component {
                 <label>{this.state.response}</label>
 
                 <div className="left"></div>
+              </div>
+              <div className="zaDugmice">
+                <button
+                  className="btn"   
+                  onClick={this.createProfileUser}
+                  style={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    flex: 2
+                  }}
+                >
+                  Registracija korisnika
+                </button>
+
+                <button
+                  className="btn"
+                  style={{
+                    backgroundColor: "blue",
+                    color: "white",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    flex: 2
+                  }}
+                  onClick={this.createProfilePublisher}
+                >
+                  Registracija izdavaca
+                </button>
               </div>
               <div className="iznadIIspod"></div>
              

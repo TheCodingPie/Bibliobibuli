@@ -33,20 +33,32 @@ state: { user: this.state.user }
   });
 }
 
+addTopic=()=>{
+  this.props.history.push({
+    pathname: `/AddTopic`,
+    state: { user: this.state.user }
+  });
+}
+
+seeTopics=(trending)=>{
+  this.props.history.push({
+    pathname: `/SeeTopics`,
+    state: { user: this.state.user,trending }
+  });
+}
  
 
   render() {
     return (
-      <div className="celaStrana">
-        <div
-          style={{
-            //backgroundColor: "blue",
-            width: "100%",
-            flex: 0.3
-          }}
-        >
+      <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
+      <div className="w-100" style={{
+
+       
+
+      }} >
+       
           <Navbar bg="light" expand="lg">
-            <Navbar.Brand>MakeUpFinder</Navbar.Brand>
+            <Navbar.Brand>Bibliobibuli</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
@@ -54,16 +66,19 @@ state: { user: this.state.user }
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
                 </NavDropdown>
                 
               </Nav>
             </Navbar.Collapse>
           </Navbar>
-        </div>
+       
 
 
     
-
+</div>
      
       </div>
     );

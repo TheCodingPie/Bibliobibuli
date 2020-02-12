@@ -24,12 +24,14 @@ let bookController = require("./src/server/controllers/BookController.js");
 let auctionController = require("./src/server/controllers/AuctionController.js");
 let requestController = require("./src/server/controllers/RequestController");
 let publisherController = require("./src/server/controllers/PublisherController");
+let topicController = require("./src/server/controllers/TopicController");
 
 app.use("/User", userController);
 
 app.use("/Book", bookController);
 /*app.use("/Auction", auctionController);
 app.use("/Request", requestController);*/
+app.use("/Topic", topicController);
 app.use("/Publisher", publisherController);
 
 

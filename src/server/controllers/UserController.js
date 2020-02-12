@@ -7,7 +7,9 @@ var publisherModel = require("../models/publisher");
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
+        console.log(user);
      await user.save((err, result)=>{
+         console.log(err);
         (err)? 
             (err.code==11000) ?  res.json("Korisnicko ime je zauzeto") :  res.json("greska na serveru") 
         : res.json("Uspesno ste kreirali profil");

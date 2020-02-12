@@ -1,66 +1,74 @@
 import React, { Component } from "react";
-import "../styles/login.css";
+import "../../styles/login.css";
 import {Modal,Button} from 'react-bootstrap'
-import * as publisherService from '../services/PublisherService'
+
+import * as topicService from '../../services/TopicService'
 let timer;
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
 //NAPINJE I DA SE IMA KONSTRUKTOR UVEK, MAKAR I PRAZAN
-export default class CreateProfilePublisher extends Component {
+export default class AddTopic extends Component {
   constructor(props) {
     super(props);
-
+    (this.props.location.state==undefined) ? this.state = {goBack:true }
+    :
     this.state = {
-      username: "",
-      password: "",
-      login: "nije",
-      email: "",
+      topic: "",
+      description: "",
+      user:this.props.location.state.user,
       successful: "",
       borderColor: "lightgray",
       modalShow:false,
+      goBack:false
      
     };
   }
-  handleChangeusername(event) {
+  handleChangeTopic(event) {
     this.setState({
-      username: event.target.value,
+      topic: event.target.value,
       borderColor: "lightgrey",
       successful: ""
     });
   }
 
-  handleChangePassword(event) {
-    this.setState({ password: event.target.value });
+  handleChangeDescription(event) {
+    this.setState({ description: event.target.value });
   }
 
-    handleChangeEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-createPublisher = async () => {
+  goToFP=()=>{
+    clearInterval(timer);
+    this.props.history.push({
+      pathname: `/FirstPageUser`,
+    state: { user: this.state.user }
+    });
+    }
+createTopic = async () => {
     if (
-      this.state.username == "" ||
-      this.state.password == "" ||
-      this.state.email == ""
+      this.state.topic == "" ||
+      this.state.description == "" 
+     
     ) {
      this.setState({modalShow:true});
       return;
     }
-  
-var res= await publisherService.createPublisher(this.state.username,this.state.email,this.state.password,[]);
-console.log(res)    
-this.setState({successful:res});
-
+         console.log(this.state.user);
+        var res= await topicService.addTopic(this.state.topic,this.state.description,this.state.user,Date.now());
+           
+        if(res=='Uspesno ste dodali temu')   
+               timer= setInterval(this.goToFP,2000);
+            
+          this.setState({successful:res});
+           
+            
 
   };
-  goToLogin=()=>{
-    clearInterval(timer);
-    this.props.history.push({
-    pathname: `/`,
-    
-  });}
 
   render() {
+   
+    
     return (
-      <div className="celaStrana">
+      (this.state.goBack)?(<label>Vratite se nazad</label>):
+      
+      (<div className="celaStrana">
         <div className="iznadIIspod"></div>
         <div className="horizontalno">
           <div className="iznadIIspod1"></div>
@@ -70,16 +78,16 @@ this.setState({successful:res});
                 alignSelf: "center"
               }}
             >
-              Kreiranje profila
+              Pokretanje teme
             </h3>
 
             <div className="form-group">
-              <label>Korisnicko ime</label>
+              <label>Naslov</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Unesite korisnicko ime"
-                onChange={this.handleChangeusername.bind(this)}
+                placeholder="Unesite temu"
+                onChange={this.handleChangeTopic.bind(this)}
                 style={{
                   borderColor: this.state.borderColor
                 }}
@@ -87,34 +95,25 @@ this.setState({successful:res});
             </div>
 
             <div className="form-group">
-              <label>Sifra</label>
+              <label>Opis</label>
               <input
-                type="password"
+                type="text"
                 className="form-control"
-                placeholder="Unesite sifru"
-                onChange={this.handleChangePassword.bind(this)}
+                placeholder="Unesite opis"
+                onChange={this.handleChangeDescription.bind(this)}
               />
             </div>
 
            
-            <div className="form-group">
-              <label>E mail</label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Unesite vas email"
-                onChange={this.handleChangeEmail.bind(this)}
-              />
-            </div>
+            
             
             <button
               type="submit"
               className="btn btn-primary btn-block"
-              onClick={this.createPublisher}
+              onClick={this.createTopic}
             >
-              Kreiraj profil
+              Kreiraj temu
             </button>
-            {(this.state.successful=="Uspesno ste kreirali profil") ? timer=setInterval(this.goToLogin, 2000):""}
             <label
               style={{
                 alignSelf: "center",
@@ -145,7 +144,7 @@ this.setState({successful:res});
       </Modal.Footer>
     </Modal>
 
-      </div>
+      </div>)
     );
   }
 }

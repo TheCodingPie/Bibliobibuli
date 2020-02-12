@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import * as userService from '../../services/UserService'
-
+let timer;
 export default class ChangeAdressUser extends Component {
   constructor(props) {
     super(props);
 
+    (this.props.location.state==undefined) ? this.state = {goBack:true }
+    :
     this.state = {
      address: "",
      user:this.props.location.state.user,
-      response:""
+      response:"",
+      goBack:false
     };
   }
   handleChangeAdress(event) {
@@ -18,16 +21,26 @@ export default class ChangeAdressUser extends Component {
       if(this.state.address=="")
       return;
       var response=await userService.changeAdress(this.state.user.username,this.state.address);
-      if(response=="true")
+      if(response=="true"){
       this.setState({response:"Uspesno ste promenili adresu",address:""});
+        timer=setInterval(this.goToFP,2000);
+    }
       else
       this.setState({response:"Niste uspeli da promenite adresu pokusajte ponovo"});
   }
-
+goToFP=()=>{
+clearInterval(timer);
+this.props.history.push({
+  pathname: `/FirstPageUser`,
+state: { user: this.state.user }
+});
+}
 
   render() {
    
     return (
+      (this.state.goBack)?(<label>Vratite se nazad</label>)
+      :(
       <div className="celaStrana">
         <div className="iznadIIspod">
         </div>
@@ -37,11 +50,11 @@ export default class ChangeAdressUser extends Component {
             <div className="login">
               <div className="iznadIIspod"></div>
               <div className="Naslov">
-                <h3>Sign In</h3>
+                <h3>Promena adrese</h3>
               </div>
 
               <div className="form-group">
-                <label>Username</label>
+                <label>Nova adresa</label>
                 <input
                   type="text"
                   className="form-control"
@@ -84,7 +97,7 @@ export default class ChangeAdressUser extends Component {
           <div className="iznadIIspod1"></div>
         </div>
         <div className="iznadIIspod"></div>
-      </div>
+      </div>)
     );
   }
 }
