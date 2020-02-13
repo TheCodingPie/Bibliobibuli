@@ -8,9 +8,9 @@ var ObjectID = require('mongodb').ObjectID;
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
-        console.log(user);
-     await user.save((err, result)=>{
-         console.log(err);
+       
+    user.save((err, result)=>{
+         
         (err)? 
             (err.code==11000) ?  res.json("Korisnicko ime je zauzeto") :  res.json("greska na serveru") 
         : res.json("Uspesno ste kreirali profil");
@@ -48,7 +48,7 @@ router.post('/createUser', async(req, res) => {
     });
     router.post('/returnUser', async(req, res) => {
        
-        console.log(req.body);
+       
 
         userModel.find(req.body, (err, docs)=> 
            
@@ -117,6 +117,32 @@ router.post('/createUser', async(req, res) => {
               (err)? res.json(null): (rate)? res.json(false) : res.json(true) ;
             });
           });
+
+          router.post('/grantRequest',async(req,res)=>{
+              
+            userModel.updateOne({_id:req.body.userId},
+              { $pull: { incomingRequests:  {_id: req.body.requestId } } } 
+            ,(err,result)=>{
+              (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) ;
+            } );
+
+
+
+          });
+
+          router.post('/notifyUser', async(req, res) => {
+            
+             
+            
+           userModel.updateOne(
+              { username:req.body.username }, 
+              { $push: { 
+                grantedRequests:{username:req.body.username,userId:req.body.userId,bookName:req.body.bookName,ownerUsername:req.body.ownerUsername} 
+                      } 
+              },(err,result)=>
+                (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) 
+               
+          )});
         
 
         

@@ -12,8 +12,8 @@ let userSchema = new mongoose.Schema({
    grade:Number,
    numOfBorrowedBooks: Number,
    numOfImages:Number,
-   incomingRequests:[{type: mongoose.Schema.Types.Object, ref: 'Request'}],
-   madeRequests:[{type: mongoose.Schema.Types.Object, ref: 'Request'}],
+   incomingRequests:[{username:String,userId: mongoose.Schema.Types.ObjectId,bookId:mongoose.Schema.Types.ObjectId,bookName:String,ownerUsername:String}],
+   grantedRequests:[{username:String,userId: mongoose.Schema.Types.ObjectId,bookId:mongoose.Schema.Types.ObjectId,bookName:String,ownerUsername:String}],
    booksForSale:[{name:String,lastnameAuthor:String,urlImage:String,id:mongoose.Schema.Types.ObjectId}],
    booksToRent:[{name:String,lastnameAuthor:String,urlImage:String,id:mongoose.Schema.Types.ObjectId}],
    booksSold:[{name:String}]

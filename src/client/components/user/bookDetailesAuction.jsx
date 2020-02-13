@@ -34,7 +34,7 @@ class BookDetailAuction extends React.Component {
       imgUrl:""
       
     }
-    console.log('h')
+    
   }
   
 

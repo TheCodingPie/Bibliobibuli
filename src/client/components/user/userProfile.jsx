@@ -126,15 +126,19 @@ seeTopics=(trending)=>{
  
 
   render() {
+    
       
     return (
         (this.state.goBack)?(<label>Vratite se nazad</label>):
     (
       <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
       
-        <h3>{this.state.user.name}</h3>
+        <h3>{this.state.user.username}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
+        </label>
+        <label>
+          {this.state.user.address} 
         </label>
         <h6>{this.state.user.email}</h6>
        

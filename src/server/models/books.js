@@ -11,13 +11,11 @@ let bookSchema = new mongoose.Schema({
   usernameOwner:String,
   bookType:String,
   imageNumber:Number,
-  borrowedTo:[{username:String}],
+  borrowedTo:[{username:String,returnDate:Date}],
   description:String,
   yearPublishing:Number,
   publishing:String,
   urlImage:String
-  
-
   
 })
 

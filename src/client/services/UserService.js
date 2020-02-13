@@ -69,12 +69,30 @@ let url=Fetchurl.url + 'User/'
   return res.data;
 }
 
+const grantRequest =async(data)=>
+{
+  let dataToSend={userId:data.userId,requestId:data.requestId}
+  let res=await axios.post(url+'grantRequest/', dataToSend);
+  let resData = await res.data;
+  return resData;
+}
+
+const notifyUser =async(request)=>
+{
+  
+  let res=await axios.post(url+'notifyUser/', request);
+  let resData = await res.data;
+  return resData;
+}
+
 export{
   createUser,
   login,
   returnImageNumber,
   changeAdress,
-  returnUser
+  returnUser,
+  grantRequest,
+  notifyUser,
 }
 
 
