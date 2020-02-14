@@ -59,7 +59,7 @@ export default class Login extends Component {
   render() {
    
     return (
-      <div className="celaStrana">
+      <div style={{flexGrow:1, display:"flex",flexDirection:"row", backgroundColor:"whitesmoke"}}>
         <div className="iznadIIspod" style={{justifyContent:'center'}}>
           <div className="img-flusername">
             <img src={im} alt="tatla" />
@@ -135,9 +135,10 @@ export default class Login extends Component {
                     flex: 2
                   }}
                 >
+                 
                   Registracija korisnika
                 </button>
-
+                  <div style={{flexGrow:0.3}}></div>
                 <button
                   className="btn"
                   style={{
