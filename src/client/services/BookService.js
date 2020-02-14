@@ -145,6 +145,39 @@ const sellNewBook=async (id,count,orderId)=>{
   return res.data;
 }
 
-export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,searchBarAuction,
-  returnBookTrade,returnBookAuction, addCommentBook, canRateBook, rateBook, sellNewBook}
+
 //export  {addBookExchange,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
+const borrowBookTrade=async(data)=>
+{
+
+
+
+  let res = await axios.post(url+'BorrowBookTrade/', data);
+  return res.data;
+}
+
+
+const borrowBookTradeConfirmed=async(_id,username)=>
+{
+
+  let dataToSend={_id,username};
+
+  let res = await axios.post(url+'BorrowBookTradeConfirmed/', dataToSend);
+  return res.data;
+}
+
+const freeBook=async(bookId)=>{
+  let dataToSend={_id:bookId};
+  let res = await axios.post(url+'FreeBook/', dataToSend);
+  return res.data;
+
+}
+
+
+export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,
+  rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,
+  searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed,  addCommentBook, canRateBook, rateBook, sellNewBook}
+
+  //export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks 
+   // ,addBookSale,searchBarTrade,searchBarAuction,
+   // returnBookTrade,returnBookAuction}

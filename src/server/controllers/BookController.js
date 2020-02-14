@@ -36,7 +36,7 @@ var orderModel=require("../models/order");
     });
     router.post('/searchBarTrade', async(req, res) => {
       let b=req.body.name;
-      console.log(b)
+    
      bookModel.find({name: {'$regex':b}},{name:1,_id:1},function (err,books){
        (err)? res.json([]):(books)? res.json(books) :res.json([])  ;
      })
@@ -44,7 +44,7 @@ var orderModel=require("../models/order");
     });
     router.post('/searchBarAuction', async(req, res) => {
       let b=req.body.name;
-      console.log(b)
+     
      bookforAuction.find({name: {'$regex':b}},{name:1,_id:1},function (err,books){
        (err)? res.json([]):(books)? res.json(books) :res.json([])  ;
      })
@@ -137,6 +137,43 @@ router.post('/SeeBook',async(req,res)=>{
     } );
 
   });
+
+  router.post('/BorrowBookTradeConfirmed',async(req,res)=>{
+    let returnDate=new Date();
+     returnDate.setDate(returnDate.getDate() + 10);
+      
+      
+    bookModel.updateOne({_id:req.body._id},{$push:{borrowedTo:{username:req.body.username,returnDate}}},
+    
+     (err) =>
+        (err)? res.json(false): res.json(true)
+       );
+  
+    });
+
+    router.post('/BorrowBookTrade',async(req,res)=>{//da pita da li moze da pozajmi
+    
+     
+      userModel.updateOne({username:req.body.ownerUsername},{$push:{incomingRequests:{username:req.body.username,userId:req.body.userId,bookId:req.body.bookId,bookName:req.body.bookName,ownerUsername:req.body.ownerUsername}}},
+      
+       (err) =>
+          (err)? res.json(false): res.json(true)
+         );
+    
+      });
+
+    
+  router.post('/FreeBook',async(req,res)=>{
+    
+      
+      
+    bookModel.updateOne({_id:req.body._id},{$push:{borrowedTo:{username:req.body.username,returnDate:Date.now()}}},
+    
+     (err) =>
+        (err)? res.json(false): res.json(true)
+       );
+  
+    });
 
 
   router.post('/AddCommentBook',async(req,res)=>{

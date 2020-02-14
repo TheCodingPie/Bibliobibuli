@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 
-import { Navbar, Nav, NavDropdown,Image ,Container } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown,Image ,Container,Pagination } from "react-bootstrap";
 
 import * as userService from '../../services/UserService'
 import * as bookService from '../../services/BookService'
@@ -20,13 +20,19 @@ export default class UserProfile extends React.Component {
       user: this.props.location.state.user,
       userViewing:this.props.location.state.userViewing,
       images:[],
-      goBack:false
+      goBack:false,
+      showGrades:false,
+      disableGradeButton:false
     };
-    console.log(this.state.userViewing)
+    
     
   }
   componentDidMount=async()=>{
-      if(this.state.goBack)return
+      if(this.state.goBack)
+          return;
+    await this.setState({user:await userService.returnUser(this.state.user.username)});
+    console.log(this.state.user);
+    (this.state.user.usersWhoGradedMe.includes(this.state.userViewing.username)) ? this.setState({disableGradeButton:true}) : this.setState({disableGradeButton:false})
     let user=await userService.returnUser(this.state.user.username);
     let images=user.booksForSale.concat(user.booksToRent);
     console.log(images);
@@ -123,22 +129,46 @@ seeTopics=(trending)=>{
     state: { user: this.state.user,trending }
   });
 }
- 
+ rateUser=async(grade)=>{
+  let newSumOfGrades=this.state.user.sumOfGrades+grade;
+  let newGrade=newSumOfGrades/(this.state.user.numOfGrades+1);
+  let res=await userService.gradeUser(this.state.user.username,newGrade,newSumOfGrades,this.state.userViewing.username);
 
+console.log(res);
+this.setState({showGrades:false,disableGradeButton:true})
+ }
+printGrades=()=>{
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} onClick={()=>this.rateUser(number)}>
+        {number}
+      </Pagination.Item>,
+    );
+   
+    }
+    return items;
+}
   render() {
+    
       
     return (
         (this.state.goBack)?(<label>Vratite se nazad</label>):
     (
       <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
       
-        <h3>{this.state.user.name}</h3>
+        <h3>{this.state.user.username}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label>
+        <label>
+          {this.state.user.address} 
+        </label>
         <h6>{this.state.user.email}</h6>
-       
-
+        <h6>Prosecna ocena:{this.state.user.grade}</h6>
+        <h6>Broj ocena:{this.state.user.numOfGrades}</h6>
+       <Button disabled={this.state.disableGradeButton} onClick={()=>this.setState({showGrades:true})}>Oceni ovog korisnika</Button>
+      { (this.state.showGrades)?<Pagination>{this.printGrades()}</Pagination>:[]}
         <Container style={{display:'flex',flexDirection:'row'}}>
           <div className="justify-content-center row">{this.printImages()}</div>
         </Container>

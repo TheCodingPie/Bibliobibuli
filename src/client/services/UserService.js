@@ -5,10 +5,12 @@ import Fetchurl from './FetchUrl';
 let url=Fetchurl.url + 'User/'
 
 
-  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold) => 
+  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe) => 
   {
  let dataToSend = {
-      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,numOfImages, incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold
+      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,
+      numOfImages, incomingRequests, madeRequests,booksForSale, 
+      booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe
     };
 
     let res = await axios.post(url+'createUser/', dataToSend);
@@ -109,6 +111,29 @@ const viewOrder= async(orderId)=>{
 }
 
 
+const grantRequest =async(data)=>
+{
+  let dataToSend={userId:data.userId,requestId:data.requestId}
+  let res=await axios.post(url+'grantRequest/', dataToSend);
+  let resData = await res.data;
+  return resData;
+}
+
+const notifyUser =async(request)=>
+{
+  
+  let res=await axios.post(url+'notifyUser/', request);
+  let resData = await res.data;
+  return resData;
+}
+const gradeUser =async(username,grade,sumOfGrades,userGrading)=>
+{
+  let dataToSend={username,grade,sumOfGrades,userGrading}
+  let res=await axios.post(url+'gradeUser/', dataToSend);
+  let resData = await res.data;
+  return resData;
+}
+
 export{
   createUser,
   login,
@@ -121,8 +146,10 @@ export{
   searchPublishers,
   addOrder,
   seeOrders,
-  viewOrder
-
+  viewOrder,
+  grantRequest,
+  notifyUser,
+  gradeUser,
 }
 
 
