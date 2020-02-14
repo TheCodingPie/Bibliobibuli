@@ -5,7 +5,7 @@ let publisherSchema = new mongoose.Schema({
   username: {type:String,unique:true},
    email: String,
     password:String,
-    booksForSale:[{name:String,bookType:String,bookNumber:Number,id:mongoose.Schema.Types.ObjectId}],
+    booksForSale:[{name:String,bookType:String,bookNumber:Number,description:String ,id:mongoose.Schema.Types.ObjectId}],
     numOfReviews:Number,
     averageReview:Number,
     totalOfReviews:Number,

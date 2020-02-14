@@ -10,7 +10,7 @@ let url =Fetchurl.url+'Book/';
 const addBookExchange = async (name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description,yearPublishing,publishing,urlImage) => 
 {
 let dataToSend = {
-    name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description, yearPublishing,publishing,urlImage
+    name, nameAuthor,lastnameAuthor,comments,numOfReviews,averageReview,usernameOwner,bookType,imageNumber,borrowedTo,description, yearPublishing,publishing,urlImage, ratings:[],totalOfReviews:0,
   };
 
   let res = await axios.post(url+'addBook/', dataToSend);
@@ -120,6 +120,33 @@ const searchNewBooks=async (part)=>{
   return res.data;
 }
 
+const addCommentBook=async (id, comment, username)=>
+{
+  let dataToSend={id,comment,username};
+  let res = await axios.post(url+'AddCommentBook/', dataToSend);
+  return res.data;
+}
+
+const canRateBook=async (id,userid)=>{
+  let dataToSend={id,userid};
+  let res = await axios.post(url+'CanRateBook/', dataToSend);
+  return res.data;
+}
+
+const rateBook=async (id,rating,userid)=>{
+  let dataToSend={id,rating,userid};
+  let res = await axios.post(url+'RateBook/', dataToSend);
+  return res.data;
+}
+
+const sellNewBook=async (id,count,orderId)=>{
+  let dataToSend={id,count,orderId};
+  let res = await axios.post(url+'SellNewBook/', dataToSend);
+  return res.data;
+}
+
+
+//export  {addBookExchange,addBookSale,searchBarTrade,searchBarAuction,returnBookTrade}
 const borrowBookTrade=async(data)=>
 {
 
@@ -160,4 +187,9 @@ const findBookBought=async(date,usernameBidder)=>{
 
 export  {addBookExchange,findBookBought,addNewBook,seeBook,addCommentNewBook,
   rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,
-  searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed,addBid}
+  addBid,
+  searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed,  addCommentBook, canRateBook, rateBook, sellNewBook}
+
+  //export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks 
+   // ,addBookSale,searchBarTrade,searchBarAuction,
+   // returnBookTrade,returnBookAuction}

@@ -7,6 +7,7 @@ let bookSchema = new mongoose.Schema({
   lastnameAuthor:String,
   comments:[{comment:String,usernameCommentAuthor:String}],
   numOfReviews:Number,
+  totalOfReviews:Number,
   averageReview:Number,
   usernameOwner:String,
   bookType:String,
@@ -16,6 +17,8 @@ let bookSchema = new mongoose.Schema({
   yearPublishing:Number,
   publishing:String,
   urlImage:String,
+  ratings:[{rating:Number,userid:mongoose.Schema.Types.ObjectId}],  
+
   
 })
 

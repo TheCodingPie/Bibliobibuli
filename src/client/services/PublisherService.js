@@ -23,11 +23,20 @@ const seeMyBooks= async(id)=>{
   return data;
 }
 
+const seeOrders= async(username)=>{
+  let dataToSend = {
+    username
+  };
+  let res = await axios.post(url+'SeeOrders/', dataToSend);
+  let data = await res.data;
+  return data;
+}
+
 
 
 
 export{
-    createPublisher,seeMyBooks
+    createPublisher,seeMyBooks, seeOrders
    
 }
 

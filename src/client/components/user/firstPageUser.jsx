@@ -9,6 +9,8 @@ import { Button, Modal } from "react-bootstrap";
 import SearchBar from "../searchBar";
 import SearchBarAuction from "../searchBarAuction";
 import moment from "moment";
+import SearchNewBooks from "./SearchNewBooks";
+import SearchPublisher from "./SearchPublisher";
 
 
 
@@ -110,12 +112,6 @@ printImages = () => {
   });
   return findImages;
 };
-searchNewBooks=()=>{
-  this.props.history.push({
-    pathname: `/SearchNewBooks`,
-state: { user: this.state.user }
-  });
-}
 
 addTopic=()=>{
   this.props.history.push({
@@ -142,7 +138,7 @@ this.props.history.push({
 }
  
 obradiIzborAuction=(selected)=>{
-  
+  console.log(selected[0])
   this.props.history.push({
     pathname: `/bookDetailAuction`,
    state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
@@ -204,6 +200,31 @@ obradiIzborAuction=(selected)=>{
    return requests;
 }
 
+
+  selectBook = async (selected) => {
+    if (selected.length === 0) return;
+  this.props.history.push({
+    pathname: `/SeeNewBookUser`,
+      state: { bookid: selected[0]._id , user:this.state.user }});
+
+  }
+
+  selectPublisher=async(selected)=>{
+    if (selected.length === 0) return;
+    this.props.history.push({
+      pathname: `/PublisherProfile`,
+        state: { username: selected[0].username, user:this.state.user }});
+
+  }
+
+  goToOrders=()=>{
+    this.props.history.push({
+      pathname: `/OrdersPage`,
+      state: { user: this.state.user}
+    });
+  }
+
+
   render() {
     return (
       (this.state.goBack)?(<label>Vratite se nazad</label>):
@@ -222,14 +243,17 @@ obradiIzborAuction=(selected)=>{
               <Nav className="mr-auto">
               <SearchBar obradiIzbor={this.obradiIzborTrade}></SearchBar>
                 <SearchBarAuction obradiIzbor={this.obradiIzborAuction}></SearchBarAuction>
+                <SearchNewBooks selectBook={this.selectBook}></SearchNewBooks>
+                <SearchPublisher selectPublisher={this.selectPublisher}></SearchPublisher>
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.searchNewBooks}>Pretrazi nove knjige</Button></NavDropdown.Item>
+                
                   <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
                 </NavDropdown>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">

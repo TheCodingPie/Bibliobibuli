@@ -3,6 +3,7 @@ var router = express.Router();
 
 var publisherModel = require("../models/publisher");
 var newBookModel= require('../models/newBook');
+var orderModel=require("../models/order");
 var ObjectID = require('mongodb').ObjectID;
 
 router.post('/createPublisher', async(req, res) => {
@@ -26,8 +27,15 @@ router.post('/createPublisher', async(req, res) => {
             (err)? res.json([]): (!user)? res.json([]) : res.json(user.booksForSale) ;
         });
     });
+
+    router.post('/SeeOrders',async(req,res)=>{
+       
+        orderModel.find({publisherUsername:req.body.username,sendBook:false}, function(err, orders) {
+            (err)? res.json([]): (!orders)? res.json([]) : res.json(orders) ;
+        });
+    });
   
-      
+  
 
 
 

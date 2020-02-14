@@ -3,14 +3,18 @@ import firebase from '../../config/firebaseConfig'
 import { FormControl, Button,  Image, ListGroup, Badge, } from 'react-bootstrap';
 import * as bookService from '../../services/BookService'
 import * as userService from '../../services/UserService'
+import * as boo from '../../services/UserService'
+import MyVerticallyCenteredModal from '../publisher/CustomModal';
 
+import InputRange from 'react-input-range';
 var storageRef = firebase.storage().ref();
+
 
 class BookDetailTrade extends React.Component {
 
   constructor(props) {
     super(props);
-   console.log(this.props.location.state)
+   
     this.state = {
    
       user: this.props.location.state.user,
@@ -31,7 +35,12 @@ class BookDetailTrade extends React.Component {
         yearPublishing:2020,
         publishing:"",
         urlImage:""},
-        imgUrl:""
+      imgUrl:"",
+      comment:"",
+      modalShow:false,
+      canRate:false,
+      value:1,
+      labelCanRate:"",
       
     }
    
@@ -43,11 +52,13 @@ class BookDetailTrade extends React.Component {
   componentDidMount = async () => {
     
     let image=await bookService.returnBookTrade(this.state.idPhoto)
-    
+    console.log(image)
     await this.setState({image:image.data,imgUrl:image.data.urlImage});
-    console.log('ovde')
-    console.log(this.state.image)
+    var canRate= await bookService.canRateBook(this.state.idPhoto, this.state.user._id);
+    (canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti knjigu"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili knjigu."})
+   
   }
+
   printComments=()=>{
     let comments= this.state.image.comments.map((comment, index)=>{
        
@@ -59,6 +70,24 @@ class BookDetailTrade extends React.Component {
      return comments;
  }
 
+ addComment=async()=>{
+  var result= await bookService.addCommentBook(this.state.idPhoto,this.state.comment,this.state.user.username);
+  (result)? 
+   this.setState({modalShow:true, successAdd:"Uspesno ste dodali komentar.",title:"Komentarisanje knjige"}) 
+   : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Komentarisanje knjige"}) ;
+}
+
+onChangeComment=(e)=>{
+  this.setState({comment:e.target.value});
+}
+
+rateBook=async()=>{
+  let result=await bookService.rateBook(this.state.idPhoto, this.state.value, this.state.user._id);
+  (result)? 
+  this.setState({modalShow:true, successAdd:"Uspesno ste ocenili knjigu.",
+  title:"Ocenjivanje knjige"}) 
+  : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Ocenjivanje knjige"}) ;
+}
 CanBorrowBook=()=>{
  console.log('cao');
     if(this.state.image.borrowedTo.length==0)
@@ -99,6 +128,7 @@ freeBook=async()=>{
 
 
 
+
  render() {
 
   
@@ -123,6 +153,15 @@ freeBook=async()=>{
     <div style={{flex:2,display:'flex',flexDirection:'column',width:'100%'}}>
     <label style={{alignSelf:'center',color:'blue'}}>Broj ocena: {this.state.image.numOfReviews}</label>
     <label style={{alignSelf:'center',color:'blue'}}>Prosecna ocena: {this.state.image.averageReview}</label>
+    <InputRange
+              maxValue={5}
+              minValue={1}
+              disabled={this.state.canRate}
+                value={this.state.value}
+              onChange={value => this.setState({ value })} />
+               {this.state.labelCanRate}
+               <Button  disabled={this.state.canRate} onClick={()=>this.rateBook()}>Oceni</Button>  
+
     </div>
     <div style={{flex:2}}></div>
         </div>
@@ -155,11 +194,21 @@ freeBook=async()=>{
 
     </div>
     <div style={{flex:5}}>
-      <br/>
+    <div className="addComment">
+             <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
+            <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
+             </div>
       <h3>Komentari</h3>
       <ListGroup>
                     {this.printComments()}
                 </ListGroup>
+
+                <MyVerticallyCenteredModal
+          show={this.state.modalShow}
+          data={this.state.successAdd}
+          title={this.state.title}
+          onHide={() => {this.setState({ modalShow: false }); window.location.reload(true) ;}}
+        />
 </div>
 
       </div>

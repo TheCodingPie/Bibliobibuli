@@ -5,10 +5,12 @@ import Fetchurl from './FetchUrl';
 let url=Fetchurl.url + 'User/'
 
 
-  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold) => 
+  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe) => 
   {
  let dataToSend = {
-      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,numOfImages, incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold
+      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,
+      numOfImages, incomingRequests, madeRequests,booksForSale, 
+      booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe
     };
 
     let res = await axios.post(url+'createUser/', dataToSend);
@@ -69,6 +71,46 @@ let url=Fetchurl.url + 'User/'
   return res.data;
 }
 
+const getPublisher=async(username)=>{
+  let dataToSend={username};
+  let res = await axios.post(url+'GetPublisher/', dataToSend);
+  return res.data;
+}
+
+const searchPublishers=async (part)=>{
+  let dataToSend={part};
+  let res = await axios.post(url+'SearchPublishers/', dataToSend);
+  return res.data;
+}
+
+
+const addOrder=async (idUser,userUsername,userAddress
+  ,publisherUsername,price, countBook,idBook, nameBook ,userEmail)=>{
+    let total=countBook*price;
+  let dataToSend={idUser,userUsername,userAddress
+    ,publisherUsername,price, countBook,idBook, nameBook,sendBook:false, totalPrice:total, userEmail, seeUser:false};
+  let res = await axios.post(url+'AddOrder/', dataToSend);
+  return res.data;
+}
+const seeOrders= async(username)=>{
+  let dataToSend = {
+    username
+  };
+  let res = await axios.post(url+'SeeOrders/', dataToSend);
+  let data = await res.data;
+  return data;
+}
+
+const viewOrder= async(orderId)=>{
+  let dataToSend = {
+    orderId
+  };
+  let res = await axios.post(url+'ViewOrder/', dataToSend);
+  let data = await res.data;
+  return data;
+}
+
+
 const grantRequest =async(data)=>
 {
   let dataToSend={userId:data.userId,requestId:data.requestId}
@@ -84,6 +126,13 @@ const notifyUser =async(request)=>
   let resData = await res.data;
   return resData;
 }
+const gradeUser =async(username,grade,sumOfGrades,userGrading)=>
+{
+  let dataToSend={username,grade,sumOfGrades,userGrading}
+  let res=await axios.post(url+'gradeUser/', dataToSend);
+  let resData = await res.data;
+  return resData;
+}
 
 export{
   createUser,
@@ -91,8 +140,16 @@ export{
   returnImageNumber,
   changeAdress,
   returnUser,
+  ratePublisher,
+  canRatePublisher,
+  getPublisher,
+  searchPublishers,
+  addOrder,
+  seeOrders,
+  viewOrder,
   grantRequest,
   notifyUser,
+  gradeUser,
 }
 
 

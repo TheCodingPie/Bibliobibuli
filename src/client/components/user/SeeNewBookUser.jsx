@@ -6,6 +6,7 @@ import InputRange from 'react-input-range';
 import "react-input-range/lib/css/index.css";
 import MyVerticallyCenteredModal from '../publisher/CustomModal';
 import "../publisher/publishercss/addBook.css"
+import { BrowserRouter as  Router,Link} from "react-router-dom";
 
 export default class SeeNewBookUser extends React.Component {
     constructor(props) {
@@ -66,14 +67,20 @@ export default class SeeNewBookUser extends React.Component {
               state: { book: this.state.book, user:this.state.user }});
      }
 
+     goToPublisher=()=>{
+        this.props.history.push({
+            pathname: `/PublisherProfile`,
+              state: { username: this.state.book.usernamePublisher, user:this.state.user }});
 
+     }
+     //<Button onClick={()=>this.goToPublisher()}>{this.state.book.usernamePublisher}</Button>
     render()
     {
        
         return(
             <div class="seeBook">
                 <div class="bookAddCom"> 
-              <div class="aboutBook">
+              <div  className="justify-content-center col aboutBook">
                   
                <h4>O knjizi</h4>
                <br/>
@@ -81,7 +88,12 @@ export default class SeeNewBookUser extends React.Component {
                <br/>
                Autor :{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}
                <br/>
-               Izdavac:{this.state.book.usernamePublisher}
+               Izdavac:
+               <Link to={{
+                 pathname: `/PublisherProfile`,
+                 state: { username: this.state.book.usernamePublisher, user:this.state.user }
+
+               }} className="card-link">{this.state.book.usernamePublisher}</Link>
                <br/>
                Zanr:{this.state.book.bookType}
                <br/>

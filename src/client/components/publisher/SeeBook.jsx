@@ -28,8 +28,8 @@ class SeeBook extends React.Component {
     componentDidMount=async()=>{
         var result= await bookService.seeBook(this.state.bookid);
        (result) ? this.setState({book:result}):this.setState({labela:"Doslo je do greske"});
-        var canRate= await bookService.canRateNewBook(this.state.bookid, this.state.user._id);
-        (canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti knjigu"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili knjigu."})
+        //var canRate= await bookService.canRateNewBook(this.state.bookid, this.state.user._id);
+        //(canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti knjigu"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili knjigu."})
 
     }
     addComment=async()=>{
@@ -94,30 +94,13 @@ class SeeBook extends React.Component {
               <div className="contentCom">
               <div className="leftRight1"></div>
               <div class="addCommentAndRate">
+                  <div style={{flexGrow:0.5}}></div>
 
              <div className="addComment">
              <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
             <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
              </div>
-             <div className="rate">
-                 <div className="rateBook">
-                 <div className="leftRight"> Oceni knjigu:</div>
-                 <div className="roller">
-             <InputRange
-              maxValue={5}
-              minValue={1}
-              disabled={this.state.canRate}
-                value={this.state.value}
-              onChange={value => this.setState({ value })} />
-              </div>
-               <div className="leftRight"></div>
-               </div>
-               <div className="rateDown">
-                   {this.state.labelCanRate}
-                 <Button  disabled={this.state.canRate} onClick={()=>this.rateBook()}>Oceni</Button>  
-               </div>
-
-             </div>
+           
 
 
               </div>
