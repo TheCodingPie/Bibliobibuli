@@ -68,7 +68,7 @@ handleChangeDate=async date=>{
 }
 handleChangeTime=async time=>{
   if(time==null) return
- this.setState({timeEnd:time.format("HH:mm")})
+ this.setState({time:time.format("HH:mm")})
 }
 
   componentDidMount = async () => {
@@ -109,7 +109,12 @@ handleChangeTime=async time=>{
   
    console.log(parsedDate);
     await bookService.addBookSale(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,this.state.user.username,this.state.bookType,this.state.idPhoto,this.state.startPrice,[],parsedDate,this.state.time,0,null,this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage,{price:0,usernameBidder:"",seen:false})
-  this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",startPrice:0,dateEnd:new Date(),
+  
+  
+    this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",startPrice:0,dateEnd:new Date(),
+  
+  
+  
   time:moment().format("HH:mm"),urlImage:"",urlImageLocal:""})
   this.setState({ idPhoto: parseInt(await userService.returnImageNumber(this.state.user.username)) });
   }
@@ -131,6 +136,8 @@ handleChangeTime=async time=>{
 
 
   render() {
+    console.log(this.state.timeEnd);
+    console.log(this.state.dateEnd);
 
     return (
       <div style={{ flexGrow: 1, width: '100%' }}>

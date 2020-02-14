@@ -223,6 +223,10 @@ obradiIzborAuction=(selected)=>{
       state: { user: this.state.user}
     });
   }
+  logOut=()=>{
+    this.props.history.replace( {pathname:'/'});
+    
+  }
 
 
   render() {
@@ -254,6 +258,7 @@ obradiIzborAuction=(selected)=>{
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
                 </NavDropdown>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">

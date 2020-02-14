@@ -63,6 +63,11 @@ class PublisherFirstPage extends React.Component {
       : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Narudzbina knjiga"}) ;
     }
 
+    logOut=()=>{
+      this.props.history.replace( {pathname:'/'});
+      
+    }
+
 
     render()
     {
@@ -77,6 +82,7 @@ class PublisherFirstPage extends React.Component {
                 <NavDropdown title="Opcije" id="basic-nav-dropdown">
                   <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={this.seeMyBooks}>Vidi knjige</Button></NavDropdown.Item>
+                  <NavDropdown.Item ><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
                 </NavDropdown>
                 
               </Nav>

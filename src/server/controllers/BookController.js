@@ -193,13 +193,11 @@ router.post('/SeeBook',async(req,res)=>{
    { 
      highestBid:{usernameBidder:bid.usernameBidder,seen:false},
      auctionEndDate:{$lt: bid.date}
-   }
+   },
+   (err,result)=>{
+    (err)? console.log(err): (result.ok===1)? res.json(result) : res.json(false) ;
+  } );
     
-   
-
-   )
-   res.json(rezult);
-  
  });
 
 
