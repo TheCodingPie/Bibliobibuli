@@ -59,7 +59,7 @@ export default class Login extends Component {
   render() {
    
     return (
-      <div style={{flexGrow:1, display:"flex",flexDirection:"row", backgroundColor:"whitesmoke"}}>
+      <div style={{flexGrow:1, display:"flex",flexDirection:"row", backgroundColor:"whitesmoke", height:"100%"}}>
         <div className="iznadIIspod" style={{justifyContent:'center'}}>
           <div className="img-flusername">
             <img src={im} alt="tatla" />
