@@ -183,11 +183,17 @@ const findBookBought=async(date,usernameBidder)=>{
   console.log(res.data)
   return res.data;
 }
+const updateSeenAuction=async(id)=>{
+  let dataToSend={id:id};
+  let res = await axios.post(url+'updateSeenAuction/', dataToSend);
+  console.log(res.data)
+  return res.data;
+}
 
 
 export  {addBookExchange,findBookBought,addNewBook,seeBook,addCommentNewBook,
   rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,
-  addBid,
+  addBid,updateSeenAuction,
   searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed,  addCommentBook, canRateBook, rateBook, sellNewBook}
 
   //export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,rateNewBook, canRateNewBook, searchNewBooks 

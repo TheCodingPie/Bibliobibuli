@@ -39,9 +39,9 @@ class FirstPageUser extends React.Component {
    let month = date.getMonth() + 1;
    parsedDate += month + "/";
    parsedDate += date.getDate();
-   let booksWon=bookService.findBookBought(parsedDate,user.username)
-   
-    this.setState({user:user,images:images})
+   let booksWon=await bookService.findBookBought(parsedDate,user.username)
+   console.log(booksWon)
+    this.setState({user:user,images:images,boughtButNotSeenBooks:booksWon,numberOfBoughtButNotSeenBooks:booksWon.length})
   }
 componentWillMount=async ()=>{
  /* this.setState({
@@ -223,6 +223,18 @@ obradiIzborAuction=(selected)=>{
       state: { user: this.state.user}
     });
   }
+  updateSeen=(book,index)=>{
+    console.log(index)
+    let result=bookService.updateSeenAuction(book._id);
+    if(this.state.boughtButNotSeenBooks.length==1)
+    this.setState({boughtButNotSeenBooks:[],numberOfBoughtButNotSeenBooks:0})
+    else{
+    let books=this.state.boughtButNotSeenBooks.splice(index, 1)
+    this.setState({boughtButNotSeenBooks:books,
+      numberOfBoughtButNotSeenBooks:books.length})
+    }
+    console.log(result);
+  }
 
 
   render() {
@@ -265,11 +277,9 @@ obradiIzborAuction=(selected)=>{
                   <Dropdown.Menu>
                     {this.state.boughtButNotSeenBooks.map((x, index) => (
                       <Dropdown.Item
-                        onClick={() => {
-                          this.setState({ data: x, modalVisible: true });
-                        }}
+                        onClick={()=>this.updateSeen(x,index)}
                       >
-                        {x.date}
+                        Dobijena knjiga na aukciji {x.name} za cenu {x.highestBid.price}
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>

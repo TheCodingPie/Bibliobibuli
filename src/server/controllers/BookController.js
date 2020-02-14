@@ -189,16 +189,12 @@ router.post('/SeeBook',async(req,res)=>{
    router.post('/findBookBought', async(req, res) => {
     let bid=req.body;
     console.log(bid)
- let rezult= await bookforAuction.find( 
+  bookforAuction.find( 
    { 
-     highestBid:{usernameBidder:bid.usernameBidder,seen:false},
+     'highestBid.usernameBidder':bid.usernameBidder,'highestBid.seen':false,
      auctionEndDate:{$lt: bid.date}
-   }
-    
+   },(err,result)=>(err)?console.log(err):res.json(result))
    
-
-   )
-   res.json(rezult);
   
  });
 
@@ -267,6 +263,16 @@ router.post('/SellNewBook',async(req,res)=>{
     res.json(false);
   }
 
+});
+router.post('/updateSeenAuction',async(req,res)=>{
+  let id=new ObjectID(req.body.id);
+  bookforAuction.updateOne({_id:id},{
+    $set:{
+      'highestBid.seen':true
+    }
+  },(err,result)=>{
+    (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) ;
+  } );
 });
 
 

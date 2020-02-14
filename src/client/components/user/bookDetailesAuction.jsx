@@ -72,7 +72,7 @@ class BookDetailAuction extends React.Component {
    parsedDate += month + "/";
    parsedDate += date.getDate();
   
-  console.log(this.state.image.auctionEndDate)
+  console.log(this.state.image.auctionEndTime)
    console.log(parsedDate)
    if(this.state.image.auctionEndDate>parsedDate
    ||(this.state.image.auctionEndDate==parsedDate && moment().format("HH:mm")<this.state.image.auctionEndTime))
