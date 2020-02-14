@@ -73,20 +73,22 @@ class PublisherFirstPage extends React.Component {
     {
         return(
           <div >
-            <Navbar bg="light" expand="large" >
+            <Navbar class="navbar navbar-expand-lg navbar-light bg-light">
             <Navbar.Brand>Bibliobibuli</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
+            
+        
+              <Nav className="navbar">
                 
-                <NavDropdown title="Opcije" id="basic-nav-dropdown">
-                  <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.seeMyBooks}>Vidi knjige</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
-                </NavDropdown>
+            
+             <Button  onClick={this.addBook}>Dodaj knjigu</Button> 
+             <span class="navbar"></span>
+                  <Button onClick={this.seeMyBooks}>Vidi knjige</Button>
+                  <span class="navbar"></span>
+                   <Button onClick={()=>this.logOut()}>Odjavi se</Button>
                 
+                  
               </Nav>
-            </Navbar.Collapse>
+         
             </Navbar>
             <div style={{display:"flex", flexDirection:"row", flexGrow:1}}>
                  

@@ -261,16 +261,17 @@ obradiIzborAuction=(selected)=>{
                 <SearchBarAuction obradiIzbor={this.obradiIzborAuction}></SearchBarAuction>
                 <SearchNewBooks selectBook={this.selectBook}></SearchNewBooks>
                 <SearchPublisher selectPublisher={this.selectPublisher}></SearchPublisher>
-                <NavDropdown title="Opcije" id="basic-nav-dropdown">
-                  <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
                 
-                  <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
+                <NavDropdown title="Opcije"  class="dropdown-menu dropdown-menu-right" role="menu" >
+                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
+                  <NavDropdown.Item  class="dropdown-item"><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
+                
+                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item" ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
                 </NavDropdown>
                 <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -289,7 +290,7 @@ obradiIzborAuction=(selected)=>{
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-                
+               
               </Nav>
             </Navbar.Collapse>
           </Navbar>
