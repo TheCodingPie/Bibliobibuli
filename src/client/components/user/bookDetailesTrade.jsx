@@ -10,7 +10,7 @@ class BookDetailTrade extends React.Component {
 
   constructor(props) {
     super(props);
-   console.log(this.props.location.state)
+   
     this.state = {
    
       user: this.props.location.state.user,

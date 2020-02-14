@@ -131,7 +131,7 @@ this.props.history.push({
 }
  
 obradiIzborAuction=(selected)=>{
-  
+  console.log(selected[0])
   this.props.history.push({
     pathname: `/bookDetailAuction`,
    state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }

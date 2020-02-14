@@ -6,11 +6,11 @@ var  bookModel = require("../models/books");
 var publisherModel = require("../models/publisher");
 var ObjectID = require('mongodb').ObjectID;
 router.post('/createUser', async(req, res) => {
-       
+       console.log(req.body)
         let user=new userModel(req.body);
        
     user.save((err, result)=>{
-         
+         console.log(err);
         (err)? 
             (err.code==11000) ?  res.json("Korisnicko ime je zauzeto") :  res.json("greska na serveru") 
         : res.json("Uspesno ste kreirali profil");
@@ -143,6 +143,20 @@ router.post('/createUser', async(req, res) => {
                 (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) 
                
           )});
+
+          router.post('/gradeUser', async(req, res) => {
+            
+             console.log(req.body);
+            
+            userModel.updateOne(
+               { username:req.body.username }, 
+               { $set: { 
+                 grade:req.body.grade ,sumOfGrades:req.body.sumOfGrades
+                       } ,$inc:{numOfGrades:1},$push:{usersWhoGradedMe:req.body.userGrading}
+               },(err,result)=>
+                 (err)? console.log(err): (result.ok===1)? res.json(true) : res.json(false) 
+                
+           )});
         
 
         

@@ -5,10 +5,12 @@ import Fetchurl from './FetchUrl';
 let url=Fetchurl.url + 'User/'
 
 
-  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold) => 
+  const createUser = async (username, name, lastname, address, email , password, grade, numOfBorrowedBooks, numOfImages,incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe) => 
   {
  let dataToSend = {
-      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,numOfImages, incomingRequests, madeRequests,booksForSale, booksToRent,comments,booksSold
+      username, name, lastname, address, email , password, grade, numOfBorrowedBooks,
+      numOfImages, incomingRequests, madeRequests,booksForSale, 
+      booksToRent,comments,booksSold,numOfGrades,sumOfGrades,usersWhoGradedMe
     };
 
     let res = await axios.post(url+'createUser/', dataToSend);
@@ -84,6 +86,13 @@ const notifyUser =async(request)=>
   let resData = await res.data;
   return resData;
 }
+const gradeUser =async(username,grade,sumOfGrades,userGrading)=>
+{
+  let dataToSend={username,grade,sumOfGrades,userGrading}
+  let res=await axios.post(url+'gradeUser/', dataToSend);
+  let resData = await res.data;
+  return resData;
+}
 
 export{
   createUser,
@@ -93,6 +102,7 @@ export{
   returnUser,
   grantRequest,
   notifyUser,
+  gradeUser,
 }
 
 
