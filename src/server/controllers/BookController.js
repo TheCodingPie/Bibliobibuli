@@ -173,6 +173,33 @@ router.post('/SeeBook',async(req,res)=>{
        );
   
     });
+    router.post('/addBidAuction', async(req, res) => {
+      let bid=req.body;
+    let rez=await bookforAuction.updateOne(
+     { _id:bid._id}, 
+     { $push: {
+       bids:{price:parseInt(bid.price),usernameBidder:bid.usernameBidder,seen:false}
+     },$set:{highestBid:{price:parseInt(bid.price),usernameBidder:bid.usernameBidder,seen:false}}
+     ,
+    
+     })
+      res.json('true')
+   });
+   router.post('/findBookBought', async(req, res) => {
+    let bid=req.body;
+    console.log(bid)
+ let rezult= await bookforAuction.find( 
+   { 
+     highestBid:{usernameBidder:bid.usernameBidder,seen:false},
+     auctionEndDate:{$lt: bid.date}
+   }
+    
+   
+
+   )
+   res.json(rezult);
+  
+ });
 
 
 

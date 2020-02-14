@@ -32,7 +32,7 @@ const addBookSale=async(  name,
   aboutBook,
   yearPublishing,
   publishing,
-  urlImage)=>
+  urlImage,highestBid)=>
   {
     let dataToSend={name,
       nameAuthor,
@@ -49,7 +49,7 @@ const addBookSale=async(  name,
       aboutBook,
       yearPublishing,
       publishing,
-    urlImage}
+    urlImage,highestBid}
       let res = await axios.post(url+'addBookAuction/', dataToSend);
   return res;
   }
@@ -145,8 +145,19 @@ const freeBook=async(bookId)=>{
   return res.data;
 
 }
+const addBid=async(_id,price,usernameBidder)=>{
+  let dataToSend={_id:_id,price:price,usernameBidder:usernameBidder};
+  let res = await axios.post(url+'addBidAuction/', dataToSend);
+  return res.data;
+}
+const findBookBought=async(date,usernameBidder)=>{
+  let dataToSend={date:date,usernameBidder:usernameBidder};
+  let res = await axios.post(url+'findBookBought/', dataToSend);
+  console.log(res.data)
+  return res.data;
+}
 
 
-export  {addBookExchange,addNewBook,seeBook,addCommentNewBook,
+export  {addBookExchange,findBookBought,addNewBook,seeBook,addCommentNewBook,
   rateNewBook, canRateNewBook, searchNewBooks ,addBookSale,searchBarTrade,
-  searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed}
+  searchBarAuction,returnBookTrade,returnBookAuction,borrowBookTrade,freeBook,borrowBookTradeConfirmed,addBid}

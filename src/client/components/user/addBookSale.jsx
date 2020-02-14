@@ -64,7 +64,7 @@ handleChangeStartPrice=(e)=>{
   this.setState({startPrice:e.target.value})
 }
 handleChangeDate=async date=>{
-  this.setState({dateEnd:date})
+ this.setState({dateEnd:date})
 }
 handleChangeTime=async time=>{
   if(time==null) return
@@ -99,8 +99,19 @@ handleChangeTime=async time=>{
   addToFirebase = async () => {
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).put(this.state.file);
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).getDownloadURL().then((url) => this.setState({ urlImage: url }));
-    await bookService.addBookSale(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,this.state.user.username,this.state.bookType,this.state.idPhoto,this.state.startPrice,[],this.state.dateEnd,this.state.time,0,null,this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage)
-  this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:""})
+
+   let parsedDate = "";
+   parsedDate += this.state.dateEnd.getFullYear() +"/";
+   let month = this.state.dateEnd.getMonth() + 1;
+   parsedDate += month + "/";
+   parsedDate += this.state.dateEnd.getDate();
+ 
+  
+   console.log(parsedDate);
+    await bookService.addBookSale(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,this.state.user.username,this.state.bookType,this.state.idPhoto,this.state.startPrice,[],parsedDate,this.state.time,0,null,this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage,{price:0,usernameBidder:"",seen:false})
+  this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",startPrice:0,dateEnd:new Date(),
+  time:moment().format("HH:mm"),urlImage:"",urlImageLocal:""})
+  this.setState({ idPhoto: parseInt(await userService.returnImageNumber(this.state.user.username)) });
   }
 
 
@@ -145,7 +156,7 @@ handleChangeTime=async time=>{
                       src={this.state.urlImageLocal} />
 
                     <Media.Body xs={2}>
-                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis fotografije" onChange={this.onChangeAbout} />
+                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis fotografije" onChange={this.onChangeAbout} value={this.state.aboutBook} />
                     </Media.Body>
 
                   </Media>

@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 
 
-import { Navbar, Nav, NavDropdown,Image ,Container, Badge } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown,Image ,Container, Badge,Dropdown } from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
 import * as userService from '../../services/UserService'
 import * as bookService from '../../services/BookService'
 import { Button, Modal } from "react-bootstrap";
 import SearchBar from "../searchBar";
 import SearchBarAuction from "../searchBarAuction";
+import moment from "moment";
 
 
 
@@ -21,14 +22,22 @@ class FirstPageUser extends React.Component {
     this.state = {
       user: this.props.location.state.user,
       images:[],
-      goBack:false
+      goBack:false,
+      numberOfBoughtButNotSeenBooks:0,
+      boughtButNotSeenBooks:[]
     };
   }
   componentDidMount=async()=>{
     if(this.props.location.state==undefined)return;
     let user=await userService.returnUser(this.state.user.username);
     let images=user.booksForSale.concat(user.booksToRent);
-    
+   let date=new Date();
+   let parsedDate = "";
+   parsedDate += date.getFullYear() +"/";
+   let month = date.getMonth() + 1;
+   parsedDate += month + "/";
+   parsedDate += date.getDate();
+   let booksWon=bookService.findBookBought(parsedDate,user.username)
    
     this.setState({user:user,images:images})
   }
@@ -64,14 +73,16 @@ bookDetailed=async(item)=>{
    
  })
  if(p){
+   console.log(item);
+   item._id=item.id
  this.props.history.push({
   pathname: `/bookDetailAuction`,
- state: { user: this.state.user,book_id:item.id,item:item }
+ state: { user: this.state.user,item:item }
 });return}
-
+item._id=item.id;
     this.props.history.push({
       pathname: `/bookDetailTrade`,
-     state: { user: this.state.user,book_id:item.id,item:item }
+     state: { user: this.state.user,book_id:item._id,item:item }
     });
   
 }
@@ -220,6 +231,25 @@ obradiIzborAuction=(selected)=>{
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
                   <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
                 </NavDropdown>
+                <Dropdown>
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Nove knjige osvojene na aukciji
+                    <Badge variant="light">{this.state.numberOfBoughtButNotSeenBooks}</Badge>
+                    <span className="sr-only">unread messages</span>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {this.state.boughtButNotSeenBooks.map((x, index) => (
+                      <Dropdown.Item
+                        onClick={() => {
+                          this.setState({ data: x, modalVisible: true });
+                        }}
+                      >
+                        {x.date}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
                 
               </Nav>
             </Navbar.Collapse>

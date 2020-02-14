@@ -15,7 +15,7 @@ let bookSchema = new mongoose.Schema({
   description:String,
   yearPublishing:Number,
   publishing:String,
-  urlImage:String
+  urlImage:String,
   
 })
 

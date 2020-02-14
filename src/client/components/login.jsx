@@ -60,7 +60,7 @@ export default class Login extends Component {
    
     return (
       <div className="celaStrana">
-        <div className="iznadIIspod">
+        <div className="iznadIIspod" style={{justifyContent:'center'}}>
           <div className="img-flusername">
             <img src={im} alt="tatla" />
           </div>

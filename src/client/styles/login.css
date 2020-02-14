@@ -19,9 +19,13 @@
     flex: 3;
     width: 100%;
 }
+.centar{
+  display: flex;
+  flex: 10;
+}
 .iznadIIspod1{
     display: flex;
-    flex: 10;
+    flex: 4.5;
     width: 100%;
 }
 .login{
@@ -34,7 +38,7 @@
 }
 .horizontalno {
     display: flex;
-    flex: 0.5;
+    flex: 20;
     flex-direction: row;
     width: 100%;
 }

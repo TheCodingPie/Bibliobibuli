@@ -82,7 +82,7 @@ handleChangeYearPublishing=(e)=>{
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).put(this.state.file);
    await storageRef.child(this.state.user.username.toString() + '/' + this.state.idPhoto.toString()).getDownloadURL().then((url) => this.setState({ urlImage: url }));
     await bookService.addBookExchange(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,[],0,0,this.state.user.username,this.state.bookType,this.state.idPhoto,[],this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage)
-  this.setState({urlImage:null,urlImageLocal:null,name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:""})
+  this.setState({urlImage:null,urlImageLocal:null,name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",aboutImage:""})
   }
 
 
@@ -148,7 +148,7 @@ handleChangeYearPublishing=(e)=>{
                       src={this.state.urlImageLocal} />
 
                     <Media.Body xs={2}>
-                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis fotografije" onChange={this.onChangeAbout} />
+                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis fotografije" onChange={this.onChangeAbout} value={this.state.aboutBook} />
                     </Media.Body>
 
                   </Media>
