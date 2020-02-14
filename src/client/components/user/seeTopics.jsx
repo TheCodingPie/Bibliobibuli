@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../styles/login.css";
-import {Modal,Button} from 'react-bootstrap'
+import {Modal,Button,Badge} from 'react-bootstrap'
 import ListGroup from 'react-bootstrap/ListGroup'
 import * as topicService from '../../services/TopicService'
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
@@ -50,7 +50,7 @@ state: { user: this.state.user,topic }
         
      this.state.topics.map((item, index) => {
         let date= new Date(item.dateStarted)
-     elements.push (<ListGroup.Item action onClick={()=>this.ShowTopic(item)} variant="info"> <div className="col">  <h2> {item.topic}  </h2> <h4>Pokrenuo temu-->{item.userWhoStarted.username}</h4>  <h5> {date.toLocaleDateString("de")}</h5>  </div>  </ListGroup.Item>)
+     elements.push (<ListGroup.Item action onClick={()=>this.ShowTopic(item)} variant="warning"> <div className="col">  <h2> {item.topic}  </h2> <h4>Pokrenuo temu: <Badge variant='info'>{item.userWhoStarted.username}</Badge></h4>  <h5> {date.toLocaleDateString("de")}</h5>  </div>  </ListGroup.Item>)
      }
              );
           return elements;
@@ -61,7 +61,7 @@ state: { user: this.state.user,topic }
     (this.state.goBack)?(<label>Vratite se nazad</label>):
      (
       <div className="celaStrana">
-       
+     {(this.props.location.state.trending)?<h1>Najaktuelnije teme</h1>:<h1>Teme</h1>}  
         
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printTopics()}

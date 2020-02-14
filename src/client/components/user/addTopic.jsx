@@ -54,7 +54,7 @@ createTopic = async () => {
         var res= await topicService.addTopic(this.state.topic,this.state.description,this.state.user,Date.now());
            
         if(res=='Uspesno ste dodali temu')   
-               timer= setInterval(this.goToFP,2000);
+               timer= setInterval(this.goToFP,1500);
             
           this.setState({successful:res});
            

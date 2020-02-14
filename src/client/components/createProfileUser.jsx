@@ -70,12 +70,14 @@ export default class CreateProfileUser extends Component {
   
 var res= await userService.createUser(this.state.username,this.state.name,this.state.lastname, this.state.address, this.state.email,this.state.password,0,0,0,[],[],[],[],[],[],0,0,[]);
 console.log(res)  
-this.setState({successful:res});  
+await this.setState({successful:res});  
 
 
   };
 
   render() {
+    if(this.state.successful=="Uspesno ste kreirali profil") 
+           timer=setInterval(this.goToLogin, 1500);
     return (
       <div className="celaStrana">
         <div className="iznadIIspod"></div>
@@ -159,7 +161,7 @@ this.setState({successful:res});
             >
               Kreiraj profil
             </button>
-            {(this.state.successful=="Uspesno ste kreirali profil") ? timer=setInterval(this.goToLogin, 2000):""}
+           
             <label
               style={{
                 alignSelf: "center",

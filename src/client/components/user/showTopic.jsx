@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as userService from '../../services/UserService'
-import {Jumbotron,Container,ListGroup,Button} from 'react-bootstrap'
+import {Jumbotron,Container,ListGroup,Button, Badge} from 'react-bootstrap'
 import * as topicService from '../../services/TopicService'
 
 //SVAKA CUSTOM KOMPONENTA MORA DA POCINJE VELIKIM SLOVOM INACE BACA GRESKU!!!!!!!!!!!!!!!!!!!
@@ -36,7 +36,7 @@ export default class ShowTopic extends Component {
      
    this.state.topic.comments.map((item, index) => {
       let date= new Date(item.date)
-   elements.push (<ListGroup.Item action  variant="info"> <div className="col">  <h3> {item.comment}  </h3> <h4>{item.userWhoCommented.username}</h4>  <h6> {date.toLocaleDateString("de")}</h6>  </div>  </ListGroup.Item>)
+   elements.push (<ListGroup.Item action  variant="warning"> <div className="col">  <h3> {item.comment}  </h3> <h5>{item.userWhoCommented.username}</h5>  <h6> {date.toLocaleDateString("de")}</h6>  </div>  </ListGroup.Item>)
    }
            );
         return elements;
@@ -84,15 +84,15 @@ state: { user: this.state.topic.userWhoStarted,userViewing:this.state.user}
         <h2>
          {this.state.topic.description}
         </h2>
-        <p>Pokrenuo temu - - >  
+        <h4><Badge >Pokrenuo temu:  </Badge><div></div>
         <Button onClick={this.goToUserProfile}> {this.state.topic.userWhoStarted.username}</Button>
-        </p>
-        <p>Broj pregleda--> 
-        {this.state.topic.seenBy}
-        </p>
-        <p>
+        </h4>
+        <h5>Broj pregleda: <div></div>
+        { this.state.topic.seenBy}
+        </h5>
+        <h5>
          {date.toLocaleDateString("de")}
-        </p>
+        </h5>
         <h2>Komentari </h2>
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printComments()}

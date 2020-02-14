@@ -26,15 +26,15 @@ export default class PublisherProfile extends React.Component {
         let res = await userService.getPublisher(this.state.publisherUsername);
         (res)? this.setState({publisher:res}) : console.log(res);
         let canRate= await userService.canRatePublisher(this.state.publisher._id, this.state.user._id);
-        (canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti korisnika"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili korisnika."})
+        (canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti izdavaca"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili izdavaca."})
     }
 
     ratePublisher=async()=>{
         let result=await userService.ratePublisher(this.state.user._id,this.state.publisher._id, this.state.value);
         (result)? 
-        this.setState({modalShow:true, successAdd:"Uspesno ste ocenili korisnika.",
+        this.setState({modalShow:true, successAdd:"Uspesno ste ocenili izdavaca.",
         title:"Ocenjivanje korisnika"}) 
-        : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Ocenjivanje korisnika"}) ;
+        : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Ocenjivanje izdavaca"}) ;
 
     }
     //<Button className="ml-3 mr-2 mb-3" onClick={()=>this.goToBook(item.id)} >Vidi objavu</Button>

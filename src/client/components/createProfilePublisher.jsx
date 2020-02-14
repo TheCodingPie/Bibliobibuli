@@ -59,6 +59,8 @@ this.setState({successful:res});
   });}
 
   render() {
+    if(this.state.successful=="Uspesno ste kreirali profil") 
+       timer=setInterval(this.goToLogin, 1500)
     return (
       <div className="celaStrana">
         <div className="iznadIIspod"></div>
@@ -114,7 +116,7 @@ this.setState({successful:res});
             >
               Kreiraj profil
             </button>
-            {(this.state.successful=="Uspesno ste kreirali profil") ? timer=setInterval(this.goToLogin, 2000):""}
+         
             <label
               style={{
                 alignSelf: "center",

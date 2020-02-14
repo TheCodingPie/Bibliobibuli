@@ -31,12 +31,12 @@ export default class UserProfile extends React.Component {
       if(this.state.goBack)
           return;
     await this.setState({user:await userService.returnUser(this.state.user.username)});
-    console.log(this.state.user);
+    //console.log(this.state.user);
     (this.state.user.usersWhoGradedMe.includes(this.state.userViewing.username)) ? this.setState({disableGradeButton:true}) : this.setState({disableGradeButton:false})
     let user=await userService.returnUser(this.state.user.username);
     let images=user.booksForSale.concat(user.booksToRent);
-    console.log(images);
-    console.log(user);
+   // console.log(images);
+  //  console.log(user);
     this.setState({user:user,images:images})
   }
 componentWillMount=async ()=>{
@@ -63,8 +63,8 @@ state: { user: this.state.user }
   });
 }
 bookDetailed=async(item)=>{
-console.log(item);
-console.log(this.state.user.booksForSale)
+//console.log(item);
+//console.log(this.state.user.booksForSale)
   let p=false;
  this.state.user.booksForSale.forEach((x)=>{
    if(x.name==item.name)
@@ -73,18 +73,19 @@ console.log(this.state.user.booksForSale)
     
    
  })
- if(p){
+ if(p)
  this.props.history.push({
-  pathname: `/bookDetailSale`,
- state: { user: this.state.user,book_id:item.id,item:item }
-});return}
-
-    this.props.history.push({
+  pathname: `/bookDetailAuction`,
+ state: { user: this.state.user,book_id:item.id,item:item, idPS:item.id }
+      })
+else
+   this.props.history.push({
       pathname: `/bookDetailTrade`,
      state: { user: this.state.user,book_id:item.id,item:item }
     });
   
 }
+
 printImages = () => {
   
   let findImages = this.state.images.map((item, index) => {
@@ -134,8 +135,9 @@ seeTopics=(trending)=>{
   let newGrade=newSumOfGrades/(this.state.user.numOfGrades+1);
   let res=await userService.gradeUser(this.state.user.username,newGrade,newSumOfGrades,this.state.userViewing.username);
 
-console.log(res);
-this.setState({showGrades:false,disableGradeButton:true})
+//console.log(res);
+//this.setState({showGrades:false,disableGradeButton:true})
+window.location.reload(true);
  }
 printGrades=()=>{
   let items = [];
@@ -150,7 +152,7 @@ printGrades=()=>{
     return items;
 }
   render() {
-    
+    console.log(this.state.images);
       
     return (
         (this.state.goBack)?(<label>Vratite se nazad</label>):
@@ -168,7 +170,11 @@ printGrades=()=>{
         <h6>Prosecna ocena:{this.state.user.grade}</h6>
         <h6>Broj ocena:{this.state.user.numOfGrades}</h6>
        <Button disabled={this.state.disableGradeButton} onClick={()=>this.setState({showGrades:true})}>Oceni ovog korisnika</Button>
+       <br/>
+       <br/>
+       <div className="justify-content-center row" style={{flexGrow:1}} >
       { (this.state.showGrades)?<Pagination>{this.printGrades()}</Pagination>:[]}
+      </div>
         <Container style={{display:'flex',flexDirection:'row'}}>
           <div className="justify-content-center row">{this.printImages()}</div>
         </Container>

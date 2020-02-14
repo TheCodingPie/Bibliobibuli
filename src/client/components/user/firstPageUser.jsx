@@ -79,7 +79,7 @@ bookDetailed=async(item)=>{
    item._id=item.id
  this.props.history.push({
   pathname: `/bookDetailAuction`,
- state: { user: this.state.user,item:item }
+ state: { user: this.state.user,item:item , idPS:item._id}
 });return}
 item._id=item.id;
     this.props.history.push({
@@ -141,7 +141,7 @@ obradiIzborAuction=(selected)=>{
   console.log(selected[0])
   this.props.history.push({
     pathname: `/bookDetailAuction`,
-   state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
+   state: { user: this.state.user,book_id:selected[0].id,item:selected[0], idPS:selected[0]._id }
   });
   
   }
@@ -294,7 +294,7 @@ obradiIzborAuction=(selected)=>{
             </Navbar.Collapse>
           </Navbar>
         </div>
-        <h3>{this.state.user.username}</h3>
+        <h1>{this.state.user.username}</h1>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label><br/>
@@ -306,7 +306,7 @@ obradiIzborAuction=(selected)=>{
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printGrantedRequests()}
       </ListGroup>
-      {(this.state.user.incomingRequests.length==0)? [] : <h3>Zahtevane knjige</h3>}
+      {(this.state.user.incomingRequests.length==0)? [] : <h3>Korisnici traze sledece knjige od Vas</h3>}
        
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printRequests()}

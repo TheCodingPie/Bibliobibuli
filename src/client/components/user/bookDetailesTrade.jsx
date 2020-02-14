@@ -18,7 +18,7 @@ class BookDetailTrade extends React.Component {
     this.state = {
    
       user: this.props.location.state.user,
-      idPhoto:this.props.location.state.book_id,//--undefined
+      idPhoto:this.props.location.state.book_id,
       item:this.props.location.state.item,
       disabled:false,
       image:{  name:"",
@@ -72,9 +72,17 @@ class BookDetailTrade extends React.Component {
 
  addComment=async()=>{
   var result= await bookService.addCommentBook(this.state.idPhoto,this.state.comment,this.state.user.username);
-  (result)? 
-   this.setState({modalShow:true, successAdd:"Uspesno ste dodali komentar.",title:"Komentarisanje knjige"}) 
+  /*(result)? 
+   this.setState({modalShow:true, successAdd:"Uspesno ste dodali komentar.",title:"Komentarisanje knjige", }) 
    : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Komentarisanje knjige"}) ;
+*/
+   this.setState(prevState => ({
+    image: {                  
+        ...prevState.image,    
+        comments: [...prevState.image.comments, {comment:prevState.comment,usernameCommentAuthor:prevState.user.username}]       
+    },
+    comment:""
+  }));
 }
 
 onChangeComment=(e)=>{
@@ -82,11 +90,24 @@ onChangeComment=(e)=>{
 }
 
 rateBook=async()=>{
-  let result=await bookService.rateBook(this.state.idPhoto, this.state.value, this.state.user._id);
-  (result)? 
-  this.setState({modalShow:true, successAdd:"Uspesno ste ocenili knjigu.",
-  title:"Ocenjivanje knjige"}) 
-  : this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Ocenjivanje knjige"}) ;
+  await bookService.rateBook(this.state.idPhoto, this.state.value, this.state.user._id);
+  //(result)? 
+ // this.setState({modalShow:true, successAdd:"Uspesno ste ocenili knjigu.",
+  //title:"Ocenjivanje knjige"}) 
+ //: this.setState({modalShow:true, successAdd:"Doslo je do greske, pokusajte ponovo.", title:"Ocenjivanje knjige"}) ;
+
+ let total=this.state.image.totalOfReviews+this.state.value;
+ let averageReview= total/(this.state.image.numOfReviews+1);
+
+ this.setState(prevState => ({
+  image: {                  
+      ...prevState.image,    
+      numOfReviews: prevState.image.numOfReviews+1 ,
+      averageReview:averageReview   
+  },
+  canRate:true, labelCanRate:"Vec ste ocenili knjigu."
+}));
+
 }
 CanBorrowBook=()=>{
  console.log('cao');
@@ -195,7 +216,7 @@ freeBook=async()=>{
     </div>
     <div style={{flex:5}}>
     <div className="addComment">
-             <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
+             <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" value={this.state.comment} onChange={this.onChangeComment} />
             <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
              </div>
       <h3>Komentari</h3>

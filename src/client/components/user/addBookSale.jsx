@@ -112,12 +112,13 @@ handleChangeTime=async time=>{
     await bookService.addBookSale(this.state.name,this.state.nameAuthor,this.state.lastnameAuthor,this.state.user.username,this.state.bookType,this.state.idPhoto,this.state.startPrice,[],parsedDate,this.state.time,0,null,this.state.aboutBook,parseInt(this.state.yearPublishing),this.state.publishing,this.state.urlImage,{price:0,usernameBidder:"",seen:false})
   
   
-    this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",startPrice:0,dateEnd:new Date(),
+   // this.setState({name:"",lastnameAuthor:"",nameAuthor:"",bookType:"",publishing:"",yearPublishing:2020,aboutBook:"",startPrice:0,dateEnd:new Date(),
   
   
   
-  time:moment().format("HH:mm"),urlImage:"",urlImageLocal:""})
-  this.setState({ idPhoto: parseInt(await userService.returnImageNumber(this.state.user.username)) });
+  //time:moment().format("HH:mm"),urlImage:"",urlImageLocal:""})
+  //this.setState({ idPhoto: parseInt(await userService.returnImageNumber(this.state.user.username)) });
+  window.location.reload(true);
   }
 
 
