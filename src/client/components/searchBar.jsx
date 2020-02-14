@@ -15,13 +15,6 @@ export default class SearchBar extends Component {
     }
 
   }
- getArtists = async (first_letter) => {
-    const response = await fetch('http://localhost:1234/getUsernames/' + first_letter);
-    const artists = await response.json();
-    //console.log(artists)
-    this.setState({ podaci: artists });
-  };
-
 
   
 
@@ -29,43 +22,24 @@ export default class SearchBar extends Component {
 
 
   obradiInput = async(input) => {
-    console.log(input)
+    
     let booksToTrade=await bookService.searchBarTrade(input);
-    console.log(booksToTrade.data)
+   
     this.setState({ podaci: booksToTrade.data });
   };
 
   render() {
     
-    //this.followArtist('Mina','Stef');
-    //this.getComments('joksi').catch(err=> console.log('Fetch Error :-S', err));
-    //this.addComment('Pi','4-12-2019 Pavle = Top je sminka').catch((error) =>  console.error('Error:', error));;
-
     return (
-      /* <div  style={{
-         
-         display:'flex',
-         flexDirection:'row'
-       }}>*/
+     
       <Typeahead
         id="basic-example"
         labelKey="name"
         onChange={selected => this.props.obradiIzbor(selected)}
         options={this.state.podaci}
-        placeholder="Pretrazi sminkere"
+        placeholder="Pretrazi knjige za trampu"
         onInputChange={input => this.obradiInput(input)}
-      />/*
-          <button
-              className="btn "
-              style={{ backgroundColor: "pink", color: "White" }}
-              type="submit"
-              data-toggle="popover"
-              data-content="Pretrazi"
-              onClick={this.props.obradiIzbor}
-            >
-              Pretrazi
-            </button>
-      </div>*/
+      />
     );
   }
 }

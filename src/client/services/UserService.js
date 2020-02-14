@@ -75,6 +75,39 @@ const getPublisher=async(username)=>{
   return res.data;
 }
 
+const searchPublishers=async (part)=>{
+  let dataToSend={part};
+  let res = await axios.post(url+'SearchPublishers/', dataToSend);
+  return res.data;
+}
+
+
+const addOrder=async (idUser,userUsername,userAddress
+  ,publisherUsername,price, countBook,idBook, nameBook ,userEmail)=>{
+    let total=countBook*price;
+  let dataToSend={idUser,userUsername,userAddress
+    ,publisherUsername,price, countBook,idBook, nameBook,sendBook:false, totalPrice:total, userEmail, seeUser:false};
+  let res = await axios.post(url+'AddOrder/', dataToSend);
+  return res.data;
+}
+const seeOrders= async(username)=>{
+  let dataToSend = {
+    username
+  };
+  let res = await axios.post(url+'SeeOrders/', dataToSend);
+  let data = await res.data;
+  return data;
+}
+
+const viewOrder= async(orderId)=>{
+  let dataToSend = {
+    orderId
+  };
+  let res = await axios.post(url+'ViewOrder/', dataToSend);
+  let data = await res.data;
+  return data;
+}
+
 
 export{
   createUser,
@@ -84,7 +117,11 @@ export{
   returnUser,
   ratePublisher,
   canRatePublisher,
-  getPublisher
+  getPublisher,
+  searchPublishers,
+  addOrder,
+  seeOrders,
+  viewOrder
 
 }
 

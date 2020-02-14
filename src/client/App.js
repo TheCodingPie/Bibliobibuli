@@ -21,6 +21,9 @@ import SearchNewBooks from './components/user/SearchNewBooks';
 import SeeNewBookUser from './components/user/SeeNewBookUser';
 import BuyNewBook from './components/user/BuyNewBook';
 import PublisherProfile from './components/user/PublisherProfile'
+import UserProfile from './components/user/userProfile';
+import BookDetailAuction from './components/user/bookDetailesAuction';
+import OrdersPage from './components/user/ordersPage';
 
 
 function App() {
@@ -40,6 +43,7 @@ function App() {
            <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
            <Route path="/AddBookSale" exact component={AddBookSale} />
            <Route path="/bookDetailTrade" exact component={BookDetailTrade} />
+           <Route path="/bookDetailAuction" exact component={BookDetailAuction} />
            <Route path="/AddNewBook" exact component={AddNewBook} />
            <Route path="/SeeMyBooks" exact component={SeeMyBooks} />
            <Route path="/SeeBook" exact component={SeeBook} />
@@ -48,6 +52,8 @@ function App() {
            <Route path="/SeeNewBookUser" exact component={SeeNewBookUser} />
            <Route path="/BuyNewBook" exact component={BuyNewBook} />
            <Route path="/PublisherProfile" exact component={PublisherProfile} />
+           <Route path="/UserProfile" exact component={UserProfile} />
+           <Route path="/OrdersPage" exact component={OrdersPage} />
     
         </Switch>
      </Router>

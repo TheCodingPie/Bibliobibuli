@@ -1,21 +1,15 @@
 import React, { Component } from "react";
 
 
-import ModalFooter from "react-bootstrap/ModalFooter";
-import ModalHeader from "react-bootstrap/ModalHeader";
-
 import { Navbar, Nav, NavDropdown,Image ,Container } from "react-bootstrap";
-import ListGroup from "react-bootstrap/ListGroup";
+
 import * as userService from '../../services/UserService'
 import * as bookService from '../../services/BookService'
 import { Button, Modal } from "react-bootstrap";
-import SearchBar from "../searchBar";
-import SearchBarAuction from "../searchBarAuction";
-import SearchNewBooks from "./SearchNewBooks";
-import SearchPublisher from "./SearchPublisher";
 
 
-class FirstPageUser extends React.Component {
+
+export default class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     (this.props.location.state==undefined)?
@@ -24,12 +18,15 @@ class FirstPageUser extends React.Component {
       }:
     this.state = {
       user: this.props.location.state.user,
+      userViewing:this.props.location.state.userViewing,
       images:[],
       goBack:false
     };
+    console.log(this.state.userViewing)
+    
   }
   componentDidMount=async()=>{
-    if(this.props.location.state==undefined)return;
+      if(this.state.goBack)return
     let user=await userService.returnUser(this.state.user.username);
     let images=user.booksForSale.concat(user.booksToRent);
     console.log(images);
@@ -67,10 +64,12 @@ console.log(this.state.user.booksForSale)
    if(x.name==item.name)
    p=true;
    
+    
+   
  })
  if(p){
  this.props.history.push({
-  pathname: `/bookDetailAuction`,
+  pathname: `/bookDetailSale`,
  state: { user: this.state.user,book_id:item.id,item:item }
 });return}
 
@@ -104,6 +103,12 @@ printImages = () => {
   });
   return findImages;
 };
+searchNewBooks=()=>{
+  this.props.history.push({
+    pathname: `/SearchNewBooks`,
+state: { user: this.state.user }
+  });
+}
 
 addTopic=()=>{
   this.props.history.push({
@@ -118,90 +123,20 @@ seeTopics=(trending)=>{
     state: { user: this.state.user,trending }
   });
 }
-
-obradiIzborTrade=(selected)=>{
-console.log(selected[0])
-this.props.history.push({
-  pathname: `/bookDetailTrade`,
- state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
-});
-
-}
  
-obradiIzborAuction=(selected)=>{
-  console.log('uso')
-  this.props.history.push({
-    pathname: `/bookDetailAuction`,
-   state: { user: this.state.user,book_id:selected[0].id,item:selected[0] }
-  });
-  
-  }
-
-
-  selectBook = async (selected) => {
-    if (selected.length === 0) return;
-  this.props.history.push({
-    pathname: `/SeeNewBookUser`,
-      state: { bookid: selected[0]._id , user:this.state.user }});
-
-  }
-
-  selectPublisher=async(selected)=>{
-    if (selected.length === 0) return;
-    this.props.history.push({
-      pathname: `/PublisherProfile`,
-        state: { username: selected[0].username, user:this.state.user }});
-
-  }
-
-  goToOrders=()=>{
-    this.props.history.push({
-      pathname: `/OrdersPage`,
-      state: { user: this.state.user}
-    });
-  }
-
 
   render() {
+      
     return (
-      (this.state.goBack)?(<label>Vratite se nazad</label>):
-      (
+        (this.state.goBack)?(<label>Vratite se nazad</label>):
+    (
       <div style={{flexGrow:1, flexShrink:1, flexBasis:1}}>
-      <div className="w-100" style={{
-
-       
-
-      }} >
-       
-          <Navbar bg="light" expand="lg">
-            <Navbar.Brand>Bibliobibuli</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-              <SearchBar obradiIzbor={this.obradiIzborTrade}></SearchBar>
-                <SearchBarAuction obradiIzbor={this.obradiIzborAuction}></SearchBarAuction>
-                <SearchNewBooks selectBook={this.selectBook}></SearchNewBooks>
-                <SearchPublisher selectPublisher={this.selectPublisher}></SearchPublisher>
-                <NavDropdown title="Opcije" id="basic-nav-dropdown">
-                  <NavDropdown.Item ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
-                
-                  <NavDropdown.Item ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
-                </NavDropdown>
-                
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
-        </div>
-        <h3>{this.state.user.username}</h3>
+      
+        <h3>{this.state.user.name}</h3>
         <label>
           {this.state.user.name} {this.state.user.lastname}
         </label>
-       
+        <h6>{this.state.user.email}</h6>
        
 
         <Container style={{display:'flex',flexDirection:'row'}}>
@@ -217,7 +152,6 @@ obradiIzborAuction=(selected)=>{
   }
 }
 
-export default FirstPageUser;
 
 function MyVerticallyCenteredModal(props) {
   return (

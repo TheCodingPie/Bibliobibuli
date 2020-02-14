@@ -7,6 +7,7 @@ var  bookforAuction = require("../models/booksForAuction");
 var newBookModel= require('../models/newBook');
 var publisherModel=require('../models/publisher');
 var ObjectID = require('mongodb').ObjectID;
+var orderModel=require("../models/order");
 
 
     router.post('/addBook', async(req, res) => {
@@ -50,7 +51,6 @@ var ObjectID = require('mongodb').ObjectID;
  
     });
     router.post('/returnBookAuction', async(req, res) => {
-      console.log(b)
      bookforAuction.find(req.body, (err, docs)=> 
            
      (err || docs.length==0 )? res.json("false") : res.send(docs[0])
@@ -70,7 +70,7 @@ var ObjectID = require('mongodb').ObjectID;
       let result= await publisherModel.updateOne(
         {username:newBook.usernamePublisher},
          { $push:{
-             booksForSale:{name:newBook.name, bookType:newBook.bookType,bookNumber:newBook.countOfBooks,id:newBook._id}
+             booksForSale:{name:newBook.name, bookType:newBook.bookType,description:newBook.description,bookNumber:newBook.countOfBooks,id:newBook._id}
            }
          })
          if(result.ok===1)
@@ -138,6 +138,72 @@ router.post('/SeeBook',async(req,res)=>{
 
   });
 
+
+  router.post('/AddCommentBook',async(req,res)=>{
+    let id=new ObjectID(req.body.id);
+    bookModel.updateOne({_id:id},{
+      $push:{
+        comments: {comment:req.body.comment,usernameCommentAuthor:req.body.username}
+      }
+    },(err,result)=>{
+      (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) ;
+    } );
+});
+
+router.post('/CanRateBook',async(req,res)=>{
+  let id=new ObjectID(req.body.id);
+  let userid=new ObjectID(req.body.userid);
+  bookModel.findOne({_id:id,ratings:{$elemMatch:{userid:userid}}},function(err, rate) {
+    (err)? res.json(null): (rate)? res.json(false) : res.json(true) ;
+  });
+});
+
+router.post('/RateBook',async(req,res)=>{
+  let id=new ObjectID(req.body.id);
+  let userid=new ObjectID(req.body.userid);
+  let numOfReviews=10;
+   let averageReview=10;
+   let total=0;
+ await bookModel.findOne({_id:id},{numOfReviews:1, averageReview:1,totalOfReviews:1, _id:0}
+,(err, result)=>{(err)? res.json(false):(!result)? res.json(false): numOfReviews=result.numOfReviews+1, averageReview=result.averageReview, total=result.totalOfReviews});
+total+=req.body.rating;
+averageReview=total/numOfReviews;
+
+  bookModel.updateOne({_id:id},{
+    $set:{numOfReviews:numOfReviews, averageReview:averageReview, totalOfReviews:total},
+    $push:{
+      ratings: {rating:req.body.rating, userid:userid}
+    }
+  },(err,result)=>{
+    (err)? res.json(false): (result.ok===1)? res.json(true) : res.json(false) ;
+  } );
+});
+
+
+router.post('/SellNewBook',async(req,res)=>{
+
+  let id=new ObjectID(req.body.id);
+  let idOrder=new ObjectID(req.body.orderId);
+  let count=0;
+  await newBookModel.findOne({_id:id},{countOfBooks:1, _id:0}
+    ,(err, result)=>{(err)? res.json(false):(!result)? res.json(false): count=result.countOfBooks});
+  
+    count-=req.body.count;
+    let success=false;
+   await newBookModel.updateOne({_id:id},{
+      $set:{countOfBooks:count}
+    },(err, result)=>{(err)? res.json(false):(!result)? res.json(false): success=true} );
+
+   if(success){
+    await orderModel.updateOne({_id:idOrder},{
+      $set:{sendBook:true}
+    },(err, result)=>{(err)? res.json(false):(!result)? res.json(false): res.json(true)} );
+  }
+  else{
+    res.json(false);
+  }
+
+});
 
 
 

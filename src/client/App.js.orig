@@ -11,10 +11,8 @@ import AddTopic from './components/user/addTopic';
 import SeeTopics from './components/user/seeTopics';
 import ShowTopic from './components/user/showTopic';
 import ChangeAdressUser from './components/user/changeAdress';
-<<<<<<< HEAD
 import AddBookSale from './components/user/addBookSale';
 import BookDetailTrade from './components/user/bookDetailesTrade';
-=======
 import AddNewBook from './components/publisher/AddNewBook';
 import SeeMyBooks from './components/publisher/SeeMyBooks';
 import SeeBook from './components/publisher/SeeBook';
@@ -22,8 +20,12 @@ import PublisherFirstPage from './components/publisher/PublisherFirstPage';
 import SearchNewBooks from './components/user/SearchNewBooks';
 import SeeNewBookUser from './components/user/SeeNewBookUser';
 import BuyNewBook from './components/user/BuyNewBook';
+<<<<<<< HEAD
+import UserProfile from './components/user/userProfile';
+=======
+import BookDetailAuction from './components/user/bookDetailesAuction';
+>>>>>>> dd4d41440ab4c038a3d2452925aa3fbda5330123
 
->>>>>>> origin/master
 
 function App() {
   return (
@@ -40,10 +42,9 @@ function App() {
            <Route path="/SeeTopics" exact component={SeeTopics} />
            <Route path="/ShowTopic" exact component={ShowTopic} />
            <Route path="/ChangeAdressUser" exact component={ChangeAdressUser} />
-<<<<<<< HEAD
            <Route path="/AddBookSale" exact component={AddBookSale} />
            <Route path="/bookDetailTrade" exact component={BookDetailTrade} />
-=======
+           <Route path="/bookDetailSale" exact component={BookDetailAuction} />
            <Route path="/AddNewBook" exact component={AddNewBook} />
            <Route path="/SeeMyBooks" exact component={SeeMyBooks} />
            <Route path="/SeeBook" exact component={SeeBook} />
@@ -51,7 +52,7 @@ function App() {
            <Route path="/SearchNewBooks" exact component={SearchNewBooks} />
            <Route path="/SeeNewBookUser" exact component={SeeNewBookUser} />
            <Route path="/BuyNewBook" exact component={BuyNewBook} />
->>>>>>> origin/master
+           <Route path="/UserProfile" exact component={UserProfile} />
     
         </Switch>
      </Router>

@@ -5,6 +5,7 @@ var  userModel = require("../models/user");
 var  bookModel = require("../models/books");
 var publisherModel = require("../models/publisher");
 var ObjectID = require('mongodb').ObjectID;
+var orderModel= require('../models/order');
 router.post('/createUser', async(req, res) => {
        
         let user=new userModel(req.body);
@@ -124,6 +125,44 @@ router.post('/createUser', async(req, res) => {
             });
     
         });
+
+
+        router.post('/SearchPublishers',async(req,res)=>{
+
+          publisherModel.find({username:{$regex:req.body.part}},{_id:1,username:1},
+          
+            function(err, publishers) {
+              (err)? res.json([]): (publishers)? res.json(publishers) : res.json([]) ;
+            } );
+        
+          });
+
+          router.post('/AddOrder', async(req, res) => {
+            let order=new orderModel(req.body);
+           let rez=  await order.save();
+           if(rez==null)
+           res.json('false');
+           else
+           res.json('true');
+         
+          });
+
+          router.post('/SeeOrders',async(req,res)=>{
+            
+            orderModel.find({userUsername:req.body.username,seeUser:false}, function(err, orders) {
+                (err)? res.json([]): (!orders)? res.json([]) : res.json(orders) ;
+            });
+        });
+          
+
+        router.post('/ViewOrder',async(req,res)=>{
+          let idOrder=new ObjectID(req.body.orderId);
+
+          await orderModel.updateOne({_id:idOrder},{
+            $set:{seeUser:true}
+          },(err, result)=>{(err)? res.json(false):(!result)? res.json(false): res.json(true)} );
+      });
+        
           
 
         
