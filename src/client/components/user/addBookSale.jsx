@@ -67,6 +67,7 @@ handleChangeDate=async date=>{
  this.setState({dateEnd:date})
 }
 handleChangeTime=async time=>{
+  
   if(time==null) return
  this.setState({time:time.format("HH:mm")})
 }
