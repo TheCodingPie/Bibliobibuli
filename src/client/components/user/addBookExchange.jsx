@@ -134,7 +134,7 @@ handleChangeYearPublishing=(e)=>{
             <Col></Col>
 
             <Col xs={9}>
-              <h5>Dodavanje fotografije</h5>
+              <h5>Dodavanje knjige za razmenu</h5>
               <div class="custom-file mb-3 mt-3" >
                 <input type="file" class="custom-file-input" id="inputGroupFile04" onChange={this.onChangeImage} />
                 <label class="custom-file-label" for="inputGroupFile04">Izaberite fotografiju</label>
@@ -150,7 +150,7 @@ handleChangeYearPublishing=(e)=>{
                       src={this.state.urlImageLocal} />
 
                     <Media.Body xs={2}>
-                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis fotografije" onChange={this.onChangeAbout} value={this.state.aboutBook} />
+                      <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite opis knjige" onChange={this.onChangeAbout} value={this.state.aboutBook} />
                     </Media.Body>
 
                   </Media>
@@ -165,7 +165,7 @@ handleChangeYearPublishing=(e)=>{
                     <label>Ime knjige</label>
                     <input     type="text"
                   className="form-control"
-                  placeholder="Unesite korisnicko ime"
+                  placeholder="Unesite ime knjige"
                   value={this.state.name}
                   onChange={this.handleChangeName.bind(this)}
                   ></input>
@@ -175,7 +175,7 @@ handleChangeYearPublishing=(e)=>{
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Unesite korisnicko ime"
+                        placeholder="Unesite ime autora"
                         value={this.state.nameAuthor}
                         onChange={this.handleChangeNameAuthor.bind(this)}
                         ></input>
@@ -185,17 +185,17 @@ handleChangeYearPublishing=(e)=>{
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Unesite korisnicko ime"
+                        placeholder="Unesite prezime autora"
                         value={this.state.lastnameAuthor}
                         onChange={this.handleChangeLastnameAuthor.bind(this)}
                         ></input>
                 </div>
                 <div style={{display:'flex',flexDirection:'row'}}>
-                    <label>Tip knjige</label>
+                    <label>Zanr knjige</label>
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Unesite korisnicko ime"
+                        placeholder="Unesite Zanr knjige"
                         value={this.state.bookType}
                         onChange={this.handleChangeBookType.bind(this)}
                         ></input>
@@ -215,7 +215,7 @@ handleChangeYearPublishing=(e)=>{
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Unesite korisnicko ime"
+                        placeholder="Unesite izdavanje knjige"
                         value={this.state.publishing}
                         onChange={this.handleChangePublishing.bind(this)}
                         ></input>

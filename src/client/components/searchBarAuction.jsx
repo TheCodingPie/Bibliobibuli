@@ -40,7 +40,7 @@ export default class SearchBarAuction extends Component {
         labelKey="name"
         onChange={selected => this.props.obradiIzbor(selected)}
         options={this.state.podaci}
-        placeholder="Pretrazi aukcije"
+        placeholder="Pretrazi knjige na aukciji"
         onInputChange={input => this.obradiInput(input)}
       />
     );

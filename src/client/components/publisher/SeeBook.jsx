@@ -44,7 +44,7 @@ class SeeBook extends React.Component {
 
     printComments=()=>{
         let comments= this.state.book.comments.map((comment, index)=>{
-         return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" > <div className="col"> 
+         return (<ListGroup.Item key={ index} variant="info" className="mb-2 mt-1" style={{marginBottom:20}} > <div className="col"> 
           <div><text>Autor komentara: {comment.usernameCommentAuthor}</text> </div> 
            <div>Komentar:<br/> {comment.comment}</div>
           </div>  </ListGroup.Item>);  
@@ -65,31 +65,31 @@ class SeeBook extends React.Component {
     {
        
         return(
-            <div class="seeBook">
-                <div class="bookAddCom"> 
-              <div class="aboutBook">
+            <div class="seeBook" style={{}}>
+                <div class="bookAddCom" style={{backgroundColor:'lightgrey'}}> 
+              <div class="aboutBook" style={{backgroundColor:'lightgrey'}} class="text-secondary">
                   
-               <h4>O knjizi</h4>
+               <h1 style={{color:"#ff0178"}}>O knjizi</h1>
                <br/>
-               Naslov knjige:{this.state.book.name}
+               <h6><b>Naslov knjige: </b>{this.state.book.name}</h6>
                <br/>
-               Autor :{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}
+               <h6><b>Autor :</b>{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}</h6>
                <br/>
-               Izdavac:{this.state.book.usernamePublisher}
+               <h6><b>Izdavac:</b>{this.state.book.usernamePublisher}</h6>
                <br/>
-               Zanr:{this.state.book.bookType}
+               <h6><b>Zanr:</b>{this.state.book.bookType}</h6>
                <br/>
-               Cena:{this.state.book.price}
+               <h6><b>Cena:</b>{this.state.book.price}</h6>
                <br/>
-               Godina izdavanja:{this.state.book.yearPublishing}
+               <h6><b>Godina izdavanja:</b>{this.state.book.yearPublishing}</h6>
                <br/>
-               Broj knjiga na prodaji: {this.state.book.countOfBooks}
+               <h6><b>Broj knjiga na prodaji: </b>{this.state.book.countOfBooks}</h6>
                <br/>
-               Prosecna ocena:{this.state.book.averageReview}
+               <h6><b>Prosecna ocena:</b>{this.state.book.averageReview}</h6>
                <br/>
-               Opis:
+               <h6><b>Opis:</b>
                <br/>
-               {this.state.book.description}               
+               {this.state.book.description}   </h6>            
               </div>
               <div className="contentCom">
               <div className="leftRight1"></div>
@@ -98,7 +98,7 @@ class SeeBook extends React.Component {
 
              <div className="addComment">
              <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
-            <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
+            <Button variant="info" onClick={()=>this.addComment()} ><h5>Dodaj komentar</h5> </Button>
              </div>
            
 
@@ -112,7 +112,7 @@ class SeeBook extends React.Component {
               <div class="comments">
                   <div className="leftRight"></div>
                   <div className="content2">
-                      <h4>Komentari:</h4>
+                      <h1 class="text-warning"><b>Komentari:</b></h1>
                 <ListGroup>
                     {this.printComments()}
                 </ListGroup>

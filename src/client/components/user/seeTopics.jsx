@@ -50,7 +50,7 @@ state: { user: this.state.user,topic }
         
      this.state.topics.map((item, index) => {
         let date= new Date(item.dateStarted)
-     elements.push (<ListGroup.Item action onClick={()=>this.ShowTopic(item)} variant="warning"> <div className="col">  <h2> {item.topic}  </h2> <h4>Pokrenuo temu: <Badge variant='info'>{item.userWhoStarted.username}</Badge></h4>  <h5> {date.toLocaleDateString("de")}</h5>  </div>  </ListGroup.Item>)
+     elements.push (<ListGroup.Item  action onClick={()=>this.ShowTopic(item)} style={{marginBottom:'20px'}} variant="warning"> <div className="col">  <h2 class="text-info" > {item.topic}  </h2> <h4 class="text-secondary">Pokrenuo temu: <Badge variant='info'>{item.userWhoStarted.username}</Badge></h4>  <h5> {date.toLocaleDateString("de")}</h5>  </div>  </ListGroup.Item>)
      }
              );
           return elements;
@@ -61,15 +61,17 @@ state: { user: this.state.user,topic }
     (this.state.goBack)?(<label>Vratite se nazad</label>):
      (
       <div className="celaStrana">
-     {(this.props.location.state.trending)?<h1>Najaktuelnije teme</h1>:<h1>Teme</h1>}  
-        
+        <div style={{display:'flex',flex:5,backgroundColor:'white',width:'100%',alignItems:'center',justifyContent:'center'}}>
+     {(this.props.location.state.trending)?<h1 style={{color:"#ff0178"}}>Najaktuelnije teme</h1>:<h1 style={{color:"#ff0178"}}>Teme</h1>}  
+     </div>
+     <div style={{width:'75%',flex:95}}>
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printTopics()}
       </ListGroup>
         
        
 
-       
+      </div>
       </div>
     ));
   }

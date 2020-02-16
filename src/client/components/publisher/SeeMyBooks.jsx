@@ -29,9 +29,9 @@ class SeeMyBooks extends React.Component {
 
     printBooks=()=>{
        let books= this.state.books.map((book, index)=>{
-        return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" > <div className="col"> <div><text>Naslov knjige: {book.name}</text> </div> <div>Zanr knjige: {book.bookType}</div>
+        return (<ListGroup.Item key={ index} variant="info" className="mb-2 mt-1" > <div className="col"> <div><text>Naslov knjige: {book.name}</text> </div> <div>Zanr knjige: {book.bookType}</div>
          <div>Broj knjiga za prodaju: {book.bookNumber}  </div>  
-         <div><Button onClick={() => this.viewBookDetail(book.id)} >Vidi detaljnije</Button>  </div> </div>  </ListGroup.Item>);  
+         <div><Button  variant="warning" style={{color:'white'}} onClick={() => this.viewBookDetail(book.id)} ><h5>Vidi detaljnije</h5></Button>  </div> </div>  </ListGroup.Item>);  
         });
         return books;
     }
@@ -42,7 +42,7 @@ class SeeMyBooks extends React.Component {
             <div className="addNewBook">
                 <div className="leftRight"></div>
                 <div className="content2">
-                    <h2>Moje knjige</h2>
+                    <h2 style={{color:"#ff0178"}}>Moje knjige</h2>
                 <ListGroup>
                 {this.printBooks()}
                 </ListGroup>

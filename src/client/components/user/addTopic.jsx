@@ -69,50 +69,51 @@ createTopic = async () => {
       (this.state.goBack)?(<label>Vratite se nazad</label>):
       
       (<div className="celaStrana">
-        <div className="iznadIIspod"></div>
-        <div className="horizontalno">
+        <div style={{display:'flex',flex:10}}></div>
+        <div style={{display:'flex',flex:5,flexDirection:'row',width:'100%'}}>
           <div className="iznadIIspod1"></div>
           <div className="login">
-            <h3
-              style={{
-                alignSelf: "center"
-              }}
-            >
-              Pokretanje teme
-            </h3>
-
+          <div style={{display:'flex',flex:2}}></div>
+          <label><span class="badge badge-info"><h3><strong>Pokretanje teme</strong></h3></span></label> <br/>
+            <div style={{display:'flex',flex:2}}></div>
             <div className="form-group">
               <label>Naslov</label>
+              <div style={{display:'flex',flex:2}}></div>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Unesite temu"
+                placeholder="Unesite naslov teme"
                 onChange={this.handleChangeTopic.bind(this)}
                 style={{
                   borderColor: this.state.borderColor
                 }}
               />
             </div>
-
+            <div style={{display:'flex',flex:2}}></div>
             <div className="form-group">
               <label>Opis</label>
+              <div style={{display:'flex',flex:2}}></div>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Unesite opis"
+                placeholder="Unesite opis teme"
                 onChange={this.handleChangeDescription.bind(this)}
               />
             </div>
-
+            <div style={{display:'flex',flex:2}}></div>
            
             
             
             <button
               type="submit"
-              className="btn btn-primary btn-block"
+              className="btn  btn-block"
+              style={{
+                backgroundColor: "#ff0178",
+                    color: "white",
+              }}
               onClick={this.createTopic}
             >
-              Kreiraj temu
+             <h4> Kreiraj temu</h4>
             </button>
             <label
               style={{
@@ -122,10 +123,11 @@ createTopic = async () => {
             >
               {this.state.successful}
             </label>
+            <div style={{display:'flex',flex:2}}></div>
           </div>
           <div className="iznadIIspod1"></div>
         </div>
-        <div className="iznadIIspod"></div>
+        <div style={{display:'flex',flex:10}}></div>
 
         <Modal
       show={this.state.modalShow}

@@ -106,7 +106,7 @@ printImages = () => {
           class="img-thumbnail"
         />
         </a>
-        <h4>{item.name}</h4>
+        <h4 >{item.name}</h4>
       </div>
     );
   });
@@ -263,26 +263,26 @@ obradiIzborAuction=(selected)=>{
                 <SearchPublisher selectPublisher={this.selectPublisher}></SearchPublisher>
                 
                 <NavDropdown title="Opcije"  class="dropdown-menu dropdown-menu-right" role="menu" >
-                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.addBook}>Dodaj knjigu za razmenu</Button></NavDropdown.Item>
-                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.changeAdress}>Promeni adresu</Button></NavDropdown.Item>
-                  <NavDropdown.Item  class="dropdown-item"><Button onClick={this.addBookSale}>Dodaj knjigu za aukciju</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item " ><button class="btn btn-info" onClick={this.addBook} >Dodaj knjigu za razmenu</button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item" ><button class="btn btn-info" onClick={this.changeAdress}>Promeni adresu</button></NavDropdown.Item>
+                  <NavDropdown.Item  class="dropdown-item"><button class="btn btn-info" onClick={this.addBookSale}>Dodaj knjigu za aukciju</button></NavDropdown.Item>
                 
-                  <NavDropdown.Item class="dropdown-item" ><Button onClick={this.addTopic}>Pokreni temu na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</Button></NavDropdown.Item>
-                  <NavDropdown.Item class="dropdown-item" ><Button onClick={()=>this.goToOrders()}>Vidi narudzbine</Button></NavDropdown.Item>
-                  <NavDropdown.Item class="dropdown-item"><Button onClick={()=>this.logOut()}>Odjavi se</Button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item" ><button class="btn btn-info" onClick={this.addTopic}>Pokreni temu na forumu</button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><button class="btn btn-info" onClick={()=>this.seeTopics(true)}>Pregledaj najaktuelnije teme na forumu</button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><button class="btn btn-info" onClick={()=>this.seeTopics(false)}>Pregledaj sve teme na forumu</button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item" ><button class="btn btn-info" onClick={()=>this.goToOrders()}>Vidi narudzbine</button></NavDropdown.Item>
+                  <NavDropdown.Item class="dropdown-item"><button class="btn btn-info" onClick={()=>this.logOut()}>Odjavi se</button></NavDropdown.Item>
                 </NavDropdown>
                 <Dropdown>
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     Nove knjige osvojene na aukciji
-                    <Badge variant="light">{this.state.numberOfBoughtButNotSeenBooks}</Badge>
+                    <Badge variant="info">{this.state.numberOfBoughtButNotSeenBooks}</Badge>
                     <span className="sr-only">unread messages</span>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     {this.state.boughtButNotSeenBooks.map((x, index) => (
-                      <Dropdown.Item
+                      <Dropdown.Item variant="light" style={{borderBottom:2,borderBottomColor:'black',borderBottomStyle:'dashed'}}
                         onClick={()=>this.updateSeen(x,index)}
                       >
                         Dobijena knjiga na aukciji {x.name} za cenu {x.highestBid.price}
@@ -295,12 +295,15 @@ obradiIzborAuction=(selected)=>{
             </Navbar.Collapse>
           </Navbar>
         </div>
-        <h1>{this.state.user.username}</h1>
-        <label>
+       <label><span class="badge badge-info"><h1 style={{color:'white'}}><strong>{this.state.user.username}</strong></h1></span></label> <br/>
+        <label  ><h3 style={{color:'#5bc0de'}}>
           {this.state.user.name} {this.state.user.lastname}
-        </label><br/>
+          </h3></label><br/>
         <label>
-          {this.state.user.address}
+        <address><h5>
+        Adresa: {this.state.user.address}</h5>
+</address>
+          
         </label>
 
         {(this.state.user.grantedRequests.length==0)? [] :<h2><Badge variant="success">Odobreni zahtevi za trampu</Badge ></h2>}
@@ -312,7 +315,7 @@ obradiIzborAuction=(selected)=>{
         <ListGroup style={{display:'flex',flexDirection:'column'}}>
               {this.printRequests()}
       </ListGroup>
-        <h3>Vase knjige</h3>
+        <h3>Vaše knjige</h3>
         <Container style={{display:'flex',flexDirection:'row'}}>
          
           <div className="justify-content-center row">{this.printImages()}</div>

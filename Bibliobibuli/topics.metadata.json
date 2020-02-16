@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"Bibliobibuli.topics"},{"v":{"$numberInt":"2"},"unique":true,"key":{"topic":{"$numberInt":"1"}},"name":"topic_1","ns":"Bibliobibuli.topics","background":true}],"uuid":"cdbd6105159e4da3b3c351760c3b25d2"}

@@ -42,23 +42,24 @@ state: { user: this.state.user }
       (this.state.goBack)?(<label>Vratite se nazad</label>)
       :(
       <div className="celaStrana">
-        <div className="iznadIIspod">
+        <div style={{display:'flex',flex:10}}>
         </div>
-        <div className="horizontalno">
+        <div style={{display:'flex',flex:5,flexDirection:'row',width:'100%'}}>
           <div className="iznadIIspod1"></div>
           <div className="centar">
             <div className="login">
-              <div className="iznadIIspod"></div>
+            <div style={{display:'flex',flex:3}}></div>
               <div className="Naslov">
-                <h3>Promena adrese</h3>
+              <label><span class="badge badge-info"><h3><strong>Promena adrese</strong></h3></span></label> <br/>
               </div>
-
+              <div style={{display:'flex',flex:3}}></div>
               <div className="form-group">
-                <label>Nova adresa</label>
+                <label className="secondary">Nova adresa</label>
+                <div style={{display:'flex',flex:3}}></div>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Unesite adresu"
+                  placeholder="Unesite novu adresu"
                   value={this.state.address}
                   onChange={this.handleChangeAdress.bind(this)}
                   style={{
@@ -66,6 +67,7 @@ state: { user: this.state.user }
                   }}
                 />
               </div>
+              <div style={{display:'flex',flex:3}}></div>
 
              
               <div className="butto">
@@ -74,7 +76,7 @@ state: { user: this.state.user }
                   className="btn  btn-block"
                   style={{
                     backgroundColor: "#ff0178",
-                    color: "blue",
+                    color: "white",
                     alignItems: "center",
                     justifyContent: "center",
                     display: "flex",
@@ -85,6 +87,7 @@ state: { user: this.state.user }
                   <h5>Promenite adresu</h5>
                
                 </button>
+                <div style={{display:'flex',flex:2}}></div>
                 <label>{this.state.response}</label>
 
                 <div className="left"></div>
@@ -96,7 +99,7 @@ state: { user: this.state.user }
           </div>
           <div className="iznadIIspod1"></div>
         </div>
-        <div className="iznadIIspod"></div>
+        <div style={{display:'flex',flex:10}}></div>
       </div>)
     );
   }

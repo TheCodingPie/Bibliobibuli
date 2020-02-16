@@ -38,21 +38,21 @@ export default class BuyNewBook extends React.Component {
     render(){
        
         return(
-            <div style={{flexGrow:1, flexDirection:"row", display:"flex"}}>
+            <div style={{flexGrow:1, flexDirection:"row", display:"flex",height:'100%'}}>
                 <div style={{flexGrow:2}}></div>
-                <div style={{flexGrow:3,display:"flex",flexDirection:"column"}}>
+                <div style={{flexGrow:3,display:"flex",flexDirection:"column",alignContent:'center',justifyContent:'center'}} class="text-info">
 
                    <div>
-                       Naslov knjige:   {this.state.book.name}
+                       <h3>Naslov knjige:   {this.state.book.name}</h3>
                   </div> 
                   
                   <div>
-                      Izdavac :{this.state.book.usernamePublisher}
+                      <h3>Izdavac :{this.state.book.usernamePublisher}</h3>
                   </div>
 
                 <div  >
-                
-                    Kolicina knjiga:
+                <h3>
+                    Kolicina knjiga:</h3>
               
                  <input
                 type="number"
@@ -62,19 +62,23 @@ export default class BuyNewBook extends React.Component {
                 
                 </div>
                 <div>
+                    <h3>
                     Ukupna cena knjiga:
                 {this.state.countToBuy * this.state.book.price}
+                </h3>
                 </div>
                 <div>
-                    Cena knjige po komadu:{this.state.book.price}
+                    <h3>
+                    Cena knjige po komadu:{this.state.book.price}</h3>
                 </div>
                 <div>
+                    <h3>
                     Adresa na koju ce biti poslata knjiga:
-                    {this.state.user.address}
+                    {this.state.user.address}</h3>
                 </div>
                  <div style={{flexDirection:"row", display:"flex"}}>
                  <div style={{flexGrow:3}}></div>
-                <Button onClick={()=>this.confirmOrder()}>Potvrdite </Button>
+                <Button variant="warning" style={{color:'white'}} onClick={()=>this.confirmOrder()}><h2>Potvrdite</h2></Button>
                
                 </div>
                 </div>

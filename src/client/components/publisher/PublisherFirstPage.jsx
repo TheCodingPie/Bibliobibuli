@@ -40,16 +40,16 @@ class PublisherFirstPage extends React.Component {
      
      printOrders = () => {
       let findImages = this.state.orders.map((order, index) => {
-        return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" >
-        <div style={{display:"flex", flexDirection:"column"}}>
-         <div>  Naslov knjige: {order.nameBook}</div> 
-         <div>  Kolicina knjiga:{order.countBook}</div> 
-         <div>  Ukupna cena:{order.totalPrice}</div> 
-         <div>  Cena knjige pojedinacno:{order.price}</div> 
-         <div>  Username korisnika:{order.userUsername} </div>
-         <div>  Adresa korisnika:{order.userAddress} </div>
-         <div>  Email korisnika:{order.userEmail} </div>
-          <div><Button className="ml-3 mr-2 mb-3" onClick={()=> this.deliveredOffer(order.idBook,order._id,order.countBook)}  >Isporuci</Button></div>
+        return (<ListGroup.Item key={ index} variant="info" className="mb-2 mt-1" style={{marginBottom:20}} >
+        <div style={{display:"flex", flexDirection:"column",}}>
+         <div class="text-secondary">  Naslov knjige: {order.nameBook}</div> 
+         <div class="text-secondary">  Kolicina knjiga:{order.countBook}</div> 
+         <div class="text-secondary">  Ukupna cena:{order.totalPrice}</div> 
+         <div class="text-secondary">  Cena knjige pojedinacno:{order.price}</div> 
+         <div class="text-secondary">  Username korisnika:{order.userUsername} </div>
+         <div class="text-secondary">  Adresa korisnika:{order.userAddress} </div>
+         <div class="text-secondary">  Email korisnika:{order.userEmail} </div>
+          <div class="text-secondary"><Button className="ml-3 mr-2 mb-3" variant="warning" onClick={()=> this.deliveredOffer(order.idBook,order._id,order.countBook)}  >Isporuci</Button></div>
         </div>
            </ListGroup.Item>); 
       });
@@ -80,11 +80,11 @@ class PublisherFirstPage extends React.Component {
               <Nav className="navbar">
                 
             
-             <Button  onClick={this.addBook}>Dodaj knjigu</Button> 
+             <Button variant="secondary" onClick={this.addBook}><h6>Dodaj knjigu</h6></Button> 
              <span class="navbar"></span>
-                  <Button onClick={this.seeMyBooks}>Vidi knjige</Button>
+                  <Button variant="secondary" onClick={this.seeMyBooks}><h6>Vidi knjige</h6></Button>
                   <span class="navbar"></span>
-                   <Button onClick={()=>this.logOut()}>Odjavi se</Button>
+                   <Button variant="secondary" onClick={()=>this.logOut()}><h6>Odjavi se</h6></Button>
                 
                   
               </Nav>
@@ -94,7 +94,7 @@ class PublisherFirstPage extends React.Component {
                  
                     <div style={{flexGrow:1}}></div>
                     <div style={{flexGrow:3}}>
-                    <h4>Pristigle porudzbine</h4>
+                    <h1 style={{color:'#ff0178'}}>Pristigle porudzbine</h1>
                       <ListGroup>
                 {this.printOrders()}
                 </ListGroup>

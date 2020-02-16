@@ -82,6 +82,7 @@ class AddNewBook extends React.Component {
                 <div className="content">
                     <div className="contentHeader"></div>
                     <div className="content2">
+                    <h6>Ime knjige:</h6>
                 <input
                 type="text"
                 className="form-control"

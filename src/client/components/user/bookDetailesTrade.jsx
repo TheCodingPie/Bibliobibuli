@@ -56,13 +56,12 @@ class BookDetailTrade extends React.Component {
     await this.setState({image:image.data,imgUrl:image.data.urlImage});
     var canRate= await bookService.canRateBook(this.state.idPhoto, this.state.user._id);
     (canRate)? this.setState({canRate:false, labelCanRate:"Mozete oceniti knjigu"}): this.setState({canRate:true, labelCanRate:"Vec ste ocenili knjigu."})
-   
   }
 
   printComments=()=>{
     let comments= this.state.image.comments.map((comment, index)=>{
        
-     return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" > <div className="col"> 
+     return (<ListGroup.Item key={ index} style={{marginBottom:20}} variant="info" className="mb-2 mt-1" > <div className="col"> 
       <div><text>Autor komentara: {comment.usernameCommentAuthor}</text> </div> 
        <div>Komentar:<br/> {comment.comment}</div>
       </div>  </ListGroup.Item>);  
@@ -151,29 +150,17 @@ freeBook=async()=>{
 
 
  render() {
-
+  
   
     return (
-        <div style={{alignItems:'center',display:'flex',flexDirection:'column'}}>
-        <div
-        className=" mr-2 ml-2 mb-2 " 
-        style={{display:'flex',alignItems:'center',flex:5}}
-      >
-        <Image
-          width={300}
-          height={300}
-          className="ml-2 "
-          src={this.state.image.urlImage}
-          alt="radi"
-          class="img-thumbnail"
-        />
-        <span></span>
-        <span></span>
-        <div style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+      <div style={{alignItems:'center',display:'flex',flexDirection:'column',width:'100%',height:'100%'}}>
+      <div style={{alignItems:'center',display:'flex',flexDirection:'row',height:'50%',width:'100%',borderBottomStyle:'groove',borderBottomColor:'#868e96',borderBottomWidth:'3px',backgroundColor:'#e2dddd '}}>
+      <div style={{display:'flex',flex:17}}>
+    <div style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
     <div style={{flex:2}}></div>
     <div style={{flex:2,display:'flex',flexDirection:'column',width:'100%'}}>
-    <label style={{alignSelf:'center',color:'blue'}}>Broj ocena: {this.state.image.numOfReviews}</label>
-    <label style={{alignSelf:'center',color:'blue'}}>Prosecna ocena: {this.state.image.averageReview}</label>
+    <label style={{alignSelf:'center',color:"#ff0178"}}>Broj ocena: {this.state.image.numOfReviews}</label>
+    <label style={{alignSelf:'center',color:"#ff0178"}}>Prosecna ocena: {this.state.image.averageReview}</label>
     <InputRange
               maxValue={5}
               minValue={1}
@@ -186,41 +173,74 @@ freeBook=async()=>{
     </div>
     <div style={{flex:2}}></div>
         </div>
+    
+</div>
+
+      <div style={{display:'flex',flex:30,alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+    <div
+        className=" mr-2 ml-2 mb-2 " 
+        style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}
+      >
+        <Image
+          width={300}
+          height={300}
+          className="ml-2 "
+          src={this.state.image.urlImage}
+          alt="radi"
+          class="img-thumbnail"
+        />
+        <span></span>
+        <span></span>
+        <h1><Badge variant='info'>{this.state.image.name}</Badge></h1>
+      
        
       </div>
-      <div style={{flex:5,display:'flex',flexDirection:'column'}}>
-    <h3><Badge variant='dark'>{this.state.image.name}</Badge></h3>
-    <label>Autor : {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</label>
-    <label>Tip knjige : {this.state.image.bookType}</label>
-    <label>Godina izdavanja : {this.state.image.yearPublishing}</label>
-    <label>Izdavacka kuca : {this.state.image.publishing}</label>
-    <label>Opis knjige : {this.state.image.description}</label>
-    {
-     (this.state.user.username==this.state.image.usernameOwner )?
-        (<Button onClick={this.freeBook} disabled={this.state.disabled}>Knjiga je dostupna</Button>):
-     (this.CanBorrowBook())?
-              (<Button onClick={this.borrowBook} disabled={this.state.disabled} >Pozajmi ovu knjigu</Button>)
-              :
-              (<h3> <Badge variant='info'>Knjiga je trenutno pozajmljena nekom korisniku, pokusajte za par dana</Badge></h3>)
-    }
-    <br/>
-    {(this.state.disabled && this.state.user.username!==this.state.image.usernameOwner)?<Badge variant='info'>Poslata je poruka vlasniku knjige, sacekajte njegov odgovor</Badge>:[]}
-
-    
-    </div>
+      
     <div style={{flex:2}}>
    
    
 
-
+</div>
     </div>
-    <div style={{flex:5}}>
-    <div className="addComment">
+    <div style={{display:'flex',flex:47,height:'100%',alignContent:'flex-start',justifyContent:'centre',flexDirection:'column'}}>
+      <div style={{display:'flex',flex:2}}></div>
+      <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Autor :</b> {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}<br/></h3></div>
+    <div style={{display:'flex',flex:2}}></div>
+    <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Tip knjige :</b>  {this.state.image.bookType}<br/></h3></div>
+    <div style={{display:'flex',flex:2}}></div>
+    <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Godina izdavanja :</b>  {this.state.image.yearPublishing}<br/></h3></div>
+    <div style={{display:'flex',flex:2}}></div>
+    <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Izdavacka kuca :</b>  {this.state.image.publishing}<br/></h3></div>
+    <div style={{display:'flex',flex:2}}></div>
+    <div style={{display:'flex',flex:3,wordBreak:'break-all'}}><h3><b class="text-secondary">Opis knjige :</b>  {this.state.image.description}<br/></h3></div>
+    <div style={{display:'flex',flex:2}}></div>
+    {
+      
+      (this.state.user.username==this.state.image.usernameOwner )?
+         (<Button onClick={this.freeBook} disabled={this.state.disabled}>Knjiga je dostupna</Button>):
+      (this.CanBorrowBook())?
+               (<Button onClick={this.borrowBook} disabled={this.state.disabled} >Pozajmi ovu knjigu</Button>)
+               :
+               (<h3> <Badge variant='info'>Knjiga je trenutno pozajmljena nekom korisniku, pokusajte za par dana</Badge></h3>)
+     }
+     <br/>
+     {(this.state.disabled && this.state.user.username!==this.state.image.usernameOwner)?<Badge variant='info'>Poslata je poruka vlasniku knjige, sacekajte njegov odgovor</Badge>:[]}
+ 
+     
+
+      </div>
+   
+</div>
+<div style={{flex:5,height:'50%',flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'center'}}>
+<div className="addComment" style={{width:'100%',alignSelf:'center'}}>
              <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" value={this.state.comment} onChange={this.onChangeComment} />
             <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
              </div>
-      <h3>Komentari</h3>
-      <ListGroup>
+<span></span>
+<span></span>
+<div style={{justifyContent:'center',alignItems:'center'}}>
+      <h1 style={{color:"#ff0178"}}>Komentari</h1>
+      <ListGroup style={{width:'100%',alignSelf:'center'}}>
                     {this.printComments()}
                 </ListGroup>
 
@@ -230,8 +250,8 @@ freeBook=async()=>{
           title={this.state.title}
           onHide={() => {this.setState({ modalShow: false }); window.location.reload(true) ;}}
         />
-</div>
-
+        </div>
+        </div>
       </div>
     )
   }

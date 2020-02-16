@@ -67,6 +67,7 @@ this.setState({successful:res});
         <div className="horizontalno">
           <div className="iznadIIspod1"></div>
           <div className="login">
+          <div style={{display:'flex',flex:0.15}}></div>
             <h3
               style={{
                 alignSelf: "center"
@@ -74,7 +75,7 @@ this.setState({successful:res});
             >
               Kreiranje profila
             </h3>
-
+            <div style={{display:'flex',flex:0.3}}></div>
             <div className="form-group">
               <label>Korisnicko ime</label>
               <input
@@ -87,7 +88,7 @@ this.setState({successful:res});
                 }}
               />
             </div>
-
+            <div style={{display:'flex',flex:0.3}}></div>
             <div className="form-group">
               <label>Sifra</label>
               <input
@@ -97,7 +98,7 @@ this.setState({successful:res});
                 onChange={this.handleChangePassword.bind(this)}
               />
             </div>
-
+            <div style={{display:'flex',flex:0.3}}></div>
            
             <div className="form-group">
               <label>E mail</label>
@@ -108,7 +109,7 @@ this.setState({successful:res});
                 onChange={this.handleChangeEmail.bind(this)}
               />
             </div>
-            
+            <div style={{display:'flex',flex:0.3}}></div>
             <button
               type="submit"
               className="btn btn-primary btn-block"
@@ -116,7 +117,7 @@ this.setState({successful:res});
             >
               Kreiraj profil
             </button>
-         
+            <div style={{display:'flex',flex:0.3}}></div>
             <label
               style={{
                 alignSelf: "center",

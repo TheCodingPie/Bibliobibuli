@@ -78,50 +78,47 @@ export default class SeeNewBookUser extends React.Component {
     {
        
         return(
-            <div class="seeBook">
+            <div class="seeBook" >
                 <div class="bookAddCom"> 
-              <div  className="justify-content-center col aboutBook">
+              <div  className="justify-content-flex-start col aboutBook"  class="text-secondary" style={{alignContent:'flex-start',justifyContent:'flex-start'}}>
                   
-               <h4>O knjizi</h4>
+              <h1 style={{color:"#ff0178"}}>O knjizi</h1>
                <br/>
-               Naslov knjige:{this.state.book.name}
+               <h6><b>Naslov knjige: </b>{this.state.book.name}</h6>
                <br/>
-               Autor :{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}
+               <h6><b>Autor :</b>{this.state.book.nameAuthor} {this.state.book.lastnameAuthor}</h6>
                <br/>
-               Izdavac:
+               <h6><b>Izdavac:</b>
                <Link to={{
                  pathname: `/PublisherProfile`,
                  state: { username: this.state.book.usernamePublisher, user:this.state.user }
 
-               }} className="card-link">{this.state.book.usernamePublisher}</Link>
+               }} className="card-link">{this.state.book.usernamePublisher}</Link></h6>
                <br/>
-               Zanr:{this.state.book.bookType}
+               <h6><b>Zanr:</b>{this.state.book.bookType}</h6>
                <br/>
-               Cena:{this.state.book.price}
+               <h6><b>Cena:</b>{this.state.book.price}</h6>
                <br/>
-               Godina izdavanja:{this.state.book.yearPublishing}
+               <h6><b>Godina izdavanja:</b>{this.state.book.yearPublishing}</h6>
                <br/>
-               Broj knjiga na prodaji: {this.state.book.countOfBooks}
+               <h6><b>Broj knjiga na prodaji: </b>{this.state.book.countOfBooks}</h6>
                <br/>
-               Prosecna ocena:{this.state.book.averageReview}
+               <h6><b>Prosecna ocena:</b>{this.state.book.averageReview}</h6>
                <br/>
-               Opis:
+               <h6><b>Opis:</b>
                <br/>
-               {this.state.book.description}
-                <Button onClick={()=>this.buyBook()}>Kupi</Button>              
+               {this.state.book.description}</h6>
+                <Button variant="warning" onClick={()=>this.buyBook()}><h3 style={{color:'white'}}>Kupi</h3></Button>              
               </div>
               <div className="contentCom">
               <div className="leftRight1"></div>
               <div class="addCommentAndRate">
 
-             <div className="addComment">
-             <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
-            <Button onClick={()=>this.addComment()} > Dodaj komentar</Button>
-             </div>
+           
              <div className="rate">
                  <div className="rateBook">
                  <div className="leftRight"> Oceni knjigu:</div>
-                 <div className="roller">
+                 <div className="roller" style={{marginTop:'100px'}}>
              <InputRange
               maxValue={5}
               minValue={1}
@@ -133,9 +130,15 @@ export default class SeeNewBookUser extends React.Component {
                </div>
                <div className="rateDown">
                    {this.state.labelCanRate}
-                 <Button  disabled={this.state.canRate} onClick={()=>this.rateBook()}>Oceni</Button>  
+                 <Button  disabled={this.state.canRate} variant="info" style={{marginBottom:'20px'}} onClick={()=>this.rateBook()}>Oceni</Button>  
                </div>
-
+               <span></span>
+             </div>
+             <span></span>
+             <span></span>
+             <div className="addComment">
+             <FormControl as="textarea" aria-label="With textarea" placeholder="Unesite komentar" onChange={this.onChangeComment} />
+            <Button onClick={()=>this.addComment()} variant="info" > Dodaj komentar</Button>
              </div>
 
 
@@ -148,7 +151,7 @@ export default class SeeNewBookUser extends React.Component {
               <div class="comments">
                   <div className="leftRight"></div>
                   <div className="content2">
-                      <h4>Komentari:</h4>
+                      <h1 style={{color:"#ff0178"}}>Komentari:</h1>
                 <ListGroup>
                     {this.printComments()}
                 </ListGroup>

@@ -84,6 +84,7 @@ await this.setState({successful:res});
         <div className="horizontalno">
           <div className="iznadIIspod1"></div>
           <div className="login">
+            <div style={{display:'flex',flex:0.3}}></div>
             <h3
               style={{
                 alignSelf: "center"
@@ -91,7 +92,7 @@ await this.setState({successful:res});
             >
               Kreiranje profila
             </h3>
-
+            <div style={{display:'flex',flex:0.15}}></div>
             <div className="form-group">
               <label>Korisnicko ime</label>
               <input
@@ -149,17 +150,17 @@ await this.setState({successful:res});
               <input
                 type="text"
                 className="form-control"
-                placeholder="Unesite vasu adresu"
+                placeholder="Unesite vasu adresu,postanski broj i grad"
                 onChange={this.handleChangeAddress.bind(this)}
               />
               </div>
-
+              <div style={{display:'flex',flex:0.2}}></div>
             <button
               type="submit"
               className="btn btn-primary btn-block"
               onClick={this.createUser}
             >
-              Kreiraj profil
+              <h3>Kreiraj profil</h3>
             </button>
            
             <label

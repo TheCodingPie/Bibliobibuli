@@ -73,23 +73,28 @@ export default class PublisherProfile extends React.Component {
       
         return(
 
-            <div style={{display:"flex", flexDirection:"column", flexGrow:1, height:"100%"}} >
+            <div style={{display:"flex", flexDirection:"column", flexGrow:1, height:"100%",backgroundColor:'lightgrey'}} >
               
                 <div style={{display:"flex", flexDirection:"row", flexGrow:1}}>
-                  <div style={{display:"flex", flexDirection:"column", flexGrow:1}} >
-                    <h3>O izdavacu</h3>
+                  <div style={{display:"flex", flexDirection:"column", flexGrow:1,height:'100%',alignItems:'center',justifyContent:'center'}} >
+                    <h1 class="text-info">O izdavacu</h1>
                     <div>
+                      <h3>
                       Naziv izdavaca:{this.state.publisher.username}
+                      </h3>
                     </div>
                     <div>
+                    <h3>
                       Email izdavaca:{this.state.publisher.email}
-                    </div>
+                      </h3></div>
                     <div>
+                    <h3>
                       Broj ocena:{this.state.publisher.numOfReviews}
-                    </div>
+                      </h3></div>
                     <div>
+                    <h3>
                       Prosecna ocena:{this.state.publisher.averageReview}
-                    </div>
+                      </h3></div>
                   </div>
 
                   <div style={{display:"flex", flexDirection:"column", flexGrow:1}}>
@@ -97,8 +102,7 @@ export default class PublisherProfile extends React.Component {
                    
                   </div>
                   <div style={{display:"flex", flexDirection:"row", flexGrow:1}}>
-                  <div style={{display:"flex", flexDirection:"row", flexGrow:1}} ></div>
-                  <div style={{display:"flex", flexDirection:"column", flexGrow:1}}>
+                  <div style={{display:"flex", flexDirection:"column", flexGrow:1,justifyContent:'center'}}>
                  <InputRange
                  maxValue={5}
                 minValue={1}
@@ -109,7 +113,7 @@ export default class PublisherProfile extends React.Component {
               <br/>
               <br/>
 
-           <Button  disabled={this.state.canRate} onClick={()=>this.ratePublisher()}>Oceni</Button> 
+           <Button style={{backgroundColor:"#ff0178"}} disabled={this.state.canRate} onClick={()=>this.ratePublisher()}><h2>Oceni</h2></Button> 
            </div>
            <div style={{display:"flex", flexDirection:"column", flexGrow:1}} ></div>
 

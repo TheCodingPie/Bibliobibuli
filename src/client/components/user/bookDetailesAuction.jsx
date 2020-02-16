@@ -44,7 +44,8 @@ class BookDetailAuction extends React.Component {
       canAddOrNotColor:'white'
       
     }
-    console.log(this.props.location.state.item._id)
+    console.log(this.state.user)
+    console.log(this.state.item)
     
   }
   
@@ -59,9 +60,9 @@ class BookDetailAuction extends React.Component {
   printComments=()=>{
     let comments= this.state.image.bids.map((bid, index)=>{
         console.log(bid)
-     return (<ListGroup.Item key={ index} variant="warning" className="mb-2 mt-1" > <div className="col"> 
-      <div><text>Ponudjivac : {bid.usernameBidder}</text> </div> 
-       <div>Ponuda :<br/> {bid.price}</div>
+     return (<ListGroup.Item key={ index} variant="info" className="mb-2 mt-1" > <div className="col"> 
+      <div class="text-secondary"><h6>Ponudjivac : {bid.usernameBidder}</h6> </div> 
+       <div class="text-secondary"><h6>Ponuda :<br/> {bid.price}</h6></div>
       </div>  </ListGroup.Item>);  
      });
      return comments;
@@ -127,71 +128,96 @@ handlePonuda=()=>{
 
 
  render() {
-   if(this.state.user.username==this.state.item.usernameOwner)
+   let p=false;
+   this.state.user.booksForSale.forEach((x)=>{
+     if(x._id==this.state.item._id)
+     p=true;
+   })
+   if(p)
    {
-    return (
-        <div style={{alignItems:'center',display:'flex',flexDirection:'column'}}>
-        <div
-        className=" mr-2 ml-2 mb-2 " 
-        style={{display:'flex',alignItems:'center',flex:5}}
-      >
-        <Image
-          width={300}
-          height={300}
-          className="ml-2 "
-          src={this.state.image.urlImage}
-          alt="radi"
-          class="img-thumbnail"
-        />
-        <span></span>
-        <span></span>
-        <div style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
-    <div style={{flex:2}}></div>
-    <div style={{flex:2,display:'flex',flexDirection:'column',width:'100%'}}>
+    return ( <div style={{alignItems:'center',display:'flex',flexDirection:'column',width:'100%'}}>
+    <div style={{alignItems:'center',display:'flex',flexDirection:'row',height:'50%',width:'100%',borderBottomStyle:'groove',borderBottomColor:'#868e96',borderBottomWidth:'3px',backgroundColor:'#e2dddd '}}>
+    <div style={{display:'flex',flex:17}}></div>
+    <div style={{display:'flex',flex:30,alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+    <div style={{display:'flex',flex:2}}></div>
+    <div
+    className=" mr-2 ml-2 mb-2 " 
+    style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}
+  >
     
-   
+    <Image
+      width={400}
+      height={400}
+      className="ml-2 "
+      src={this.state.image.urlImage}
+      alt="radi"
+      class="img-thumbnail"
+    />
+    <span></span>
+    <span></span>
+    <h1> <Badge >{this.state.image.name}</Badge></h1>
+    <h3><Badge variant='info'>Pocetna cena: {this.state.image.startPrice}</Badge></h3>
     </div>
-    <div style={{flex:2}}></div>
-        </div>
-       
-      </div>
-      <div style={{flex:5,display:'flex',flexDirection:'column'}}>
-      <h3> <Badge variant='info'>Pocetna cena: {this.state.image.startPrice}</Badge></h3>
-    <label>{this.state.image.name}</label>
-    <label>Autor : {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</label>
-    <label>Tip knjige : {this.state.image.bookType}</label>
-    <label>Godina izdavanja : {this.state.image.yearPublishing}</label>
-    <label>Izdavacka kuca : {this.state.image.publishing}</label>
-    <label>Opis knjige : {this.state.image.description}</label>
-    <label>O knjizi: {this.state.image.aboutBook}</label>
-    </div>
-    <div style={{flex:2}}>
    
-   
+  </div>
+
+  
+ <div style={{display:'flex',height:'100%',flex:47,alignContent:'flex-start',justifyContent:'flex-start',flexDirection:'column'}}>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Autor :</b> {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Tip knjige:</b>  {this.state.image.bookType}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Godina izdavanja : </b> {this.state.image.yearPublishing}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Izdavacka kuca :</b>  {this.state.image.publishing}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3,wordBreak:'break-all'}} class="text-break"><h3><b class="text-secondary">Opis knjige:</b>{this.state.image.aboutBook}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+<div style={{display:'flex',flex:3,wordBreak:'break-all'}} ><h3 style={{wordBreak:'break-all'}}><b class="text-secondary">O knjizi:</b>  {this.state.image.aboutBook}</h3><br/></div>
+<div style={{display:'flex',flex:2}}></div>
+</div>
+<div style={{display:'flex',flex:0}}></div>
+</div>
+<div style={{flex:2}}>
 
 
-    </div>
-    <div style={{flex:5}}>
-      <h3>Ponude</h3>
-      <ListGroup>
-                    {this.printComments()}
-                </ListGroup>
+
+
 </div>
 
-      </div>
+    
+<div style={{flex:5,height:'50%',flexDirection:'row',width:'100%'}}>
+<div style={{display:'flex',flex:17}}></div>
+<div style={{display:'flex',flex:60,width:'100%',flexDirection:'column'}}>
+  <h1 class="text-secondary"><b>Ponude</b></h1>
+  <ListGroup style={{display:'flex',flexDirection:'column-reverse'}} variant="info">
+                {this.printComments()}
+            </ListGroup>
+</div>
+<div style={{display:'flex',flex:14}}></div>
+</div>
+
+
+  
+  </div>
     )
    }
    else{
     return (
-      <div style={{alignItems:'center',display:'flex',flexDirection:'column'}}>
+      <div style={{alignItems:'center',display:'flex',flexDirection:'column',width:'100%'}}>
+      <div style={{alignItems:'center',display:'flex',flexDirection:'row',height:'50%',width:'100%',borderBottomStyle:'groove',borderBottomColor:'#868e96',borderBottomWidth:'3px',backgroundColor:'#e2dddd '}}>
+      <div style={{display:'flex',flex:17}}></div>
+      <div style={{display:'flex',flex:30,alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+      <div style={{display:'flex',flex:2}}></div>
       <div
       className=" mr-2 ml-2 mb-2 " 
-      style={{display:'flex',alignItems:'center',flex:5}}
+      style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}
     >
       
       <Image
-        width={300}
-        height={300}
+        width={400}
+        height={400}
         className="ml-2 "
         src={this.state.image.urlImage}
         alt="radi"
@@ -199,22 +225,35 @@ handlePonuda=()=>{
       />
       <span></span>
       <span></span>
-      <div style={{width:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
-  <div style={{flex:2}}></div>
-  
-  <div style={{flex:2}}></div>
+      <h1> <Badge >{this.state.image.name}</Badge></h1>
+      <h3><Badge variant='info'>Pocetna cena: {this.state.image.startPrice}</Badge></h3>
       </div>
      
     </div>
-    <h3><Badge variant='info'>Pocetna cena: {this.state.image.startPrice}</Badge></h3>
-    <div style={{flex:5,display:'flex',flexDirection:'column'}}>
- <h1> <Badge >{this.state.image.name}</Badge></h1>
-  <label>Autor : {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</label>
-  <label>Tip knjige : {this.state.image.bookType}</label>
-  <label>Godina izdavanja : {this.state.image.yearPublishing}</label>
-  <label>Izdavacka kuca : {this.state.image.publishing}</label>
-  <label>Opis knjige : {this.state.image.aboutBook}</label>
-  <label>O knjizi: {this.state.image.aboutBook}</label>
+
+    <div style={{display:'flex',flex:30,alignContent:'flex-start',justifyContent:'flex-start',flexDirection:'row'}}>
+    <div style={{display:'flex',flex:30,alignContent:'flex-start',justifyContent:'flex-start',flexDirection:'column'}}>
+   <div style={{display:'flex',height:'100%',flex:30,alignContent:'flex-start',justifyContent:'flex-start',flexDirection:'column'}}>
+ <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Autor :</b> {this.state.image.nameAuthor +"  "+this.state.image.lastnameAuthor}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Tip knjige:</b>  {this.state.image.bookType}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Godina izdavanja : </b> {this.state.image.yearPublishing}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">Izdavacka kuca :</b>  {this.state.image.publishing}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}} class="text-break"><h3><b class="text-secondary">Opis knjige:</b>{this.state.image.aboutBook}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <div style={{display:'flex',flex:3}}><h3><b class="text-secondary">O knjizi:</b>  {this.state.image.aboutBook}</h3></div>
+  <div style={{display:'flex',flex:2}}></div>
+  <Button style={{backgroundColor:"#ff0178"}} onClick={this.handleShow} >
+       <h2> Napravi Ponudu</h2>
+      </Button>
+      <label style={{color:this.state.canAddOrNotColor}}>{this.state.canAddOrNot}</label>
+  </div>
+  </div>
+  </div>
   </div>
   <div style={{flex:2}}>
  
@@ -222,15 +261,17 @@ handlePonuda=()=>{
 
 
   </div>
-  <Button variant="primary" onClick={this.handleShow} >
-        Ponudi
-      </Button>
-      <label style={{color:this.state.canAddOrNotColor}}>{this.state.canAddOrNot}</label>
-  <div style={{flex:5}}>
-    <h3>Ponude</h3>
-    <ListGroup style={{display:'flex',flexDirection:'column-reverse'}}>
+
+      
+  <div style={{flex:5,height:'50%',flexDirection:'row',width:'100%'}}>
+  <div style={{display:'flex',flex:17}}></div>
+  <div style={{display:'flex',flex:60,width:'100%',flexDirection:'column'}}>
+    <h1 class="text-secondary"><b>Ponude</b></h1>
+    <ListGroup style={{display:'flex',flexDirection:'column-reverse'}} variant="info">
                   {this.printComments()}
               </ListGroup>
+  </div>
+  <div style={{display:'flex',flex:14}}></div>
 </div>
 
 
@@ -259,6 +300,7 @@ handlePonuda=()=>{
           </Button>
         </Modal.Footer>
       </Modal>
+    
     </div>
   )
    }
